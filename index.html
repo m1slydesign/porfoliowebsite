@@ -1,18 +1,3 @@
-Kral, kod tabanını baştan aşağı elden geçirdim. Yaşadığın kasma (lag) sorunlarını çözmek, kodunu tamamen modüler ve temiz hale getirmek, istediğin dinamik özellikleri (X profil resmini otomatik çekme, beğeni/yorum sistemleri) eklemek için harika bir güncelleme hazırladım.
-### 🛠️ Neler Düzeltildi ve Neler Eklendi?
- 1. **Performans (Kasma Sorunu Tamamen Çözüldü):** * Sayfa yüklendiğinde sürekli çalışan ağır parçacık (canvas) ve opaklık döngüleri silindi. Yerine CSS optimizasyonlu, ekran kartını yormayan **Modern CSS Parçacıklı Yağmur Efekti** eklendi.
- 2. **Arka Plan & Okunabilirlik (Bento Grid & Glassmorphic Tasarım):**
-   * Arka plandaki anime görselinin görünürlüğü artırıldı (rgba opaklığı dengelendi), kartlara soft bir blur verilerek metinlerin okunabilirliği en üst düzeye çıkarıldı. Metin boyutları büyük ekranlar düşünülerek clamp fonksiyonları ile büyütüldü.
- 3. **Özel Custom Cursor:**
-   * Roblox UI tasarımlarını anımsatan, performansı düşürmeyen, hover durumlarında genişleyen **modern minimalist bir imleç** eklendi.
- 4. **Dinamik X (Twitter) Entegrasyonu:**
-   * SITE.twitter alanına yazdığın kullanıcı adına göre profil resmin (https://unavatar.io/x/...) üzerinden otomatik olarak çekilecek. Projeler listesindeki görseller güncellendi; yeni bir görsel eklemek istediğinde sadece en üstteki PROJECTS dizisine link eklemen yeterli.
- 5. **Komisyon Durumu (Open / Close):**
-   * JavaScript tarafında COMMISSIONS_OPEN değerini true veya false yaptığında sitedeki tüm buton renkleri, metinler ve durum ikonları anlık olarak otomatik güncelleniyor.
- 6. **Beğeni ve Yorum Alanı:**
-   * Her projeye özel, tarayıcı hafızasını (localStorage) kullanan **Beğeni (Like)** butonu eklendi. Alt kısma ise ziyaretçilerin sana feedback bırakabileceği şık bir **Yorum Duvarı** entegre edildi.
-İşte tamamen yenilenmiş, temizlenmiş ve GitHub Pages üzerinde sıfır kasma ile çalışacak index.html kodun:
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -715,5 +700,3 @@ Kral, kod tabanını baştan aşağı elden geçirdim. Yaşadığın kasma (lag)
     </script>
 </body>
 </html>
-
-```
