@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>m1sly | Portfolio</title>
     
-    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -44,7 +43,6 @@
             cursor: none;
         }
 
-        /* Arka Plan Katmanı */
         .bg-overlay {
             position: fixed;
             inset: 0;
@@ -53,14 +51,13 @@
             z-index: -2;
         }
 
-        /* Hafif ve Performanslı Yağmur Efekti */
         .rain-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z- কার্যকর z-index: -1;
+            z-index: -1;
             pointer-events: none;
             overflow: hidden;
         }
@@ -78,7 +75,6 @@
             100% { transform: translateY(100vh); }
         }
 
-        /* Custom Cursor */
         .custom-cursor {
             width: 8px;
             height: 8px;
@@ -109,7 +105,6 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Modern Cam Efekti Metinler İçin */
         .glass-panel {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
@@ -123,7 +118,6 @@
             background: rgba(15, 15, 15, 0.7);
         }
 
-        /* Navigasyon */
         nav {
             position: fixed;
             top: 0;
@@ -186,7 +180,6 @@
             color: var(--text);
         }
 
-        /* Komisyon Badge */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -202,7 +195,6 @@
         .badge.open { background: rgba(0, 255, 102, 0.1); color: var(--accent-open); border: 1px solid rgba(0, 255, 102, 0.2); }
         .badge.closed { background: rgba(255, 51, 51, 0.1); color: var(--accent-closed); border: 1px solid rgba(255, 51, 51, 0.2); }
 
-        /* Hero Alanı */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -281,7 +273,6 @@
         .btn.secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
         .btn.secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
-        /* Grid Sistemleri */
         section {
             max-width: 1100px;
             margin: 0 auto;
@@ -299,7 +290,6 @@
             margin-bottom: 8px;
         }
 
-        /* Projeler - Bento Tasarım */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -315,7 +305,7 @@
         .project-img-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%;
             overflow: hidden;
             border-radius: 12px;
         }
@@ -358,7 +348,6 @@
             color: #ff3366;
         }
 
-        /* Yorum Duvarı */
         .comments-section {
             margin-top: 40px;
             padding: 32px;
@@ -412,7 +401,6 @@
             margin-left: 8px;
         }
 
-        /* Fiyatlandırma */
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -431,7 +419,6 @@
             margin: 16px 0;
         }
 
-        /* Mobil Uyum */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             section { padding: 48px 16px; }
@@ -446,11 +433,9 @@
     <div class="custom-cursor" id="cursor"></div>
     <div class="custom-cursor-follower" id="cursor-follower"></div>
 
-    <!-- Navigasyon -->
     <nav id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <!-- Statik görsel yedekli X profil linki -->
                 <img id="nav-avatar" src="https://unavatar.io/x/stor4m?fallback=https://github.com/m1slydesign.png" alt="m1sly">
                 <span>m1sly</span>
             </a>
@@ -464,7 +449,6 @@
         </div>
     </nav>
 
-    <!-- Hero Bölümü -->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="avatar-container">
@@ -483,7 +467,6 @@
         </div>
     </section>
 
-    <!-- Projeler Bölümü -->
     <section id="projects">
         <div class="section-header">
             <h2>Recent Work</h2>
@@ -492,7 +475,6 @@
         <div class="projects-grid" id="portfolio-grid"></div>
     </section>
 
-    <!-- Yorumlar Duvarı -->
     <section id="guestbook">
         <div class="glass-panel comments-section">
             <h3 style="font-family: 'Syne', sans-serif; margin-bottom: 16px;">Guestbook & Feedback</h3>
@@ -504,7 +486,6 @@
         </div>
     </section>
 
-    <!-- Fiyatlandırma Bölümü -->
     <section id="pricing">
         <div class="section-header">
             <h2>Pricing Rates</h2>
@@ -524,7 +505,6 @@
         </div>
     </section>
 
-    <!-- İletişim Bölümü -->
     <section id="contact" style="text-align: center;">
         <div class="section-header">
             <h2>Get In Touch</h2>
@@ -536,9 +516,7 @@
         </div>
     </section>
 
-    <!-- JAVASCRIPT MOTORU -->
     <script>
-        // 🖼️ PROJELER — Yeni link eklemek istersen buraya ekle
         const PROJECTS = [
             "https://pbs.twimg.com/media/G9kcokAXAAAqh4T?format=jpg&name=4096x4096",
             "https://pbs.twimg.com/media/HCzDImHW0AEWjAt?format=jpg&name=4096x4096",
@@ -548,7 +526,6 @@
             "https://pbs.twimg.com/media/G8jxdpAXIAEI9Gh?format=jpg&name=large",
         ];
 
-        // Optimize Edilmiş Hafif CSS Yağmur Efekti
         const rainContainer = document.getElementById("rain");
         const dropCount = 25; 
         for (let i = 0; i < dropCount; i++) {
@@ -561,7 +538,6 @@
             rainContainer.appendChild(drop);
         }
 
-        // Custom Cursor Hareketi
         const cursor = document.getElementById("cursor");
         const follower = document.getElementById("cursor-follower");
         document.addEventListener("mousemove", (e) => {
@@ -573,7 +549,6 @@
             }, 25);
         });
 
-        // Hover Durumunda Cursor Genişletme
         const interactives = document.querySelectorAll("a, button, .project-card");
         interactives.forEach(el => {
             el.addEventListener("mouseenter", () => {
@@ -586,7 +561,6 @@
             });
         });
 
-        // Portfolyo Grid & Beğeni Sistemi
         const portfolioGrid = document.getElementById("portfolio-grid");
         portfolioGrid.innerHTML = PROJECTS.map((img, index) => {
             const isLiked = localStorage.getItem(`liked_project_${index}`) === "true";
@@ -622,7 +596,6 @@
             }
         }
 
-        // Yorum Sistemi
         const commentsList = document.getElementById("comments-list");
         function loadComments() {
             const saved = JSON.parse(localStorage.getItem("m1sly_comments") || "[]");
@@ -645,7 +618,6 @@
         }
         loadComments();
 
-        // Navbar Blur Efekti
         window.addEventListener("scroll", () => {
             const navbar = document.getElementById("navbar");
             if (window.scrollY > 40) navbar.classList.add("scrolled");
