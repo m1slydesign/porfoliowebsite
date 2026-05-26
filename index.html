@@ -47,22 +47,6 @@ body {
 /* ── CURSOR CANVAS ── */
 #cursor-canvas { position:fixed; inset:0; pointer-events:none; z-index:10000; }
 
-/* ── ANIME GIRL (PERFORMANCE FIX) ── */
-#anime-girl {
-  position:fixed;
-  bottom:0; left:-160px;
-  width:130px; height:220px;
-  z-index:500;
-  pointer-events:none;
-  animation:walkAcross 28s linear infinite;
-  will-change: transform;
-  transform: translate3d(0,0,0);
-}
-@keyframes walkAcross {
-  0%   { transform: translate3d(0,0,0); }
-  100% { transform: translate3d(calc(110vw + 160px), 0, 0); }
-}
-
 /* ── TYPEWRITER HERO ── */
 .hero-title .char {
   display:inline-block;
@@ -210,43 +194,6 @@ section { max-width:1100px; margin:0 auto; padding:80px 24px; }
 <div class="bg-overlay"></div>
 <div class="rain-container" id="rain"></div>
 <canvas id="cursor-canvas"></canvas>
-
-<svg id="anime-girl" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
-  <g id="umbrella">
-    <path d="M52 70 Q65 45 78 70" fill="#c084fc" stroke="#9333ea" stroke-width="1.5"/>
-    <path d="M52 70 Q58 55 65 54 Q72 55 78 70" fill="#a855f7" stroke="#9333ea" stroke-width="1"/>
-    <line x1="65" y1="54" x2="52" y2="70" stroke="#9333ea" stroke-width="1"/>
-    <line x1="65" y1="54" x2="65" y2="70" stroke="#9333ea" stroke-width="1"/>
-    <line x1="65" y1="54" x2="78" y2="70" stroke="#9333ea" stroke-width="1"/>
-    <line x1="65" y1="54" x2="65" y2="95" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M65 95 Q62 101 59 99" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
-  </g>
-  <path d="M50 130 Q45 165 42 185 Q65 195 88 185 Q85 165 80 130 Z" fill="#f0abfc" stroke="#c084fc" stroke-width="1"/>
-  <path d="M50 130 Q55 148 65 152 Q75 148 80 130 Z" fill="#e879f9" opacity="0.5"/>
-  <rect x="52" y="108" width="26" height="26" rx="4" fill="#fde8d8"/>
-  <path d="M52 112 Q65 118 78 112" fill="none" stroke="#c084fc" stroke-width="1.5"/>
-  <ellipse cx="65" cy="92" rx="16" ry="18" fill="#fde8d8"/>
-  <path d="M49 86 Q50 68 65 65 Q80 68 81 86 Q75 78 65 77 Q55 78 49 86Z" fill="#1e1b4b"/>
-  <path d="M49 86 Q44 100 47 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
-  <path d="M81 86 Q86 100 83 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
-  <path d="M65 65 Q68 55 72 58" fill="none" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round"/>
-  <ellipse cx="58" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
-  <ellipse cx="72" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
-  <circle cx="59.5" cy="89.5" r="1.2" fill="#fff"/>
-  <circle cx="73.5" cy="89.5" r="1.2" fill="#fff"/>
-  <ellipse cx="58" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
-  <ellipse cx="72" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
-  <path d="M61 99 Q65 103 69 99" fill="none" stroke="#c084fc" stroke-width="1.2" stroke-linecap="round"/>
-  <ellipse cx="52" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
-  <ellipse cx="78" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
-  <path d="M78 118 Q84 110 72 97" fill="none" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-  <g id="legs">
-    <line id="leg-l" x1="57" y1="185" x2="54" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-    <line id="leg-r" x1="73" y1="185" x2="76" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-    <ellipse id="shoe-l" cx="54" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
-    <ellipse id="shoe-r" cx="76" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
-  </g>
-</svg>
 
 <div id="project-modal">
   <div id="modal-title">m1sly portfolio</div>
@@ -441,45 +388,12 @@ function animLoop(){
 }
 animLoop();
 
-/* ══════════════════════════════════════
-   ANIME GIRL LEGS WALK
-══════════════════════════════════════ */
-(function walkLegs(){
-  const legL=document.getElementById('leg-l');
-  const legR=document.getElementById('leg-r');
-  const shoeL=document.getElementById('shoe-l');
-  const shoeR=document.getElementById('shoe-r');
-  let t=0;
-  function step(){
-    t+=0.12;
-    const lx2=54+Math.sin(t)*10;
-    const ly2=212+Math.cos(t)*6;
-    legL.setAttribute('x2',lx2);
-    legL.setAttribute('y2',ly2);
-    shoeL.setAttribute('cx',lx2);
-    shoeL.setAttribute('cy',ly2+1);
-    
-    const rx2=76-Math.sin(t)*10;
-    const ry2=212-Math.cos(t)*6;
-    legR.setAttribute('x2',rx2);
-    legR.setAttribute('y2',ry2);
-    shoeR.setAttribute('cx',rx2);
-    shoeR.setAttribute('cy',ry2+1);
-    requestAnimationFrame(step);
-  }
-  step();
-})();
-
-/* ══════════════════════════════════════
-   NAVBAR SCROLL
-══════════════════════════════════════ */
+/* ── NAVBAR SCROLL ── */
 window.addEventListener('scroll',()=>{
   document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
 },{passive:true});
 
-/* ══════════════════════════════════════
-   TYPEWRITER HERO TITLE
-══════════════════════════════════════ */
+/* ── TYPEWRITER HERO TITLE ── */
 function typeWriter(el, text, delay=100){
   el.innerHTML='';
   [...text].forEach((ch,i)=>{
@@ -492,9 +406,7 @@ function typeWriter(el, text, delay=100){
 }
 typeWriter(document.getElementById('hero-title'),'m1sly',120);
 
-/* ══════════════════════════════════════
-   PROJECT GRID (DOM FIXED FOR HIGH PERFORMANCE)
-══════════════════════════════════════ */
+/* ── PROJECT GRID (DOM FIXED FOR HIGH PERFORMANCE) ── */
 const grid=document.getElementById('portfolio-grid');
 
 function renderProjects(){
@@ -540,9 +452,7 @@ function toggleLike(id){
 
 renderProjects();
 
-/* ══════════════════════════════════════
-   MODAL + 360° SPIN
-══════════════════════════════════════ */
+/* ── MODAL + 360° SPIN ── */
 const modal    = document.getElementById('project-modal');
 const modalImg = document.getElementById('modal-img');
 const spinBtn  = document.getElementById('spin-btn');
@@ -603,9 +513,7 @@ window.addEventListener('touchend',()=>dragging=false);
 
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-/* ══════════════════════════════════════
-   GUESTBOOK
-══════════════════════════════════════ */
+/* ── GUESTBOOK ── */
 const comments=[];
 function addComment(){
   const inp=document.getElementById('comment-input');
@@ -621,3 +529,4 @@ document.getElementById('comment-input').addEventListener('keydown',e=>{ if(e.ke
 </script>
 </body>
 </html>
+
