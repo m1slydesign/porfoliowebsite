@@ -20,23 +20,14 @@
             --accent-closed: #ff3333;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            background-image: url('arkaplan.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -46,17 +37,15 @@
         .bg-overlay {
             position: fixed;
             inset: 0;
-            background: linear-gradient(180deg, rgba(3, 3, 3, 0.5) 0%, rgba(3, 3, 3, 0.8) 100%);
+            background: linear-gradient(180deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.8) 100%);
             backdrop-filter: blur(4px);
             z-index: -2;
         }
 
         .rain-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             pointer-events: none;
             overflow: hidden;
@@ -66,18 +55,17 @@
             position: absolute;
             width: 1px;
             height: 60px;
-            background: linear-gradient(transparent, rgba(255, 255, 255, 0.15));
+            background: linear-gradient(transparent, rgba(255,255,255,0.15));
             animation: fall linear infinite;
         }
 
         @keyframes fall {
-            0% { transform: translateY(-100px); }
+            0%   { transform: translateY(-100px); }
             100% { transform: translateY(100vh); }
         }
 
         .custom-cursor {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: #fff;
             border-radius: 50%;
             position: fixed;
@@ -88,9 +76,8 @@
         }
 
         .custom-cursor-follower {
-            width: 24px;
-            height: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            width: 24px; height: 24px;
+            border: 1px solid rgba(255,255,255,0.4);
             border-radius: 50%;
             position: fixed;
             transform: translate(-50%, -50%);
@@ -99,36 +86,31 @@
             transition: transform 0.08s ease-out;
         }
 
-        .clickable {
-            width: 16px;
-            height: 16px;
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+        .clickable { width: 16px; height: 16px; background-color: rgba(255,255,255,0.2); }
 
         .glass-panel {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--border);
             border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
         }
 
         .glass-panel:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(15, 15, 15, 0.7);
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(15,15,15,0.7);
         }
 
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 0; width: 100%;
             z-index: 1000;
             padding: 20px 0;
             transition: all 0.3s;
         }
 
         nav.scrolled {
-            background: rgba(3, 3, 3, 0.85);
+            background: rgba(3,3,3,0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 12px 0;
@@ -155,8 +137,7 @@
         }
 
         .logo img {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 8px;
             object-fit: cover;
         }
@@ -176,9 +157,7 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--text);
-        }
+        .nav-links a:hover { color: var(--text); }
 
         .badge {
             display: inline-flex;
@@ -192,8 +171,8 @@
             text-transform: uppercase;
         }
 
-        .badge.open { background: rgba(0, 255, 102, 0.1); color: var(--accent-open); border: 1px solid rgba(0, 255, 102, 0.2); }
-        .badge.closed { background: rgba(255, 51, 51, 0.1); color: var(--accent-closed); border: 1px solid rgba(255, 51, 51, 0.2); }
+        .badge.open   { background: rgba(0,255,102,0.1); color: var(--accent-open);   border: 1px solid rgba(0,255,102,0.2); }
+        .badge.closed { background: rgba(255,51,51,0.1);  color: var(--accent-closed); border: 1px solid rgba(255,51,51,0.2); }
 
         .hero {
             min-height: 100vh;
@@ -204,20 +183,16 @@
             text-align: center;
         }
 
-        .hero-content {
-            max-width: 750px;
-        }
+        .hero-content { max-width: 750px; }
 
         .avatar-container {
-            width: 110px;
-            height: 110px;
+            width: 110px; height: 110px;
             margin: 0 auto 24px;
             position: relative;
         }
 
         .avatar-container img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--border);
@@ -268,8 +243,8 @@
             transition: all 0.3s;
         }
 
-        .btn.primary { background: #fff; color: #000; }
-        .btn.primary:hover { transform: translateY(-2px); opacity: 0.9; }
+        .btn.primary  { background: #fff; color: #000; }
+        .btn.primary:hover  { transform: translateY(-2px); opacity: 0.9; }
         .btn.secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
         .btn.secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
@@ -279,10 +254,7 @@
             padding: 80px 24px;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
+        .section-header { text-align: center; margin-bottom: 48px; }
 
         .section-header h2 {
             font-family: 'Syne', sans-serif;
@@ -296,11 +268,7 @@
             gap: 20px;
         }
 
-        .project-card {
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+        .project-card { overflow: hidden; display: flex; flex-direction: column; }
 
         .project-img-wrapper {
             position: relative;
@@ -312,17 +280,13 @@
 
         .project-img-wrapper img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
         }
 
-        .project-card:hover .project-img-wrapper img {
-            transform: scale(1.04);
-        }
+        .project-card:hover .project-img-wrapper img { transform: scale(1.04); }
 
         .project-actions {
             padding: 16px;
@@ -344,20 +308,11 @@
             transition: color 0.2s;
         }
 
-        .like-btn.liked {
-            color: #ff3366;
-        }
+        .like-btn.liked { color: #ff3366; }
 
-        .comments-section {
-            margin-top: 40px;
-            padding: 32px;
-        }
+        .comments-section { margin-top: 40px; padding: 32px; }
 
-        .comment-form {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
+        .comment-form { display: flex; gap: 12px; margin-bottom: 24px; }
 
         .comment-input {
             flex: 1;
@@ -395,22 +350,11 @@
             font-size: 14px;
         }
 
-        .comment-item span {
-            color: var(--text-dark);
-            font-size: 11px;
-            margin-left: 8px;
-        }
+        .comment-item span { color: var(--text-dark); font-size: 11px; margin-left: 8px; }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 
-        .price-card {
-            padding: 32px;
-            text-align: center;
-        }
+        .price-card { padding: 32px; text-align: center; }
 
         .price-val {
             font-family: 'Space Grotesk', sans-serif;
@@ -436,7 +380,7 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <img id="nav-avatar" src="https://unavatar.io/x/stor4m?fallback=https://github.com/m1slydesign.png" alt="m1sly">
+                <img id="nav-avatar" src="https://github.com/m1slydesign.png" alt="m1sly">
                 <span>m1sly</span>
             </a>
             <ul class="nav-links">
@@ -452,7 +396,7 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="avatar-container">
-                <img id="hero-avatar" src="https://unavatar.io/x/stor4m?fallback=https://github.com/m1slydesign.png" alt="Avatar">
+                <img id="hero-avatar" src="https://github.com/m1slydesign.png" alt="Avatar">
             </div>
             <div id="hero-badge-container" style="margin-bottom: 16px;">
                 <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
@@ -517,5 +461,104 @@
     </section>
 
     <script>
-        const PROJECTS =
+        // ── Proje verileri – kendi görsellerin varsa src'yi değiştir ──
+        const PROJECTS = [
+            { id: 1, title: "Simulator HUD",      src: "https://placehold.co/640x360/111/fff?text=Simulator+HUD",      likes: 0, liked: false },
+            { id: 2, title: "Shop Menu",           src: "https://placehold.co/640x360/111/fff?text=Shop+Menu",           likes: 0, liked: false },
+            { id: 3, title: "Inventory Screen",    src: "https://placehold.co/640x360/111/fff?text=Inventory+Screen",    likes: 0, liked: false },
+        ];
 
+        // ── Rain ──
+        const rain = document.getElementById('rain');
+        for (let i = 0; i < 60; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left              = Math.random() * 100 + '%';
+            drop.style.animationDuration = (Math.random() * 1.5 + 0.5) + 's';
+            drop.style.animationDelay   = (Math.random() * 2) + 's';
+            drop.style.opacity           = Math.random() * 0.5 + 0.1;
+            rain.appendChild(drop);
+        }
+
+        // ── Custom cursor ──
+        const cursor         = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        let fx = 0, fy = 0;
+
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top  = e.clientY + 'px';
+            fx += (e.clientX - fx) * 0.12;
+            fy += (e.clientY - fy) * 0.12;
+            cursorFollower.style.left = fx + 'px';
+            cursorFollower.style.top  = fy + 'px';
+        });
+
+        document.querySelectorAll('a, button, .like-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('clickable'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('clickable'));
+        });
+
+        // ── Navbar scroll ──
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ── Portfolio grid ──
+        const grid = document.getElementById('portfolio-grid');
+
+        function renderProjects() {
+            grid.innerHTML = '';
+            PROJECTS.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'glass-panel project-card';
+                card.innerHTML = `
+                    <div class="project-img-wrapper">
+                        <img src="${p.src}" alt="${p.title}">
+                    </div>
+                    <div class="project-actions">
+                        <span style="font-size:14px; font-weight:600;">${p.title}</span>
+                        <button class="like-btn ${p.liked ? 'liked' : ''}" onclick="toggleLike(${p.id})">
+                            <i class="fa${p.liked ? 's' : 'r'} fa-heart"></i> ${p.likes}
+                        </button>
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleLike(id) {
+            const p = PROJECTS.find(x => x.id === id);
+            if (!p) return;
+            p.liked = !p.liked;
+            p.likes += p.liked ? 1 : -1;
+            renderProjects();
+        }
+
+        renderProjects();
+
+        // ── Guestbook ──
+        const comments = [];
+
+        function addComment() {
+            const input = document.getElementById('comment-input');
+            const text  = input.value.trim();
+            if (!text) return;
+            comments.unshift({ text, time: new Date().toLocaleTimeString() });
+            input.value = '';
+            renderComments();
+        }
+
+        function renderComments() {
+            const list = document.getElementById('comments-list');
+            list.innerHTML = comments.map(c =>
+                `<div class="comment-item">${c.text}<span>${c.time}</span></div>`
+            ).join('');
+        }
+
+        // Enter tuşuyla da gönder
+        document.getElementById('comment-input').addEventListener('keydown', e => {
+            if (e.key === 'Enter') addComment();
+        });
+    </script>
+</body>
+</html>
