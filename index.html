@@ -13,7 +13,7 @@
             --text-muted: #b0b0b0;
             --text-dark: #666666;
             --border: rgba(255,255,255,0.08);
-            --card-bg: rgba(10,10,10,0.6);
+            --card-bg: rgba(10,10,10,0.55);
             --accent-open: #00ff66;
             --accent-closed: #ff3333;
         }
@@ -27,35 +27,29 @@
             cursor:none;
         }
 
-        /* ── BG ── */
+        /* ── ARKA PLAN RESMİ VE BLUR SÜZGECİ ── */
+        .bg-image {
+            position: fixed;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+        }
         .bg-overlay {
             position:fixed; inset:0;
-            background:linear-gradient(180deg,rgba(3,3,3,0.5) 0%,rgba(3,3,3,0.8) 100%);
-            backdrop-filter:blur(4px);
+            background: linear-gradient(180deg, rgba(3,3,3,0.7) 0%, rgba(3,3,3,0.9) 100%);
+            backdrop-filter: blur(8px); /* Önceki sitedeki yapının blur efekti */
             z-index:-2;
         }
 
-        /* ── RAIN ── */
+        /* ── YAGMUR EFEKTI ── */
         .rain-container { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; overflow:hidden; }
-        .drop { position:absolute; width:1px; height:60px; background:linear-gradient(transparent,rgba(255,255,255,0.15)); animation:fall linear infinite; }
+        .drop { position:absolute; width:1px; height:60px; background:linear-gradient(transparent,rgba(255,255,255,0.12)); animation:fall linear infinite; }
         @keyframes fall { 0%{transform:translateY(-100px)} 100%{transform:translateY(100vh)} }
 
         /* ── CURSOR ── */
         #cursor-canvas { position:fixed; inset:0; pointer-events:none; z-index:10000; }
-
-        /* ── ANIME GIRL ── */
-        #anime-girl {
-            position:fixed;
-            bottom:0; left:-160px;
-            width:130px; height:220px;
-            z-index:500;
-            pointer-events:none;
-            animation:walkAcross 28s linear infinite;
-        }
-        @keyframes walkAcross {
-            0%   { left:-160px; }
-            100% { left:110vw;  }
-        }
 
         /* ── TYPEWRITER HERO ── */
         .hero-title .char {
@@ -64,23 +58,21 @@
             transform:translateY(20px);
             animation:charIn 0.06s forwards;
         }
-        @keyframes charIn {
-            to { opacity:1; transform:translateY(0); }
-        }
+        @keyframes charIn { to { opacity:1; transform:translateY(0); } }
 
-        /* ── GLASS ── */
+        /* ── GLASSMORPHISM PANELS ── */
         .glass-panel {
             background:var(--card-bg);
-            backdrop-filter:blur(16px);
+            backdrop-filter:blur(20px);
             border:1px solid var(--border);
             border-radius:16px;
             transition:all 0.3s cubic-bezier(0.25,0.8,0.25,1);
         }
-        .glass-panel:hover { border-color:rgba(255,255,255,0.2); background:rgba(15,15,15,0.7); }
+        .glass-panel:hover { border-color:rgba(255,255,255,0.18); background:rgba(15,15,15,0.65); }
 
         /* ── NAV ── */
         nav { position:fixed; top:0; width:100%; z-index:1000; padding:20px 0; transition:all 0.3s; }
-        nav.scrolled { background:rgba(3,3,3,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:12px 0; }
+        nav.scrolled { background:rgba(3,3,3,0.75); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:12px 0; }
         .nav-container { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; align-items:center; }
         .logo { display:flex; align-items:center; gap:12px; text-decoration:none; font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); }
         .logo img { width:32px; height:32px; border-radius:8px; object-fit:cover; }
@@ -90,14 +82,46 @@
         .badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:30px; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
         .badge.open   { background:rgba(0,255,102,0.1); color:var(--accent-open);   border:1px solid rgba(0,255,102,0.2); }
 
-        /* ── HERO ── */
+        /* ── HERO TWITTER CARD ── */
         .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 24px 60px; text-align:center; }
-        .hero-content { max-width:750px; }
-        .avatar-container { width:110px; height:110px; margin:0 auto 24px; }
-        .avatar-container img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:2px solid var(--border); }
+        .hero-content { max-width:750px; width:100%; }
+        
+        .twitter-profile-card {
+            max-width: 550px;
+            margin: 0 auto 32px;
+            text-align: left;
+            overflow: hidden;
+            position: relative;
+        }
+        .twitter-banner {
+            height: 130px;
+            background: linear-gradient(45deg, #1e1b4b, #4c1d95);
+            width: 100%;
+        }
+        .twitter-avatar-row {
+            padding: 0 24px;
+            margin-top: -45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 12px;
+        }
+        .twitter-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid #0a0a0a;
+            object-fit: cover;
+            background: #222;
+        }
+        .twitter-info { padding: 0 24px 24px; }
+        .twitter-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px; }
+        .twitter-handle { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; }
+        
         .hero-title { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; line-height:1.1; margin-bottom:12px; letter-spacing:-2px; min-height:80px; }
         .hero-role { font-size:12px; color:var(--text-dark); letter-spacing:4px; text-transform:uppercase; margin-bottom:16px; font-weight:700; }
-        .hero-bio { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:32px; }
+        .hero-bio { font-size:15px; color:var(--text-muted); line-height:1.7; margin-bottom:32px; }
+        
         .btn-group { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
         .btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:12px; font-size:13px; font-weight:600; text-decoration:none; transition:all 0.3s; }
         .btn.primary  { background:#fff; color:#000; }
@@ -106,19 +130,34 @@
         .btn.secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
 
         /* ── SECTIONS ── */
-        section { max-width:1100px; margin:0 auto; padding:80px 24px; }
-        .section-header { text-align:center; margin-bottom:48px; }
+        section { max-width:1100px; margin:0 auto; padding:60px 24px; }
+        .section-header { text-align:center; margin-bottom:44px; }
         .section-header h2 { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); margin-bottom:8px; }
 
-        /* ── PROJECTS ── */
-        .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
-        .project-card { overflow:hidden; display:flex; flex-direction:column; cursor:none; }
-        .project-img-wrapper { position:relative; width:100%; padding-top:56.25%; overflow:hidden; border-radius:12px; }
+        /* ── PROJECTS GRID WITH CAPTIONS & LIKES ── */
+        .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:24px; }
+        .project-card { overflow:hidden; display:flex; flex-direction:column; cursor:none; padding:12px; }
+        .project-img-wrapper { position:relative; width:100%; padding-top:56.25%; overflow:hidden; border-radius:12px; margin-bottom:12px; }
         .project-img-wrapper img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
-        .project-card:hover .project-img-wrapper img { transform:scale(1.04); }
-        .project-actions { padding:16px; display:flex; justify-content:space-between; align-items:center; }
-        .like-btn { background:transparent; border:none; color:var(--text-muted); font-family:'Inter',sans-serif; font-size:13px; display:flex; align-items:center; gap:6px; cursor:none; transition:color 0.2s; }
-        .like-btn.liked { color:#ff3366; }
+        .project-card:hover .project-img-wrapper img { transform:scale(1.03); }
+        
+        .project-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+        .project-title { font-size:16px; font-weight:700; color:#fff; }
+        
+        .like-btn { background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--text-muted); font-family:'Inter',sans-serif; font-size:12px; display:flex; align-items:center; gap:6px; cursor:none; padding:6px 12px; border-radius:20px; transition:all 0.2s; }
+        .like-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+        .like-btn.liked { color:#ff3366; background:rgba(255,51,102,0.1); border-color:rgba(255,51,102,0.2); }
+        
+        .project-caption { font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:12px; padding: 0 2px; }
+        
+        /* MINI IN-CARD COMMENTS SYSTEM */
+        .card-comments-box { border-top:1px solid var(--border); padding-top:10px; margin-top:auto; }
+        .card-comments-list { max-height:80px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; margin-bottom:8px; }
+        .card-comment-item { font-size:12px; color:var(--text-muted); background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:6px; word-break:break-all; }
+        .card-comment-item span { color:var(--text-dark); font-size:10px; float:right; }
+        .card-comment-form { display:flex; gap:6px; }
+        .card-comment-input { flex:1; background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:#fff; font-size:12px; font-family:'Inter',sans-serif; outline:none; }
+        .card-comment-btn { background:rgba(255,255,255,0.9); color:#000; border:none; border-radius:6px; padding:0 10px; font-size:11px; font-weight:700; font-family:'Inter',sans-serif; cursor:none; }
 
         /* ── PROJECT MODAL ── */
         #project-modal {
@@ -132,57 +171,21 @@
             flex-direction:column;
         }
         #project-modal.open { display:flex; }
-        #modal-title {
-            font-family:'Syne',sans-serif;
-            font-size:clamp(18px,3vw,28px);
-            font-weight:800;
-            margin-bottom:20px;
-            letter-spacing:-1px;
-            opacity:0;
-            transform:translateY(-16px);
-            transition:all 0.4s 0.1s;
-        }
-        #project-modal.open #modal-title { opacity:1; transform:translateY(0); }
-        #modal-img-wrap {
-            position:relative;
-            width:min(80vw,700px);
-            aspect-ratio:16/9;
-            border-radius:16px;
-            overflow:hidden;
-            border:1px solid var(--border);
-            transform-style:preserve-3d;
-            perspective:1000px;
-        }
-        #modal-img {
-            width:100%; height:100%;
-            object-fit:cover;
-            border-radius:16px;
-            transition:transform 0.05s linear;
-            transform-origin:center center;
-        }
+        #modal-title { font-family:'Syne',sans-serif; font-size:clamp(18px,3vw,28px); font-weight:800; margin-bottom:20px; letter-spacing:-1px; }
+        #modal-img-wrap { position:relative; width:min(80vw,700px); aspect-ratio:16/9; border-radius:16px; overflow:hidden; border:1px solid var(--border); perspective:1000px; }
+        #modal-img { width:100%; height:100%; object-fit:cover; border-radius:16px; transition:transform 0.05s linear; }
         .modal-controls { display:flex; gap:16px; margin-top:20px; }
-        .modal-btn {
-            background:rgba(255,255,255,0.08);
-            border:1px solid var(--border);
-            color:#fff;
-            padding:10px 22px;
-            border-radius:10px;
-            font-family:'Inter',sans-serif;
-            font-weight:600;
-            font-size:13px;
-            cursor:none;
-            transition:background 0.2s;
-        }
+        .modal-btn { background:rgba(255,255,255,0.08); border:1px solid var(--border); color:#fff; padding:10px 22px; border-radius:10px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; cursor:none; transition:background 0.2s; }
         .modal-btn:hover { background:rgba(255,255,255,0.18); }
         .modal-btn.danger { background:rgba(255,51,51,0.15); border-color:rgba(255,51,51,0.3); color:#ff3333; }
         .modal-btn.spin-active { background:rgba(0,255,102,0.12); border-color:rgba(0,255,102,0.3); color:#00ff66; }
 
         /* ── GUESTBOOK ── */
-        .comments-section { margin-top:40px; padding:32px; }
+        .comments-section { padding:32px; }
         .comment-form { display:flex; gap:12px; margin-bottom:24px; }
         .comment-input { flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; padding:12px 16px; color:#fff; font-family:'Inter',sans-serif; outline:none; }
         .comment-btn { background:#fff; color:#000; border:none; border-radius:8px; padding:0 20px; font-weight:600; font-family:'Inter',sans-serif; cursor:none; }
-        .comments-list { display:flex; flex-direction:column; gap:12px; max-height:300px; overflow-y:auto; }
+        .comments-list { display:flex; flex-direction:column; gap:12px; max-height:260px; overflow-y:auto; }
         .comment-item { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; }
         .comment-item span { color:var(--text-dark); font-size:11px; margin-left:8px; }
 
@@ -193,69 +196,22 @@
 
         @media(max-width:768px){
             .nav-links{display:none;}
-            section{padding:48px 16px;}
+            section{padding:40px 16px;}
             .comment-form{flex-direction:column;}
         }
     </style>
 </head>
 <body>
 
+<div class="bg-image"></div>
 <div class="bg-overlay"></div>
 <div class="rain-container" id="rain"></div>
 <canvas id="cursor-canvas"></canvas>
 
-<svg id="anime-girl" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
-    <g id="umbrella">
-        <path d="M52 70 Q65 45 78 70" fill="#c084fc" stroke="#9333ea" stroke-width="1.5"/>
-        <path d="M52 70 Q58 55 65 54 Q72 55 78 70" fill="#a855f7" stroke="#9333ea" stroke-width="1"/>
-        <line x1="65" y1="54" x2="52" y2="70" stroke="#9333ea" stroke-width="1"/>
-        <line x1="65" y1="54" x2="65" y2="70" stroke="#9333ea" stroke-width="1"/>
-        <line x1="65" y1="54" x2="78" y2="70" stroke="#9333ea" stroke-width="1"/>
-        <line x1="65" y1="54" x2="65" y2="95" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M65 95 Q62 101 59 99" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
-    </g>
-    <path d="M50 130 Q45 165 42 185 Q65 195 88 185 Q85 165 80 130 Z" fill="#f0abfc" stroke="#c084fc" stroke-width="1"/>
-    <path d="M50 130 Q55 148 65 152 Q75 148 80 130 Z" fill="#e879f9" opacity="0.5"/>
-    <rect x="52" y="108" width="26" height="26" rx="4" fill="#fde8d8"/>
-    <path d="M52 112 Q65 118 78 112" fill="none" stroke="#c084fc" stroke-width="1.5"/>
-    <ellipse cx="65" cy="92" rx="16" ry="18" fill="#fde8d8"/>
-    <path d="M49 86 Q50 68 65 65 Q80 68 81 86 Q75 78 65 77 Q55 78 49 86Z" fill="#1e1b4b"/>
-    <path d="M49 86 Q44 100 47 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
-    <path d="M81 86 Q86 100 83 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
-    <path d="M65 65 Q68 55 72 58" fill="none" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round"/>
-    <ellipse cx="58" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
-    <ellipse cx="72" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
-    <circle cx="59.5" cy="89.5" r="1.2" fill="#fff"/>
-    <circle cx="73.5" cy="89.5" r="1.2" fill="#fff"/>
-    <ellipse cx="58" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
-    <ellipse cx="72" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
-    <path d="M61 99 Q65 103 69 99" fill="none" stroke="#c084fc" stroke-width="1.2" stroke-linecap="round"/>
-    <ellipse cx="52" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
-    <ellipse cx="78" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
-    <path d="M78 118 Q84 110 72 97" fill="none" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-    <g id="legs">
-        <line id="leg-l" x1="57" y1="185" x2="54" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-        <line id="leg-r" x1="73" y1="185" x2="76" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-        <ellipse id="shoe-l" cx="54" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
-        <ellipse id="shoe-r" cx="76" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
-    </g>
-</svg>
-
-<div id="project-modal">
-    <div id="modal-title">m1sly portfolio</div>
-    <div id="modal-img-wrap">
-        <img id="modal-img" src="" alt="project">
-    </div>
-    <div class="modal-controls">
-        <button class="modal-btn" id="spin-btn" onclick="toggleSpin()"><i class="fas fa-rotate"></i> 360° Spin</button>
-        <button class="modal-btn danger" onclick="closeModal()"><i class="fas fa-xmark"></i> Close</button>
-    </div>
-</div>
-
 <nav id="navbar">
     <div class="nav-container">
         <a href="#home" class="logo">
-            <img src="https://github.com/m1slydesign.png" alt="m1sly">
+            <img src="https://unavatar.io/x/m1slydesign" alt="m1sly">
             <span>m1sly</span>
         </a>
         <ul class="nav-links">
@@ -270,18 +226,25 @@
 
 <section class="hero" id="home">
     <div class="hero-content">
-        <div class="avatar-container">
-            <img src="https://github.com/m1slydesign.png" alt="Avatar">
+        
+        <div class="glass-panel twitter-profile-card">
+            <div class="twitter-banner"></div>
+            <div class="twitter-avatar-row">
+                <img class="twitter-avatar" src="https://unavatar.io/x/m1slydesign" alt="m1sly UI">
+                <span class="badge open" style="margin-bottom: 8px;"><i class="fas fa-circle" style="font-size:7px; color:#00ff66;"></i> Active</span>
+            </div>
+            <div class="twitter-info">
+                <div class="twitter-name">m1sly <i class="fas fa-badge-check" style="color:#1d9bf0; font-size:16px;"></i></div>
+                <div class="twitter-handle">@m1slydesign</div>
+                <div class="hero-role">Roblox UI Designer</div>
+                <p class="hero-bio" style="margin-bottom:0; font-size:14px;">Designing clean, responsive, and performance-optimized user interfaces for Roblox experiences. High expertise in layout structure and bento styles.</p>
+            </div>
         </div>
-        <div style="margin-bottom:16px;">
-            <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
-        </div>
+
         <h1 class="hero-title" id="hero-title"></h1>
-        <div class="hero-role">Roblox UI Designer</div>
-        <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
         <div class="btn-group">
             <a href="#contact" class="btn primary"><i class="fas fa-envelope"></i> Commission Me</a>
-            <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
+            <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> Explore Work</a>
         </div>
     </div>
 </section>
@@ -289,16 +252,16 @@
 <section id="projects">
     <div class="section-header">
         <h2>Recent Work</h2>
-        <p style="color:var(--text-muted);font-size:14px;">Click a project to explore. Drag to spin 360°.</p>
+        <p style="color:var(--text-muted);font-size:14px;">Interactive layout. Leave a like or live review below each set.</p>
     </div>
     <div class="projects-grid" id="portfolio-grid"></div>
 </section>
 
 <section id="guestbook">
     <div class="glass-panel comments-section">
-        <h3 style="font-family:'Syne',sans-serif;margin-bottom:16px;">Guestbook & Feedback</h3>
+        <h3 style="font-family:'Syne',sans-serif;margin-bottom:16px;">Guestbook & General Feedback</h3>
         <div class="comment-form">
-            <input type="text" id="comment-input" class="comment-input" placeholder="Leave a feedback about my UI work...">
+            <input type="text" id="comment-input" class="comment-input" placeholder="Leave public feedback about my UI design projects...">
             <button class="comment-btn" onclick="addComment()">Send</button>
         </div>
         <div class="comments-list" id="comments-list"></div>
@@ -308,18 +271,18 @@
 <section id="pricing">
     <div class="section-header">
         <h2>Pricing Rates</h2>
-        <p style="color:var(--text-muted);font-size:14px;">Flexible solutions structured per project specifications.</p>
+        <p style="color:var(--text-muted);font-size:14px;">Fair rates based on complexity, sizing, and asset counts.</p>
     </div>
     <div class="pricing-grid">
         <div class="glass-panel price-card">
-            <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">General Work</div>
+            <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">Full Game Set</div>
             <div class="price-val">400 USD</div>
-            <p style="font-size:13px;color:var(--text-muted);">Full simulator UI sets, bento design layout setups, and responsive frames.</p>
+            <p style="font-size:13px;color:var(--text-muted);">Full simulator configurations, comprehensive bento frames, shop, HUD, and matching elements.</p>
         </div>
         <div class="glass-panel price-card">
-            <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">Assets & Scripts</div>
+            <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">Assets & Single frames</div>
             <div class="price-val">R$ 5,000</div>
-            <p style="font-size:13px;color:var(--text-muted);">Custom game icons, layout scaling fixes, or single complex HUD additions.</p>
+            <p style="font-size:13px;color:var(--text-muted);">Custom vectors, vector styling fixes, individual dynamic panels, or single HUD upgrades.</p>
         </div>
     </div>
 </section>
@@ -330,16 +293,28 @@
         <p style="color:var(--text-muted);font-size:14px;">Let's build something epic together.</p>
     </div>
     <div class="btn-group" style="justify-content:center;">
-        <a href="https://x.com/m1sly" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter</a>
-        <a href="#" class="btn secondary"><i class="fab fa-discord"></i> Discord</a>
+        <a href="https://x.com/m1slydesign" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter / X</a>
+        <a href="#" class="btn secondary"><i class="fab fa-discord"></i> Discord (m1sly)</a>
     </div>
 </section>
 
+<div id="project-modal">
+    <div id="modal-title">m1sly portfolio</div>
+    <div id="modal-img-wrap">
+        <img id="modal-img" src="" alt="project">
+    </div>
+    <div class="modal-controls">
+        <button class="modal-btn" id="spin-btn" onclick="toggleSpin()"><i class="fas fa-rotate"></i> 360° Spin</button>
+        <button class="modal-btn danger" onclick="closeModal()"><i class="fas fa-xmark"></i> Close</button>
+    </div>
+</div>
+
 <script>
+// Projeler, her birinin kendine has caption (açıklama) alanları var
 const PROJECTS = [
-    { id:1, title:"Simulator HUD",   src:"https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD",   likes:0, liked:false },
-    { id:2, title:"Shop Menu",       src:"https://placehold.co/700x394/111827/a855f7?text=Shop+Menu",       likes:0, liked:false },
-    { id:3, title:"Inventory Screen",src:"https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen",likes:0, liked:false },
+    { id:1, title:"Simulator HUD", caption:"Clean minimal HUD structure optimized for brainrot style simulators, clear text padding and custom tracking bars.", src:"https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD" },
+    { id:2, title:"Shop Menu", caption:"Glow accent bento box layouts setup for game monetization structures, gamepasses and product displays.", src:"https://placehold.co/700x394/111827/a855f7?text=Shop+Menu" },
+    { id:3, title:"Inventory Screen", caption:"Fully scaling grid components layout matching Roblox engine constraints with absolute pixel perfection.", src:"https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen" },
 ];
 
 /* ── RAIN EFFECTS ── */
@@ -427,38 +402,11 @@ function animLoop(){
 }
 animLoop();
 
-/* ── ANIME GIRL LEGS ANIMATION ── */
-(function walkLegs(){
-    const legL=document.getElementById('leg-l');
-    const legR=document.getElementById('leg-r');
-    const shoeL=document.getElementById('shoe-l');
-    const shoeR=document.getElementById('shoe-r');
-    let t=0;
-    function step(){
-        t+=0.12;
-        const lx2=54+Math.sin(t)*10;
-        const ly2=212+Math.cos(t)*6;
-        legL.setAttribute('x2',lx2);
-        legL.setAttribute('y2',ly2);
-        shoeL.setAttribute('cx',lx2);
-        shoeL.setAttribute('cy',ly2+1);
-        
-        const rx2=76-Math.sin(t)*10;
-        const ry2=212-Math.cos(t)*6;
-        legR.setAttribute('x2',rx2);
-        legR.setAttribute('y2',ry2);
-        shoeR.setAttribute('cx',rx2);
-        shoeR.setAttribute('cy',ry2+1);
-        requestAnimationFrame(step);
-    }
-    step();
-})();
-
 window.addEventListener('scroll',()=>{
     document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
 });
 
-/* ── TYPEWRITER SYSTEM ── */
+/* ── TYPEWRITER HERO ── */
 function typeWriter(el, text, delay=100){
     el.innerHTML='';
     [...text].forEach((ch,i)=>{
@@ -469,36 +417,96 @@ function typeWriter(el, text, delay=100){
         el.appendChild(span);
     });
 }
-typeWriter(document.getElementById('hero-title'),'m1sly',120);
+typeWriter(document.getElementById('hero-title'),'m1sly portfolio',100);
 
-/* ── PORTFOLIO GRID ── */
+/* ── PORTFOLIO GRID WITH LOCALSTORAGE LIKES & REVIEWS ── */
 const grid=document.getElementById('portfolio-grid');
+
+function getLikesCount(id) {
+    return parseInt(localStorage.getItem(`project_likes_${id}`)) || Math.floor(Math.random() * 25) + 12;
+}
+
+function isProjectLiked(id) {
+    return localStorage.getItem(`project_liked_${id}`) === 'true';
+}
+
+function getProjectComments(id) {
+    return JSON.parse(localStorage.getItem(`project_comments_${id}`)) || [
+        { text: "Cool clean UI UI layout design!", time: "12:40" }
+    ];
+}
+
 function renderProjects(){
     grid.innerHTML='';
     PROJECTS.forEach(p=>{
+        const likes = getLikesCount(p.id);
+        const liked = isProjectLiked(p.id);
+        const commentsArr = getProjectComments(p.id);
+        
         const card=document.createElement('div');
         card.className='glass-panel project-card';
+        
+        // Kart yapısı (Görsel, başlık, beğeni, açıklama ve mini yorum paneli)
         card.innerHTML=`
-            <div class="project-img-wrapper">
+            <div class="project-img-wrapper" onclick="openModalById(${p.id})">
                 <img src="${p.src}" alt="${p.title}">
             </div>
-            <div class="project-actions">
-                <span style="font-size:14px;font-weight:600;">${p.title}</span>
-                <button class="like-btn ${p.liked?'liked':''}" onclick="event.stopPropagation();toggleLike(${p.id})">
-                    <i class="fa${p.liked?'s':'r'} fa-heart"></i> ${p.likes}
+            <div class="project-meta">
+                <span class="project-title">${p.title}</span>
+                <button class="like-btn ${liked?'liked':''}" onclick="toggleProjectLike(event, ${p.id})">
+                    <i class="fa${liked?'s':'r'} fa-heart"></i> <span class="like-num">${likes}</span>
                 </button>
-            </div>`;
-        card.addEventListener('click',()=>openModal(p));
+            </div>
+            <div class="project-caption">${p.caption}</div>
+            
+            <div class="card-comments-box">
+                <div class="card-comments-list">
+                    ${commentsArr.map(c => `<div class="card-comment-item">${c.text}<span>${c.time}</span></div>`).join('')}
+                </div>
+                <div class="card-comment-form">
+                    <input type="text" class="card-comment-input" placeholder="Drop a comment..." onclick="event.stopPropagation()">
+                    <button class="card-comment-btn" onclick="addProjectComment(event, ${p.id}, this)">Post</button>
+                </div>
+            </div>
+        `;
         grid.appendChild(card);
     });
 }
 
-function toggleLike(id){
-    const p=PROJECTS.find(x=>x.id===id);
-    if(!p) return;
-    p.liked=!p.liked; p.likes+=p.liked?1:-1;
+function toggleProjectLike(event, id){
+    event.stopPropagation();
+    const liked = isProjectLiked(id);
+    let currentLikes = getLikesCount(id);
+    
+    if(liked) {
+        localStorage.setItem(`project_liked_${id}`, 'false');
+        localStorage.setItem(`project_likes_${id}`, currentLikes - 1);
+    } else {
+        localStorage.setItem(`project_liked_${id}`, 'true');
+        localStorage.setItem(`project_likes_${id}`, currentLikes + 1);
+    }
     renderProjects();
 }
+
+function addProjectComment(event, id, btnEl) {
+    event.stopPropagation();
+    const input = btnEl.previousElementSibling;
+    const txt = input.value.trim();
+    if(!txt) return;
+    
+    const commentsArr = getProjectComments(id);
+    commentsArr.push({ text: txt, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+    localStorage.setItem(`project_comments_${id}`, JSON.stringify(commentsArr));
+    
+    input.value = '';
+    renderProjects();
+}
+
+function openModalById(id) {
+    const p = PROJECTS.find(x => x.id === id);
+    if(p) openModal(p);
+}
+
 renderProjects();
 
 /* ── MODAL AND SPIN SYSTEM ── */
@@ -569,19 +577,20 @@ window.addEventListener('mousemove',e=>{
 window.addEventListener('mouseup',()=>dragging=false);
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-/* ── GUESTBOOK ── */
-const comments=[];
+/* ── GLOBAL GUESTBOOK ── */
+const globalComments=[];
 function addComment(){
     const inp=document.getElementById('comment-input');
     const txt=inp.value.trim(); if(!txt) return;
-    comments.unshift({text:txt,time:new Date().toLocaleTimeString()});
+    globalComments.unshift({text:txt,time:new Date().toLocaleTimeString()});
     inp.value=''; renderComments();
 }
 function renderComments(){
     document.getElementById('comments-list').innerHTML=
-        comments.map(c=>`<div class="comment-item">${c.text}<span>${c.time}</span></div>`).join('');
+        globalComments.map(c=>`<div class="comment-item">${c.text}<span>${c.time}</span></div>`).join('');
 }
 document.getElementById('comment-input').addEventListener('keydown',e=>{ if(e.key==='Enter') addComment(); });
 </script>
 </body>
 </html>
+
