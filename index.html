@@ -1,151 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>m1sly | Portfolio</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>m1sly | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg: #030303;
+  --text: #ffffff;
+  --text-muted: #b0b0b0;
+  --text-dark: #666666;
+  --border: rgba(255,255,255,0.08);
+  --card-bg: rgba(10,10,10,0.6);
+  --accent-open: #00ff66;
+  --accent-closed: #ff3333;
+}
+* { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',sans-serif;
+  background-color:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  cursor:none;
+}
 
-    <style>
-        :root {
-            --bg: #030303;
-            --text: #ffffff;
-            --text-muted: #b0b0b0;
-            --text-dark: #666666;
-            --border: rgba(255, 255, 255, 0.08);
-            --card-bg: rgba(10, 10, 10, 0.6);
-            --accent-open: #00ff66;
-            --accent-closed: #ff3333;
-        }
+/* ── BG ── */
+.bg-overlay {
+  position:fixed; inset:0;
+  background:linear-gradient(180deg,rgba(3,3,3,0.5) 0%,rgba(3,3,3,0.8) 100%);
+  backdrop-filter:blur(4px);
+  z-index:-2;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        html { scroll-behavior: smooth; }
+/* ── RAIN ── */
+.rain-container { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; overflow:hidden; }
+.drop { position:absolute; width:1px; height:60px; background:linear-gradient(transparent,rgba(255,255,255,0.15)); animation:fall linear infinite; }
+@keyframes fall { 0%{transform:translateY(-100px)} 100%{transform:translateY(100vh)} }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            cursor: none;
-        }
+/* ── CURSOR ── */
+#cursor-canvas { position:fixed; inset:0; pointer-events:none; z-index:10000; }
 
-        .bg-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.8) 100%);
-            backdrop-filter: blur(4px);
-            z-index: -2;
-        }
+/* ── ANIME GIRL ── */
+#anime-girl {
+  position:fixed;
+  bottom:0; left:-160px;
+  width:130px; height:220px;
+  z-index:500;
+  pointer-events:none;
+  animation:walkAcross 28s linear infinite;
+}
+@keyframes walkAcross {
+  0%   { left:-160px; }
+  100% { left:110vw;  }
+}
 
-        .rain-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
+/* ── TYPEWRITER HERO ── */
+.hero-title .char {
+  display:inline-block;
+  opacity:0;
+  transform:translateY(20px);
+  animation:charIn 0.06s forwards;
+}
+@keyframes charIn {
+  to { opacity:1; transform:translateY(0); }
+}
 
-        .drop {
-            position: absolute;
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(transparent, rgba(255,255,255,0.15));
-            animation: fall linear infinite;
-        }
+/* ── GLASS ── */
+.glass-panel {
+  background:var(--card-bg);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+  border-radius:16px;
+  transition:all 0.3s cubic-bezier(0.25,0.8,0.25,1);
+}
+.glass-panel:hover { border-color:rgba(255,255,255,0.2); background:rgba(15,15,15,0.7); }
 
-        @keyframes fall {
-            0%   { transform: translateY(-100px); }
-            100% { transform: translateY(100vh); }
-        }
+/* ── NAV ── */
+nav { position:fixed; top:0; width:100%; z-index:1000; padding:20px 0; transition:all 0.3s; }
+nav.scrolled { background:rgba(3,3,3,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:12px 0; }
+.nav-container { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; align-items:center; }
+.logo { display:flex; align-items:center; gap:12px; text-decoration:none; font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); }
+.logo img { width:32px; height:32px; border-radius:8px; object-fit:cover; }
+.nav-links { display:flex; list-style:none; gap:24px; align-items:center; }
+.nav-links a { color:var(--text-muted); text-decoration:none; font-size:13px; font-weight:500; transition:color 0.3s; }
+.nav-links a:hover { color:var(--text); }
+.badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:30px; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.badge.open   { background:rgba(0,255,102,0.1); color:var(--accent-open);   border:1px solid rgba(0,255,102,0.2); }
+.badge.closed { background:rgba(255,51,51,0.1);  color:var(--accent-closed); border:1px solid rgba(255,51,51,0.2); }
 
-        .custom-cursor {
-            width: 8px; height: 8px;
-            background: #fff;
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 10000;
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
+/* ── HERO ── */
+.hero { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 24px 60px; text-align:center; }
+.hero-content { max-width:750px; }
+.avatar-container { width:110px; height:110px; margin:0 auto 24px; }
+.avatar-container img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:2px solid var(--border); }
+.hero-title { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; line-height:1.1; margin-bottom:12px; letter-spacing:-2px; min-height:80px; }
+.hero-role { font-size:12px; color:var(--text-dark); letter-spacing:4px; text-transform:uppercase; margin-bottom:16px; font-weight:700; }
+.hero-bio { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:32px; }
+.btn-group { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:12px; font-size:13px; font-weight:600; text-decoration:none; transition:all 0.3s; }
+.btn.primary  { background:#fff; color:#000; }
+.btn.primary:hover  { transform:translateY(-2px); opacity:0.9; }
+.btn.secondary { background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border); }
+.btn.secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
 
-        .custom-cursor-follower {
-            width: 24px; height: 24px;
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.08s ease-out;
-        }
+/* ── SECTIONS ── */
+section { max-width:1100px; margin:0 auto; padding:80px 24px; }
+.section-header { text-align:center; margin-bottom:48px; }
+.section-header h2 { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); margin-bottom:8px; }
 
-        .clickable { width: 16px; height: 16px; background-color: rgba(255,255,255,0.2); }
+/* ── PROJECTS ── */
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
+.project-card { overflow:hidden; display:flex; flex-direction:column; cursor:none; }
+.project-img-wrapper { position:relative; width:100%; padding-top:56.25%; overflow:hidden; border-radius:12px; }
+.project-img-wrapper img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+.project-card:hover .project-img-wrapper img { transform:scale(1.04); }
+.project-actions { padding:16px; display:flex; justify-content:space-between; align-items:center; }
+.like-btn { background:transparent; border:none; color:var(--text-muted); font-family:'Inter',sans-serif; font-size:13px; display:flex; align-items:center; gap:6px; cursor:none; transition:color 0.2s; }
+.like-btn.liked { color:#ff3366; }
 
-        .glass-panel {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
-        }
+/* ── PROJECT MODAL ── */
+#project-modal {
+  display:none;
+  position:fixed; inset:0;
+  z-index:9000;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(12px);
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+#project-modal.open { display:flex; }
+#modal-title {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(18px,3vw,28px);
+  font-weight:800;
+  margin-bottom:20px;
+  letter-spacing:-1px;
+  opacity:0;
+  transform:translateY(-16px);
+  transition:all 0.4s 0.1s;
+}
+#project-modal.open #modal-title { opacity:1; transform:translateY(0); }
+#modal-img-wrap {
+  position:relative;
+  width:min(80vw,700px);
+  aspect-ratio:16/9;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  transform-style:preserve-3d;
+  perspective:1000px;
+}
+#modal-img {
+  width:100%; height:100%;
+  object-fit:cover;
+  border-radius:16px;
+  transition:transform 0.05s linear;
+  transform-origin:center center;
+}
+.modal-controls {
+  display:flex; gap:16px; margin-top:20px;
+}
+.modal-btn {
+  background:rgba(255,255,255,0.08);
+  border:1px solid var(--border);
+  color:#fff;
+  padding:10px 22px;
+  border-radius:10px;
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:13px;
+  cursor:none;
+  transition:background 0.2s;
+}
+.modal-btn:hover { background:rgba(255,255,255,0.18); }
+.modal-btn.danger { background:rgba(255,51,51,0.15); border-color:rgba(255,51,51,0.3); color:#ff3333; }
+.modal-btn.spin-active { background:rgba(0,255,102,0.12); border-color:rgba(0,255,102,0.3); color:#00ff66; }
 
-        .glass-panel:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(15,15,15,0.7);
-        }
+/* ── GUESTBOOK ── */
+.comments-section { margin-top:40px; padding:32px; }
+.comment-form { display:flex; gap:12px; margin-bottom:24px; }
+.comment-input { flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; padding:12px 16px; color:#fff; font-family:'Inter',sans-serif; outline:none; }
+.comment-btn { background:#fff; color:#000; border:none; border-radius:8px; padding:0 20px; font-weight:600; font-family:'Inter',sans-serif; cursor:none; }
+.comments-list { display:flex; flex-direction:column; gap:12px; max-height:300px; overflow-y:auto; }
+.comment-item { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; }
+.comment-item span { color:var(--text-dark); font-size:11px; margin-left:8px; }
 
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            transition: all 0.3s;
-        }
+/* ── PRICING ── */
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+.price-card { padding:32px; text-align:center; }
+.price-val { font-family:'Space Grotesk',sans-serif; font-size:32px; font-weight:700; margin:16px 0; }
 
-        nav.scrolled {
-            background: rgba(3,3,3,0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 0;
-        }
+@media(max-width:768px){
+  .nav-links{display:none;}
+  section{padding:48px 16px;}
+  .comment-form{flex-direction:column;}
+}
+</style>
+</head>
+<body>
 
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+<div class="bg-overlay"></div>
+<div class="rain-container" id="rain"></div>
+<canvas id="cursor-canvas"></canvas>
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            font-family: 'Syne', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--text);
-        }
+<!-- ANIME GIRL SVG -->
+<svg id="anime-girl" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- umbrella -->
+  <g id="umbrella">
+    <!-- canopy -->
+    <path d="M52 70 Q65 45 78 70" fill="#c084fc" stroke="#9333ea" stroke-width="1.5"/>
+    <path d="M52 70 Q58 55 65 54 Q72 55 78 70" fill="#a855f7" stroke="#9333ea" stroke-width="1"/>
+    <!-- ribs -->
+    <line x1="65" y1="54" x2="52" y2="70" stroke="#9333ea" stroke-width="1"/>
+    <line x1="65" y1="54" x2="65" y2="70" stroke="#9333ea" stroke-width="1"/>
+    <line x1="65" y1="54" x2="78" y2="70" stroke="#9333ea" stroke-width="1"/>
+    <!-- handle -->
+    <line x1="65" y1="54" x2="65" y2="95" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M65 95 Q62 101 59 99" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
 
-        .logo img {
-            width: 32px; height: 32px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
+  <!-- body -->
+  <!-- dress -->
+  <path d="M50 130 Q45 165 42 185 Q65 195 88 185 Q85 165 80 130 Z" fill="#f0abfc" stroke="#c084fc" stroke-width="1"/>
+  <!-- dress overlay -->
+  <path d="M50 130 Q55 148 65 152 Q75 148 80 130 Z" fill="#e879f9" opacity="0.5"/>
+  <!-- torso -->
+  <rect x="52" y="108" width="26" height="26" rx="4" fill="#fde8d8"/>
+  <!-- collar / shirt -->
+  <path d="M52 112 Q65 118 78 112" fill="none" stroke="#c084fc" stroke-width="1.5"/>
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
+  <!-- head -->
+  <ellipse cx="65" cy="92" rx="16" ry="18" fill="#fde8d8"/>
+  <!-- hair top -->
+  <path d="M49 86 Q50 68 65 65 Q80 68 81 86 Q75 78 65 77 Q55 78 49 86Z" fill="#1e1b4b"/>
+  <!-- hair side left -->
+  <path d="M49 86 Q44 100 47 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
+  <!-- hair side right -->
+  <path d="M81 86 Q86 100 83 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
+  <!-- ahoge -->
+  <path d="M65 65 Q68 55 72 58" fill="none" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- eyes -->
+  <ellipse cx="58" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
+  <ellipse cx="72" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
+  <!-- eye shine -->
+  <circle cx="59.5" cy="89.5" r="1.2" fill="#fff"/>
+  <circle cx="73.5" cy="89.5" r="1.2" fill="#fff"/>
+  <!-- iris color -->
+  <ellipse cx="58" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
+  <ellipse cx="72" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
+  <!-- mouth -->
+  <path d="M61 99 Q65 103 69 99" fill="none" stroke="#c084fc" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- blush -->
+  <ellipse cx="52" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
+  <ellipse cx="78" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
+
+  <!-- arm holding umbrella (right) -->
+  <path d="M78 118 Q84 110 72 97" fill="none" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- legs animated -->
+  <g id="legs">
+    <!-- left leg -->
+    <line id="leg-l" x1="57" y1="185" x2="54" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
+    <!-- right leg -->
+    <line id="leg-r" x1="73" y1="185" x2="76" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
+    <!-- shoes -->
+    <ellipse id="shoe-l" cx="54" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
+    <ellipse id="shoe-r" cx="76" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
+  </g>
+
+  <!-- rain drops near girl -->
+  <line x1="30" y1="60" x2="28" y2="80" stroke="rgba(150,200,255,0.5)" stroke-width="1"/>
+  <line x1="100" y1="75" x2="98" y2="95" stroke="rgba(150,200,255,0.5)" stroke-width="1"/>
+  <line x1="20" y1="100" x2="18" y2="120" stroke="rgba(150,200,255,0.4)" stroke-width="1"/>
+  <line x1="110" y1="110" x2="108" y2="130" stroke="rgba(150,200,255,0.4)" stroke-width="1"/>
+</svg>
+
+<!-- PROJECT MODAL -->
+<div id="project-modal">
+  <div id="modal-title">m1sly portfolio</div>
+  <div id="modal-img-wrap">
+    <img id="modal-img" src="" alt="project">
+  </div>
+  <div class="modal-controls">
+    <button class="modal-btn" id="spin-btn" onclick="toggleSpin()"><i class="fas fa-rotate"></i> 360° Spin</button>
+    <button class="modal-btn danger" onclick="closeModal()"><i class="fas fa-xmark"></i> Close</button>
+  </div>
+</div>
+
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="logo">
+      <img src="https://github.com/m1slydesign.png" alt="m1sly">
+      <span>m1sly</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Portfolio</a></li>
+      <li><a href="#pricing">Rates</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><span class="badge open">OPEN</span></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="avatar-container">
+      <img src="https://github.com/m1slydesign.png" alt="Avatar">
+    </div>
+    <div style="margin-bottom:16px;">
+      <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
+    </div>
+    <h1 class="hero-title" id="hero-title"></h1>
+    <div class="hero-role">Roblox UI Designer</div>
+    <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn primary"><i class="fas fa-envelope"></i> Commission Me</a>
+      <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-header">
+    <h2>Recent Work</h2>
+    <p style="color:var(--text-muted);font-size:14px;">Click a project to explore. Drag to spin 360°.</p>
+  </div>
+  <div class="projects-grid" id="portfolio-grid"></div>
+</section>
+
+<section id="guestbook">
+  <div class="glass-panel comments-section">
+    <h3 style="font-family:'Syne',sans-serif;margin-bottom:16px;">Guestbook & Feedback</h3>
+    <div class="comment-form">
+      <input type="text" id="comment-input" class="comment-input" placeholder="Leave a feedback about my UI work...">
+      <button class="comment-btn" onclick="addComment()">Send</button>
+    </div>
+    <div class="comments-list" id="comments-list"></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-header">
+    <h2>Pricing Rates</h2>
+    <p style="color:var(--text-muted);font-size:14px;">Flexible solutions structured per project specifications.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="glass-panel price-card">
+      <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">General Work</div>
+      <div class="price-val">R$ 2,000 - 5,000</div>
+      <p style="font-size:13px;color:var(--text-muted);">Full simulator screens, assets backgrounds, and responsive menus.</p>
+    </div>
+    <div class="glass-panel price-card">
+      <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">Simple Tasks</div>
+      <div class="price-val">R$ 500 - 1,000</div>
+      <p style="font-size:13px;color:var(--text-muted);">Single custom frame adjustments, icon scaling, or minor asset edits.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="text-align:center;">
+  <div class="section-header">
+    <h2>Get In Touch</h2>
+    <p style="color:var(--text-muted);font-size:14px;">Let's build something epic together.</p>
+  </div>
+  <div class="btn-group" style="justify-content:center;">
+    <a href="https://x.com/stor4m" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter</a>
+    <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary"><i class="fab fa-discord"></i> Discord</a>
+  </div>
+</section>
+
+<script>
+/* ══════════════════════════════════════
+   PROJECTS DATA
+══════════════════════════════════════ */
+const PROJECTS = [
+  { id:1, title:"Simulator HUD",   src:"https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD",   likes:0, liked:false },
+  { id:2, title:"Shop Menu",       src:"https://placehold.co/700x394/111827/a855f7?text=Shop+Menu",       likes:0, liked:false },
+  { id:3, title:"Inventory Screen",src:"https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen",likes:0, liked:false },
+];
+
+/* ══════════════════════════════════════
+   RAIN
+══════════════════════════════════════ */
+const rainEl = document.getElementById('rain');
+for(let i=0;i<60;i++){
+  const d=document.createElement('div');
+  d.className='drop';
+  d.style.left=(Math.random()*100)+'%';
+  d.style.animationDuration=(Math.random()*1.5+0.5)+'s';
+  d.style.animationDelay=(Math.random()*2)+'s';
+  d.style.opacity=Math.random()*0.5+0.1;
+  rainEl.appendChild(d);
+}
+
+/* ══════════════════════════════════════
+   CURSOR CANVAS — particle trail
+══════════════════════════════════════ */
+const canvas = document.getElementById('cursor-canvas');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resizeCanvas(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+
+let mx=W/2, my=H/2;
+const particles=[];
+const COLORS=['#ffffff','#e9d5ff','#c084fc','#a855f7','#7c3aed'];
+
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; });
+
+function spawnParticle(){
+  particles.push({
+    x:mx, y:my,
+    vx:(Math.random()-0.5)*2,
+    vy:(Math.random()-0.5)*2 - 0.5,
+    r:Math.random()*4+2,
+    alpha:1,
+    color:COLORS[Math.floor(Math.random()*COLORS.length)],
+    decay:Math.random()*0.03+0.02,
+    glow:Math.random()>0.6
+  });
+}
+
+function drawCursor(){
+  /* main dot */
+  ctx.save();
+  ctx.shadowColor='#c084fc';
+  ctx.shadowBlur=18;
+  ctx.beginPath();
+  ctx.arc(mx,my,6,0,Math.PI*2);
+  ctx.fillStyle='#fff';
+  ctx.fill();
+  ctx.restore();
+
+  /* outer ring pulse */
+  const t=Date.now()/600;
+  const pulse=14+Math.sin(t)*4;
+  ctx.save();
+  ctx.strokeStyle='rgba(192,132,252,0.6)';
+  ctx.lineWidth=1.5;
+  ctx.shadowColor='#a855f7';
+  ctx.shadowBlur=10;
+  ctx.beginPath();
+  ctx.arc(mx,my,pulse,0,Math.PI*2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function animLoop(){
+  ctx.clearRect(0,0,W,H);
+  spawnParticle();
+
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.x+=p.vx; p.y+=p.vy;
+    p.alpha-=p.decay;
+    if(p.alpha<=0){ particles.splice(i,1); continue; }
+    ctx.save();
+    if(p.glow){ ctx.shadowColor=p.color; ctx.shadowBlur=8; }
+    ctx.globalAlpha=p.alpha;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r*p.alpha,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  drawCursor();
+  requestAnimationFrame(animLoop);
+}
+animLoop();
+
+/* ══════════════════════════════════════
+   ANIME GIRL LEGS WALK
+══════════════════════════════════════ */
+(function walkLegs(){
+  const legL=document.getElementById('leg-l');
+  const legR=document.getElementById('leg-r');
+  const shoeL=document.getElementById('shoe-l');
+  const shoeR=document.getElementById('shoe-r');
+  let t=0;
+  function step(){
+    t+=0.12;
+    const a=Math.sin(t)*18;
+    // left leg
+    const lx2=54+Math.sin(t)*10;
+    const ly2=212+Math.cos(t)*6;
+    legL.setAttribute('x2',lx2);
+    legL.setAttribute('y2',ly2);
+    shoeL.setAttribute('cx',lx2);
+    shoeL.setAttribute('cy',ly2+1);
+    // right leg (opposite phase)
+    const rx2=76-Math.sin(t)*10;
+    const ry2=212-Math.cos(t)*6;
+    legR.setAttribute('x2',rx2);
+    legR.setAttribute('y2',ry2);
+    shoeR.setAttribute('cx',rx2);
+    shoeR.setAttribute('cy',ry2+1);
+    requestAnimationFrame(step);
+  }
+  step();
+})();
+
+/* ══════════════════════════════════════
+   NAVBAR SCROLL
+══════════════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+});
+
+/* ══════════════════════════════════════
+   TYPEWRITER HERO TITLE
+══════════════════════════════════════ */
+function typeWriter(el, text, delay=100){
+  el.innerHTML='';
+  [...text].forEach((ch,i)=>{
+    const span=document.createElement('span');
+    span.className='char';
+    span.textContent=ch;
+    span.style.animationDelay=(i*delay)+'ms';
+    el.appendChild(span);
+  });
+}
+typeWriter(document.getElementById('hero-title'),'m1sly',120);
+
+/* ══════════════════════════════════════
+   PROJECT GRID
+══════════════════════════════════════ */
+const grid=document.getElementById('portfolio-grid');
+
+function renderProjects(){
+  grid.innerHTML='';
+  PROJECTS.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='glass-panel project-card';
+    card.innerHTML=`
+      <div class="project-img-wrapper">
+        <img src="${p.src}" alt="${p.title}">
+      </div>
+      <div class="project-actions">
+        <span style="font-size:14px;font-weight:600;">${p.title}</span>
+        <button class="like-btn ${p.liked?'liked':''}" onclick="event.stopPropagation();toggleLike(${p.id})">
+          <i class="fa${p.liked?'s':'r'} fa-heart"></i> ${p.likes}
+        </button>
+      </div>`;
+    card.addEventListener('click',()=>openModal(p));
+    grid.appendChild(card);
+  });
+}
+
+function toggleLike(id){
+  const p=PROJECTS.find(x=>x.id===id);
+  if(!p) return;
+  p.liked=!p.liked; p.likes+=p.liked?1:-1;
+  renderProjects();
+}
+
+renderProjects();
+
+/* ══════════════════════════════════════
+   MODAL + 360° SPIN
+══════════════════════════════════════ */
+const modal    = document.getElementById('project-modal');
+const modalImg = document.getElementById('modal-img');
+const spinBtn  = document.getElementById('spin-btn');
+let spinning=false, spinAngle=0, spinRAF=null;
+let dragging=false, dragStartX=0, dragAngleStart=0;
+
+function openModal(p){
+  modalImg.src=p.src;
+  modal.classList.add('open');
+  spinning=false; spinAngle=0;
+  modalImg.style.transform='rotateY(0deg)';
+  spinBtn.className='modal-btn';
+  spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin';
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  modal.classList.remove('open');
+  stopSpin();
+  document.body.style.overflow='';
+}
+
+modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+
+function toggleSpin(){
+  spinning=!spinning;
+  if(spinning){
+    spinBtn.className='modal-btn spin-active';
+    spinBtn.innerHTML='<i class="fas fa-pause"></i> Stop';
+    doSpin();
+  } else {
+    stopSpin();
+    spinBtn.className='modal-btn';
+    spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin';
+  }
+}
+
+function doSpin(){
+  if(!spinning) return;
+  spinAngle=(spinAngle+1.5)%360;
+  modalImg.style.transform=`rotateY(${spinAngle}deg)`;
+  spinRAF=requestAnimationFrame(doSpin);
+}
+
+function stopSpin(){
+  spinning=false;
+  if(spinRAF) cancelAnimationFrame(spinRAF);
+}
+
+/* drag to rotate manually */
+const wrap=document.getElementById('modal-img-wrap');
+wrap.addEventListener('mousedown',e=>{ dragging=true; dragStartX=e.clientX; dragAngleStart=spinAngle; stopSpin(); spinBtn.className='modal-btn'; spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin'; });
+window.addEventListener('mousemove',e=>{ if(!dragging) return; const dx=e.clientX-dragStartX; spinAngle=(dragAngleStart+dx)%360; modalImg.style.transform=`rotateY(${spinAngle}deg)`; });
+window.addEventListener('mouseup',()=>dragging=false);
+wrap.addEventListener('touchstart',e=>{ dragging=true; dragStartX=e.touches[0].clientX; dragAngleStart=spinAngle; stopSpin(); },{passive:true});
+window.addEventListener('touchmove',e=>{ if(!dragging) return; const dx=e.touches[0].clientX-dragStartX; spinAngle=(dragAngleStart+dx)%360; modalImg.style.transform=`rotateY(${spinAngle}deg)`; },{passive:true});
+window.addEventListener('touchend',()=>dragging=false);
+
+/* ESC close */
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ══════════════════════════════════════
+   GUESTBOOK
+══════════════════════════════════════ */
+const comments=[];
+function addComment(){
+  const inp=document.getElementById('comment-input');
+  const txt=inp.value.trim(); if(!txt) return;
+  comments.unshift({text:txt,time:new Date().toLocaleTimeString()});
+  inp.value=''; renderComments();
+}
+function renderComments(){
+  document.getElementById('comments-list').innerHTML=
+    comments.map(c=>`<div class="comment-item">${c.text}<span>${c.time}</span></div>`).join('');
+}
+document.getElementById('comment-input').addEventListener('keydown',e=>{ if(e.key==='Enter') addComment(); });
+</script>
+</body>
+</html>
             align-items: center;
         }
 
