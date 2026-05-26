@@ -13,7 +13,7 @@
   --text-muted: #b0b0b0;
   --text-dark: #666666;
   --border: rgba(255,255,255,0.08);
-  --card-bg: rgba(10,10,10,0.55);
+  --card-bg: rgba(10,10,10,0.6);
   --accent-open: #00ff66;
   --accent-closed: #ff3333;
 }
@@ -22,7 +22,7 @@ html { scroll-behavior:smooth; }
 body {
   font-family:'Inter',sans-serif;
   background-color:var(--bg);
-  background-image: url('arkaplan.jpg'); /* Arka planı artık buradan çekiyor */
+  background-image: url('arkaplan.jpg'); /* Arka planı buradaki dosyadan çekiyor */
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
@@ -31,11 +31,11 @@ body {
   cursor:none;
 }
 
-/* ── BG OVERLAY VE ARKA PLAN BLUR SÜZGECİ ── */
+/* ── BG OVERLAY & BLUR ── */
 .bg-overlay {
   position:fixed; inset:0;
-  background:linear-gradient(180deg,rgba(3,3,3,0.6) 0%,rgba(3,3,3,0.85) 100%);
-  backdrop-filter:blur(8px); /* Önceki sitedeki yapının blur efekti */
+  background:linear-gradient(180deg,rgba(3,3,3,0.55) 0%,rgba(3,3,3,0.85) 100%);
+  backdrop-filter:blur(8px);
   z-index:-2;
 }
 
@@ -47,7 +47,7 @@ body {
 /* ── CURSOR ── */
 #cursor-canvas { position:fixed; inset:0; pointer-events:none; z-index:10000; }
 
-/* ── TYPEWRITER HERO ── */
+/* ── TYPEWRITER HERO ANIMATION ── */
 .hero-title .char {
   display:inline-block;
   opacity:0;
@@ -58,15 +58,15 @@ body {
   to { opacity:1; transform:translateY(0); }
 }
 
-/* ── GLASS PANELS ── */
+/* ── GLASS PANEL ── */
 .glass-panel {
   background:var(--card-bg);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(16px);
   border:1px solid var(--border);
   border-radius:16px;
   transition:all 0.3s cubic-bezier(0.25,0.8,0.25,1);
 }
-.glass-panel:hover { border-color:rgba(255,255,255,0.2); background:rgba(15,15,15,0.65); }
+.glass-panel:hover { border-color:rgba(255,255,255,0.2); background:rgba(15,15,15,0.7); }
 
 /* ── NAV ── */
 nav { position:fixed; top:0; width:100%; z-index:1000; padding:20px 0; transition:all 0.3s; }
@@ -80,46 +80,14 @@ nav.scrolled { background:rgba(3,3,3,0.85); backdrop-filter:blur(20px); border-b
 .badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:30px; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
 .badge.open   { background:rgba(0,255,102,0.1); color:var(--accent-open);   border:1px solid rgba(0,255,102,0.2); }
 
-/* ── HERO TWITTER CARD ── */
+/* ── SADE KULLANICI BLOGU (HERO ALANI) ── */
 .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 24px 60px; text-align:center; }
-.hero-content { max-width:750px; width:100%; }
-
-.twitter-profile-card {
-  max-width: 550px;
-  margin: 0 auto 32px;
-  text-align: left;
-  overflow: hidden;
-  position: relative;
-}
-.twitter-banner {
-  height: 130px;
-  background: linear-gradient(45deg, #1e1b4b, #4c1d95);
-  width: 100%;
-}
-.twitter-avatar-row {
-  padding: 0 24px;
-  margin-top: -45px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 12px;
-}
-.twitter-avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 4px solid #0a0a0a;
-  object-fit: cover;
-  background: #222;
-}
-.twitter-info { padding: 0 24px 24px; }
-.twitter-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px; }
-.twitter-handle { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; }
-
+.hero-content { max-width:750px; }
+.avatar-container { width:110px; height:110px; margin:0 auto 24px; position: relative; }
+.avatar-container img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:2px solid var(--border); }
 .hero-title { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; line-height:1.1; margin-bottom:12px; letter-spacing:-2px; min-height:80px; }
 .hero-role { font-size:12px; color:var(--text-dark); letter-spacing:4px; text-transform:uppercase; margin-bottom:16px; font-weight:700; }
-.hero-bio { font-size:15px; color:var(--text-muted); line-height:1.7; margin-bottom:32px; }
-
+.hero-bio { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:32px; }
 .btn-group { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
 .btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:12px; font-size:13px; font-weight:600; text-decoration:none; transition:all 0.3s; }
 .btn.primary  { background:#fff; color:#000; }
@@ -127,37 +95,18 @@ nav.scrolled { background:rgba(3,3,3,0.85); backdrop-filter:blur(20px); border-b
 .btn.secondary { background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border); }
 .btn.secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
 
-/* ── SECTIONS ── */
-section { max-width:1100px; margin:0 auto; padding:60px 24px; }
-.section-header { text-align:center; margin-bottom:44px; }
-.section-header h2 { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); margin-bottom:8px; }
-
-/* ── PROJECTS GRID WITH LIKES & CAPTIONS ── */
-.projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:24px; }
-.project-card { overflow:hidden; display:flex; flex-direction:column; cursor:none; padding:12px; }
+/* ── PROJELER ── */
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
+.project-card { overflow:hidden; display:flex; flex-direction:column; cursor:none; padding:14px; }
 .project-img-wrapper { position:relative; width:100%; padding-top:56.25%; overflow:hidden; border-radius:12px; margin-bottom:12px; }
 .project-img-wrapper img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
-.project-card:hover .project-img-wrapper img { transform:scale(1.03); }
+.project-card:hover .project-img-wrapper img { transform:scale(1.04); }
+.project-actions { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+.project-card-title { font-size:15px; font-weight:700; color:#fff; }
+.like-btn { background:transparent; border:none; color:var(--text-muted); font-family:'Inter',sans-serif; font-size:13px; display:flex; align-items:center; gap:6px; cursor:none; transition:color 0.2s; }
+.like-btn.liked { color:#ff3366; }
 
-.project-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-.project-title { font-size:16px; font-weight:700; color:#fff; }
-
-.like-btn { background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--text-muted); font-family:'Inter',sans-serif; font-size:12px; display:flex; align-items:center; gap:6px; cursor:none; padding:6px 12px; border-radius:20px; transition:all 0.2s; }
-.like-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
-.like-btn.liked { color:#ff3366; background:rgba(255,51,102,0.1); border-color:rgba(255,51,102,0.2); }
-
-.project-caption { font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:12px; padding: 0 2px; }
-
-/* IN-CARD COMMENTS / REVIEWS BOX */
-.card-comments-box { border-top:1px solid var(--border); padding-top:10px; margin-top:auto; }
-.card-comments-list { max-height:80px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; margin-bottom:8px; }
-.card-comment-item { font-size:12px; color:var(--text-muted); background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:6px; word-break:break-all; }
-.card-comment-item span { color:var(--text-dark); font-size:10px; float:right; }
-.card-comment-form { display:flex; gap:6px; }
-.card-comment-input { flex:1; background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:#fff; font-size:12px; font-family:'Inter',sans-serif; outline:none; }
-.card-comment-btn { background:rgba(255,255,255,0.9); color:#000; border:none; border-radius:6px; padding:0 10px; font-size:11px; font-weight:700; font-family:'Inter',sans-serif; cursor:none; }
-
-/* ── PROJECT MODAL ── */
+/* ── MODAL ── */
 #project-modal {
   display:none;
   position:fixed; inset:0;
@@ -179,11 +128,11 @@ section { max-width:1100px; margin:0 auto; padding:60px 24px; }
 .modal-btn.spin-active { background:rgba(0,255,102,0.12); border-color:rgba(0,255,102,0.3); color:#00ff66; }
 
 /* ── GUESTBOOK ── */
-.comments-section { padding:32px; }
+.comments-section { margin-top:40px; padding:32px; }
 .comment-form { display:flex; gap:12px; margin-bottom:24px; }
 .comment-input { flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; padding:12px 16px; color:#fff; font-family:'Inter',sans-serif; outline:none; }
 .comment-btn { background:#fff; color:#000; border:none; border-radius:8px; padding:0 20px; font-weight:600; font-family:'Inter',sans-serif; cursor:none; }
-.comments-list { display:flex; flex-direction:column; gap:12px; max-height:260px; overflow-y:auto; }
+.comments-list { display:flex; flex-direction:column; gap:12px; max-height:300px; overflow-y:auto; }
 .comment-item { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; }
 .comment-item span { color:var(--text-dark); font-size:11px; margin-left:8px; }
 
@@ -194,7 +143,7 @@ section { max-width:1100px; margin:0 auto; padding:60px 24px; }
 
 @media(max-width:768px){
   .nav-links{display:none;}
-  section{padding:40px 16px;}
+  section{padding:48px 16px;}
   .comment-form{flex-direction:column;}
 }
 </style>
@@ -234,22 +183,15 @@ section { max-width:1100px; margin:0 auto; padding:60px 24px; }
 
 <section class="hero" id="home">
   <div class="hero-content">
-    
-    <div class="glass-panel twitter-profile-card">
-      <div class="twitter-banner"></div>
-      <div class="twitter-avatar-row">
-        <img class="twitter-avatar" src="https://github.com/m1slydesign.png" alt="m1sly UI">
-        <span class="badge open" style="margin-bottom: 8px;"><i class="fas fa-circle" style="font-size:7px; color:#00ff66;"></i> Active</span>
-      </div>
-      <div class="twitter-info">
-        <div class="twitter-name">m1sly <i class="fas fa-badge-check" style="color:#1d9bf0; font-size:16px;"></i></div>
-        <div class="twitter-handle">@m1slydesign</div>
-        <div class="hero-role">Roblox UI Designer</div>
-        <p class="hero-bio" style="margin-bottom:0; font-size:14px;">Designing clean, responsive, and performance-optimized user interfaces for Roblox experiences. High expertise in layout structure and bento styles.</p>
-      </div>
+    <div class="avatar-container">
+      <img src="https://github.com/m1slydesign.png" alt="Avatar">
     </div>
-
+    <div style="margin-bottom:16px;">
+      <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
+    </div>
     <h1 class="hero-title" id="hero-title"></h1>
+    <div class="hero-role">Roblox UI Designer</div>
+    <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
     <div class="btn-group">
       <a href="#contact" class="btn primary"><i class="fas fa-envelope"></i> Commission Me</a>
       <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
@@ -260,9 +202,48 @@ section { max-width:1100px; margin:0 auto; padding:60px 24px; }
 <section id="projects">
   <div class="section-header">
     <h2>Recent Work</h2>
-    <p style="color:var(--text-muted);font-size:14px;">Interactive layout. Leave a like or live review below each set.</p>
+    <p style="color:var(--text-muted);font-size:14px;">Click a project to explore. Drag to spin 360°.</p>
   </div>
-  <div class="projects-grid" id="portfolio-grid"></div>
+  
+  <div class="projects-grid" id="portfolio-grid">
+    
+    <div class="glass-panel project-card" onclick="openModalFromSrc(this)">
+      <div class="project-img-wrapper">
+        <img src="https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD" alt="Project">
+      </div>
+      <div class="project-actions">
+        <span class="project-card-title">Simulator HUD</span>
+        <button class="like-btn" onclick="event.stopPropagation();toggleLike(this)">
+          <i class="far fa-heart"></i> <span class="like-count">12</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="glass-panel project-card" onclick="openModalFromSrc(this)">
+      <div class="project-img-wrapper">
+        <img src="https://placehold.co/700x394/111827/a855f7?text=Shop+Menu" alt="Project">
+      </div>
+      <div class="project-actions">
+        <span class="project-card-title">Shop Menu</span>
+        <button class="like-btn" onclick="event.stopPropagation();toggleLike(this)">
+          <i class="far fa-heart"></i> <span class="like-count">8</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="glass-panel project-card" onclick="openModalFromSrc(this)">
+      <div class="project-img-wrapper">
+        <img src="https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen" alt="Project">
+      </div>
+      <div class="project-actions">
+        <span class="project-card-title">Inventory Screen</span>
+        <button class="like-btn" onclick="event.stopPropagation();toggleLike(this)">
+          <i class="far fa-heart"></i> <span class="like-count">15</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <section id="guestbook">
@@ -308,15 +289,6 @@ section { max-width:1100px; margin:0 auto; padding:60px 24px; }
 
 <script>
 /* ══════════════════════════════════════
-   PROJECTS DATA WITH UNIQUE CAPTIONS
-══════════════════════════════════════ */
-const PROJECTS = [
-  { id:1, title:"Simulator HUD", caption:"Clean minimal HUD structure optimized for brainrot style simulators, clear text padding and custom tracking bars.", src:"https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD" },
-  { id:2, title:"Shop Menu", caption:"Glow accent bento box layouts setup for game monetization structures, gamepasses and product displays.", src:"https://placehold.co/700x394/111827/a855f7?text=Shop+Menu" },
-  { id:3, title:"Inventory Screen", caption:"Fully scaling grid components layout matching Roblox engine constraints with absolute pixel perfection.", src:"https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen" },
-];
-
-/* ══════════════════════════════════════
    RAIN ANIMATION
 ══════════════════════════════════════ */
 const rainEl = document.getElementById('rain');
@@ -331,7 +303,7 @@ for(let i=0;i<60;i++){
 }
 
 /* ══════════════════════════════════════
-   CURSOR CANVAS — particle trail
+   CURSOR CANVAS
 ══════════════════════════════════════ */
 const canvas = document.getElementById('cursor-canvas');
 const ctx = canvas.getContext('2d');
@@ -411,7 +383,7 @@ window.addEventListener('scroll',()=>{
   document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
 });
 
-/* TYPEWRITER HERO TITLE */
+/* TYPEWRITER TITLE EFFECT */
 function typeWriter(el, text, delay=100){
   el.innerHTML='';
   [...text].forEach((ch,i)=>{
@@ -422,108 +394,39 @@ function typeWriter(el, text, delay=100){
     el.appendChild(span);
   });
 }
-typeWriter(document.getElementById('hero-title'),'m1sly portfolio',100);
+typeWriter(document.getElementById('hero-title'),'m1sly',120);
 
 /* ══════════════════════════════════════
-   PROJECT GRID WITH STORAGE LIKES & REVIEWS
+   LIKE & MODAL CONTROLS (DİREKT HTML OKUR)
 ══════════════════════════════════════ */
-const grid=document.getElementById('portfolio-grid');
-
-function getLikesCount(id) {
-    return parseInt(localStorage.getItem(`project_likes_${id}`)) || Math.floor(Math.random() * 20) + 10;
-}
-
-function isProjectLiked(id) {
-    return localStorage.getItem(`project_liked_${id}`) === 'true';
-}
-
-function getProjectComments(id) {
-    return JSON.parse(localStorage.getItem(`project_comments_${id}`)) || [
-        { text: "Cool clean UI layout!", time: "12:34" }
-    ];
-}
-
-function renderProjects(){
-  grid.innerHTML='';
-  PROJECTS.forEach(p=>{
-    const likes = getLikesCount(p.id);
-    const liked = isProjectLiked(p.id);
-    const commentsArr = getProjectComments(p.id);
-
-    const card=document.createElement('div');
-    card.className='glass-panel project-card';
-    card.innerHTML=`
-      <div class="project-img-wrapper" onclick="openModalById(${p.id})">
-        <img src="${p.src}" alt="${p.title}">
-      </div>
-      <div class="project-meta">
-        <span class="project-title">${p.title}</span>
-        <button class="like-btn ${liked?'liked':''}" onclick="toggleProjectLike(event, ${p.id})">
-          <i class="fa${liked?'s':'r'} fa-heart"></i> <span class="like-num">${likes}</span>
-        </button>
-      </div>
-      <div class="project-caption">${p.caption}</div>
-      
-      <div class="card-comments-box">
-        <div class="card-comments-list">
-            ${commentsArr.map(c => `<div class="card-comment-item">${c.text}<span>${c.time}</span></div>`).join('')}
-        </div>
-        <div class="card-comment-form">
-            <input type="text" class="card-comment-input" placeholder="Drop a comment..." onclick="event.stopPropagation()">
-            <button class="card-comment-btn" onclick="addProjectComment(event, ${p.id}, this)">Post</button>
-        </div>
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-
-function toggleProjectLike(event, id){
-  event.stopPropagation();
-  const liked = isProjectLiked(id);
-  let currentLikes = getLikesCount(id);
+function toggleLike(btn){
+  const icon = btn.querySelector('i');
+  const countSpan = btn.querySelector('.like-count');
+  let currentCount = parseInt(countSpan.textContent);
   
-  if(liked) {
-      localStorage.setItem(`project_liked_${id}`, 'false');
-      localStorage.setItem(`project_likes_${id}`, currentLikes - 1);
+  if(icon.classList.contains('far')){
+    icon.className = 'fas fa-heart';
+    btn.classList.add('liked');
+    countSpan.textContent = currentCount + 1;
   } else {
-      localStorage.setItem(`project_liked_${id}`, 'true');
-      localStorage.setItem(`project_likes_${id}`, currentLikes + 1);
+    icon.className = 'far fa-heart';
+    btn.classList.remove('liked');
+    countSpan.textContent = currentCount - 1;
   }
-  renderProjects();
 }
 
-function addProjectComment(event, id, btnEl) {
-  event.stopPropagation();
-  const input = btnEl.previousElementSibling;
-  const txt = input.value.trim();
-  if(!txt) return;
-  
-  const commentsArr = getProjectComments(id);
-  commentsArr.push({ text: txt, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
-  localStorage.setItem(`project_comments_${id}`, JSON.stringify(commentsArr));
-  
-  input.value = '';
-  renderProjects();
-}
-
-function openModalById(id) {
-    const p = PROJECTS.find(x => x.id === id);
-    if(p) openModal(p);
-}
-
-renderProjects();
-
-/* ══════════════════════════════════════
-   MODAL + 360° SPIN
-══════════════════════════════════════ */
 const modal    = document.getElementById('project-modal');
 const modalImg = document.getElementById('modal-img');
 const spinBtn  = document.getElementById('spin-btn');
 let spinning=false, spinAngle=0, spinRAF=null;
 let dragging=false, dragStartX=0, dragAngleStart=0;
 
-function openModal(p){
-  modalImg.src=p.src;
+function openModalFromSrc(cardEl){
+  const imgSrc = cardEl.querySelector('.project-img-wrapper img').src;
+  const imgTitle = cardEl.querySelector('.project-card-title').textContent;
+  
+  document.getElementById('modal-title').textContent = imgTitle;
+  modalImg.src = imgSrc;
   modal.classList.add('open');
   spinning=false; spinAngle=0;
   modalImg.style.transform='rotateY(0deg)';
@@ -565,7 +468,7 @@ function stopSpin(){
   if(spinRAF) cancelAnimationFrame(spinRAF);
 }
 
-/* drag rotation manual */
+/* drag manually */
 const wrap=document.getElementById('modal-img-wrap');
 wrap.addEventListener('mousedown',e=>{ dragging=true; dragStartX=e.clientX; dragAngleStart=spinAngle; stopSpin(); spinBtn.className='modal-btn'; spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin'; });
 window.addEventListener('mousemove',e=>{ if(!dragging) return; const dx=e.clientX-dragStartX; spinAngle=(dragAngleStart+dx)%360; modalImg.style.transform=`rotateY(${spinAngle}deg)`; });
@@ -576,9 +479,7 @@ window.addEventListener('touchend',()=>dragging=false);
 
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-/* ══════════════════════════════════════
-   GLOBAL GUESTBOOK
-══════════════════════════════════════ */
+/* ── GUESTBOOK ── */
 const comments=[];
 function addComment(){
   const inp=document.getElementById('comment-input');
@@ -594,5 +495,4 @@ document.getElementById('comment-input').addEventListener('keydown',e=>{ if(e.ke
 </script>
 </body>
 </html>
-
 
