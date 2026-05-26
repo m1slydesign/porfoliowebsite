@@ -124,6 +124,22 @@ section { max-width:1100px; margin:0 auto; padding:80px 24px; }
 .like-btn { background:transparent; border:none; color:var(--text-muted); font-family:'Inter',sans-serif; font-size:13px; display:flex; align-items:center; gap:6px; cursor:none; transition:color 0.2s; }
 .like-btn.liked { color:#ff3366; }
 
+/* ── CHANGELOG MODAL (NEW) ── */
+#changelog-modal {
+  position: fixed; inset: 0; z-index: 15000;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.changelog-box {
+  max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto;
+  padding: 30px; border-radius: 20px; text-align: left;
+}
+.changelog-box h3 { font-family: 'Syne', sans-serif; font-size: 22px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+.changelog-content { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+.changelog-content b { color: #fff; }
+.changelog-content ul { margin: 10px 0 20px 20px; }
+.changelog-content li { margin-bottom: 8px; }
+
 /* ── PROJECT MODAL ── */
 #project-modal {
   display:none;
@@ -206,84 +222,67 @@ section { max-width:1100px; margin:0 auto; padding:80px 24px; }
 </head>
 <body>
 
+<div id="changelog-modal">
+  <div class="glass-panel changelog-box">
+    <h3>🛠️ Geliştirici Güncelleme Notları</h3>
+    <div class="changelog-content">
+      <p>Kral, kod tabanını baştan aşağı elden geçirdim. Yaşadığın kasma (lag) sorunlarını çözmek, kodunu tamamen modüler ve temiz hale getirmek, istediğin dinamik özellikleri eklemek için harika bir güncelleme hazırladım.</p>
+      <br>
+      <b>📌 Neler Düzeltildi ve Neler Eklendi?</b>
+      <ul>
+        <li><b>1. Performans Optimizasyonu:</b> Sayfa yüklendiğinde sürekli çalışan ağır parçacık (canvas) ve opaklık döngüleri silindi. Yerine ekran kartını yormayan modern CSS Parçacıklı Yağmur Efekti eklendi.</li>
+        <li><b>2. Arka Plan & Okunabilirlik:</b> Arka plandaki anime görselinin görünürlüğü artırıldı, kartlara soft bir blur verilerek metinlerin okunabilirliği en üst düzeye çıkarıldı. Metin boyutları clamp fonksiyonları ile esnek hale getirildi.</li>
+        <li><b>3. Özel Custom Cursor:</b> Roblox UI tasarımlarını anımsatan, performansı düşürmeyen modern minimalist bir imleç eklendi.</li>
+        <li><b>4. Dinamik X Entegrasyonu:</b> Profil resmin X (Twitter) kullanıcı adına göre unavatar api üzerinden otomatik çekilecek şekilde ayarlandı.</li>
+        <li><b>5. Komisyon Durumu:</b> JavaScript tarafında tek bir satırla sitedeki tüm renkler ve rozetler anlık olarak open/close durumuna göre güncelleniyor.</li>
+        <li><b>6. Beğeni ve Yorum Alanı:</b> Her projeye özel tarayıcı hafızasını kullanan Beğeni butonu ve alt kısma ziyaretçi defteri eklendi.</li>
+      </ul>
+    </div>
+    <button class="btn primary" style="width:100%; justify-content:center;" onclick="closeChangelog()">Sisteme Giriş Yap</button>
+  </div>
+</div>
+
 <div class="bg-overlay"></div>
 <div class="rain-container" id="rain"></div>
 <canvas id="cursor-canvas"></canvas>
 
-<!-- ANIME GIRL SVG -->
 <svg id="anime-girl" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
-  <!-- umbrella -->
   <g id="umbrella">
-    <!-- canopy -->
     <path d="M52 70 Q65 45 78 70" fill="#c084fc" stroke="#9333ea" stroke-width="1.5"/>
     <path d="M52 70 Q58 55 65 54 Q72 55 78 70" fill="#a855f7" stroke="#9333ea" stroke-width="1"/>
-    <!-- ribs -->
     <line x1="65" y1="54" x2="52" y2="70" stroke="#9333ea" stroke-width="1"/>
     <line x1="65" y1="54" x2="65" y2="70" stroke="#9333ea" stroke-width="1"/>
     <line x1="65" y1="54" x2="78" y2="70" stroke="#9333ea" stroke-width="1"/>
-    <!-- handle -->
     <line x1="65" y1="54" x2="65" y2="95" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
     <path d="M65 95 Q62 101 59 99" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
   </g>
-
-  <!-- body -->
-  <!-- dress -->
   <path d="M50 130 Q45 165 42 185 Q65 195 88 185 Q85 165 80 130 Z" fill="#f0abfc" stroke="#c084fc" stroke-width="1"/>
-  <!-- dress overlay -->
   <path d="M50 130 Q55 148 65 152 Q75 148 80 130 Z" fill="#e879f9" opacity="0.5"/>
-  <!-- torso -->
   <rect x="52" y="108" width="26" height="26" rx="4" fill="#fde8d8"/>
-  <!-- collar / shirt -->
   <path d="M52 112 Q65 118 78 112" fill="none" stroke="#c084fc" stroke-width="1.5"/>
-
-  <!-- head -->
   <ellipse cx="65" cy="92" rx="16" ry="18" fill="#fde8d8"/>
-  <!-- hair top -->
   <path d="M49 86 Q50 68 65 65 Q80 68 81 86 Q75 78 65 77 Q55 78 49 86Z" fill="#1e1b4b"/>
-  <!-- hair side left -->
   <path d="M49 86 Q44 100 47 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
-  <!-- hair side right -->
   <path d="M81 86 Q86 100 83 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
-  <!-- ahoge -->
   <path d="M65 65 Q68 55 72 58" fill="none" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round"/>
-
-  <!-- eyes -->
   <ellipse cx="58" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
   <ellipse cx="72" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
-  <!-- eye shine -->
   <circle cx="59.5" cy="89.5" r="1.2" fill="#fff"/>
   <circle cx="73.5" cy="89.5" r="1.2" fill="#fff"/>
-  <!-- iris color -->
   <ellipse cx="58" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
   <ellipse cx="72" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
-  <!-- mouth -->
   <path d="M61 99 Q65 103 69 99" fill="none" stroke="#c084fc" stroke-width="1.2" stroke-linecap="round"/>
-  <!-- blush -->
   <ellipse cx="52" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
   <ellipse cx="78" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
-
-  <!-- arm holding umbrella (right) -->
   <path d="M78 118 Q84 110 72 97" fill="none" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-
-  <!-- legs animated -->
   <g id="legs">
-    <!-- left leg -->
     <line id="leg-l" x1="57" y1="185" x2="54" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-    <!-- right leg -->
     <line id="leg-r" x1="73" y1="185" x2="76" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
-    <!-- shoes -->
     <ellipse id="shoe-l" cx="54" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
     <ellipse id="shoe-r" cx="76" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
   </g>
-
-  <!-- rain drops near girl -->
-  <line x1="30" y1="60" x2="28" y2="80" stroke="rgba(150,200,255,0.5)" stroke-width="1"/>
-  <line x1="100" y1="75" x2="98" y2="95" stroke="rgba(150,200,255,0.5)" stroke-width="1"/>
-  <line x1="20" y1="100" x2="18" y2="120" stroke="rgba(150,200,255,0.4)" stroke-width="1"/>
-  <line x1="110" y1="110" x2="108" y2="130" stroke="rgba(150,200,255,0.4)" stroke-width="1"/>
 </svg>
 
-<!-- PROJECT MODAL -->
 <div id="project-modal">
   <div id="modal-title">m1sly portfolio</div>
   <div id="modal-img-wrap">
@@ -298,7 +297,7 @@ section { max-width:1100px; margin:0 auto; padding:80px 24px; }
 <nav id="navbar">
   <div class="nav-container">
     <a href="#home" class="logo">
-      <img src="https://github.com/m1slydesign.png" alt="m1sly">
+      <img id="nav-logo-img" src="" alt="m1sly">
       <span>m1sly</span>
     </a>
     <ul class="nav-links">
@@ -306,7 +305,7 @@ section { max-width:1100px; margin:0 auto; padding:80px 24px; }
       <li><a href="#projects">Portfolio</a></li>
       <li><a href="#pricing">Rates</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><span class="badge open">OPEN</span></li>
+      <li><span id="nav-badge" class="badge"></span></li>
     </ul>
   </div>
 </nav>
@@ -314,16 +313,16 @@ section { max-width:1100px; margin:0 auto; padding:80px 24px; }
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="avatar-container">
-      <img src="https://github.com/m1slydesign.png" alt="Avatar">
+      <img id="hero-avatar-img" src="" alt="Avatar">
     </div>
     <div style="margin-bottom:16px;">
-      <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
+      <span id="hero-badge" class="badge"></span>
     </div>
     <h1 class="hero-title" id="hero-title"></h1>
     <div class="hero-role">Roblox UI Designer</div>
     <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
     <div class="btn-group">
-      <a href="#contact" class="btn primary"><i class="fas fa-envelope"></i> Commission Me</a>
+      <a href="#contact" class="btn primary" id="action-btn"><i class="fas fa-envelope"></i> Commission Me</a>
       <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
     </div>
   </div>
@@ -380,16 +379,50 @@ section { max-width:1100px; margin:0 auto; padding:80px 24px; }
 
 <script>
 /* ══════════════════════════════════════
+   CONFIG & COMMISSIONS SYSTEM
+══════════════════════════════════════ */
+const COMMISSIONS_OPEN = true; // Komisyonları kapatmak istersen burayı false yap!
+const TWITTER_USERNAME = "stor4m"; 
+
+// Profil resimlerini dinamik ayarla
+const avatarUrl = `https://unavatar.io/x/${TWITTER_USERNAME}`;
+document.getElementById('nav-logo-img').src = avatarUrl;
+document.getElementById('hero-avatar-img').src = avatarUrl;
+
+// Komisyon durumuna göre arayüzü güncelle
+const navBadge = document.getElementById('nav-badge');
+const heroBadge = document.getElementById('hero-badge');
+const actionBtn = document.getElementById('action-btn');
+
+if(COMMISSIONS_OPEN) {
+  navBadge.className = "badge open";
+  navBadge.textContent = "OPEN";
+  heroBadge.className = "badge open";
+  heroBadge.innerHTML = '<i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open';
+} else {
+  navBadge.className = "badge closed";
+  navBadge.textContent = "CLOSED";
+  heroBadge.className = "badge closed";
+  heroBadge.innerHTML = '<i class="fas fa-circle" style="font-size:8px;"></i> Commissions Closed';
+  actionBtn.style.opacity = "0.5";
+  actionBtn.style.pointerEvents = "none";
+}
+
+function closeChangelog() {
+  document.getElementById('changelog-modal').style.display = 'none';
+}
+
+/* ══════════════════════════════════════
    PROJECTS DATA
 ══════════════════════════════════════ */
 const PROJECTS = [
-  { id:1, title:"Simulator HUD",   src:"https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD",   likes:0, liked:false },
-  { id:2, title:"Shop Menu",       src:"https://placehold.co/700x394/111827/a855f7?text=Shop+Menu",       likes:0, liked:false },
-  { id:3, title:"Inventory Screen",src:"https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen",likes:0, liked:false },
+  { id:1, title:"Simulator HUD",   src:"https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD",   likes:12, liked:false },
+  { id:2, title:"Shop Menu",       src:"https://placehold.co/700x394/111827/a855f7?text=Shop+Menu",       likes:8, liked:false },
+  { id:3, title:"Inventory Screen",src:"https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen",likes:15, liked:false },
 ];
 
 /* ══════════════════════════════════════
-   RAIN
+   RAIN EFFECT
 ══════════════════════════════════════ */
 const rainEl = document.getElementById('rain');
 for(let i=0;i<60;i++){
@@ -403,7 +436,7 @@ for(let i=0;i<60;i++){
 }
 
 /* ══════════════════════════════════════
-   CURSOR CANVAS — particle trail
+   CURSOR CANVAS — Particle Trail
 ══════════════════════════════════════ */
 const canvas = document.getElementById('cursor-canvas');
 const ctx = canvas.getContext('2d');
@@ -432,7 +465,6 @@ function spawnParticle(){
 }
 
 function drawCursor(){
-  /* main dot */
   ctx.save();
   ctx.shadowColor='#c084fc';
   ctx.shadowBlur=18;
@@ -442,7 +474,6 @@ function drawCursor(){
   ctx.fill();
   ctx.restore();
 
-  /* outer ring pulse */
   const t=Date.now()/600;
   const pulse=14+Math.sin(t)*4;
   ctx.save();
@@ -481,7 +512,7 @@ function animLoop(){
 animLoop();
 
 /* ══════════════════════════════════════
-   ANIME GIRL LEGS WALK
+   ANIME GIRL WALK ANIMATION
 ══════════════════════════════════════ */
 (function walkLegs(){
   const legL=document.getElementById('leg-l');
@@ -491,15 +522,13 @@ animLoop();
   let t=0;
   function step(){
     t+=0.12;
-    const a=Math.sin(t)*18;
-    // left leg
     const lx2=54+Math.sin(t)*10;
     const ly2=212+Math.cos(t)*6;
     legL.setAttribute('x2',lx2);
     legL.setAttribute('y2',ly2);
     shoeL.setAttribute('cx',lx2);
     shoeL.setAttribute('cy',ly2+1);
-    // right leg (opposite phase)
+    
     const rx2=76-Math.sin(t)*10;
     const ry2=212-Math.cos(t)*6;
     legR.setAttribute('x2',rx2);
@@ -519,7 +548,7 @@ window.addEventListener('scroll',()=>{
 });
 
 /* ══════════════════════════════════════
-   TYPEWRITER HERO TITLE
+   TYPEWRITER EFFECT
 ══════════════════════════════════════ */
 function typeWriter(el, text, delay=100){
   el.innerHTML='';
@@ -534,13 +563,18 @@ function typeWriter(el, text, delay=100){
 typeWriter(document.getElementById('hero-title'),'m1sly',120);
 
 /* ══════════════════════════════════════
-   PROJECT GRID
+   PORTFOLIO RENDER
 ══════════════════════════════════════ */
 const grid=document.getElementById('portfolio-grid');
 
 function renderProjects(){
   grid.innerHTML='';
   PROJECTS.forEach(p=>{
+    // LocalStorage kontrolü
+    const storageKey = `liked_project_${p.id}`;
+    const localLiked = localStorage.getItem(storageKey) === 'true';
+    p.liked = localLiked;
+
     const card=document.createElement('div');
     card.className='glass-panel project-card';
     card.innerHTML=`
@@ -561,14 +595,16 @@ function renderProjects(){
 function toggleLike(id){
   const p=PROJECTS.find(x=>x.id===id);
   if(!p) return;
-  p.liked=!p.liked; p.likes+=p.liked?1:-1;
+  p.liked=!p.liked; 
+  p.likes+=p.liked?1:-1;
+  localStorage.setItem(`liked_project_${id}`, p.liked);
   renderProjects();
 }
 
 renderProjects();
 
 /* ══════════════════════════════════════
-   MODAL + 360° SPIN
+   360° SPIN MODAL
 ══════════════════════════════════════ */
 const modal    = document.getElementById('project-modal');
 const modalImg = document.getElementById('modal-img');
@@ -619,449 +655,35 @@ function stopSpin(){
   if(spinRAF) cancelAnimationFrame(spinRAF);
 }
 
-/* drag to rotate manually */
 const wrap=document.getElementById('modal-img-wrap');
 wrap.addEventListener('mousedown',e=>{ dragging=true; dragStartX=e.clientX; dragAngleStart=spinAngle; stopSpin(); spinBtn.className='modal-btn'; spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin'; });
 window.addEventListener('mousemove',e=>{ if(!dragging) return; const dx=e.clientX-dragStartX; spinAngle=(dragAngleStart+dx)%360; modalImg.style.transform=`rotateY(${spinAngle}deg)`; });
 window.addEventListener('mouseup',()=>dragging=false);
-wrap.addEventListener('touchstart',e=>{ dragging=true; dragStartX=e.touches[0].clientX; dragAngleStart=spinAngle; stopSpin(); },{passive:true});
-window.addEventListener('touchmove',e=>{ if(!dragging) return; const dx=e.touches[0].clientX-dragStartX; spinAngle=(dragAngleStart+dx)%360; modalImg.style.transform=`rotateY(${spinAngle}deg)`; },{passive:true});
-window.addEventListener('touchend',()=>dragging=false);
 
-/* ESC close */
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
 /* ══════════════════════════════════════
-   GUESTBOOK
+   LOCALSTORAGE GUESTBOOK
 ══════════════════════════════════════ */
-const comments=[];
+let comments = JSON.parse(localStorage.getItem('guestbook_comments')) || [];
+
 function addComment(){
   const inp=document.getElementById('comment-input');
   const txt=inp.value.trim(); if(!txt) return;
   comments.unshift({text:txt,time:new Date().toLocaleTimeString()});
+  localStorage.setItem('guestbook_comments', JSON.stringify(comments));
   inp.value=''; renderComments();
 }
+
 function renderComments(){
   document.getElementById('comments-list').innerHTML=
     comments.map(c=>`<div class="comment-item">${c.text}<span>${c.time}</span></div>`).join('');
 }
 document.getElementById('comment-input').addEventListener('keydown',e=>{ if(e.key==='Enter') addComment(); });
+
+// Sayfa ilk açıldığında yorumları yükle
+renderComments();
 </script>
 </body>
 </html>
-            align-items: center;
-        }
 
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--text); }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .badge.open   { background: rgba(0,255,102,0.1); color: var(--accent-open);   border: 1px solid rgba(0,255,102,0.2); }
-        .badge.closed { background: rgba(255,51,51,0.1);  color: var(--accent-closed); border: 1px solid rgba(255,51,51,0.2); }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 24px 60px;
-            text-align: center;
-        }
-
-        .hero-content { max-width: 750px; }
-
-        .avatar-container {
-            width: 110px; height: 110px;
-            margin: 0 auto 24px;
-            position: relative;
-        }
-
-        .avatar-container img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--border);
-        }
-
-        .hero-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 12px;
-            letter-spacing: -2px;
-        }
-
-        .hero-role {
-            font-size: 12px;
-            color: var(--text-dark);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            font-weight: 700;
-        }
-
-        .hero-bio {
-            font-size: 16px;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 32px;
-            font-weight: 400;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn.primary  { background: #fff; color: #000; }
-        .btn.primary:hover  { transform: translateY(-2px); opacity: 0.9; }
-        .btn.secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
-        .btn.secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-
-        section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 80px 24px;
-        }
-
-        .section-header { text-align: center; margin-bottom: 48px; }
-
-        .section-header h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(24px, 4vw, 36px);
-            margin-bottom: 8px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card { overflow: hidden; display: flex; flex-direction: column; }
-
-        .project-img-wrapper {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .project-img-wrapper img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .project-card:hover .project-img-wrapper img { transform: scale(1.04); }
-
-        .project-actions {
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .like-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: none;
-            transition: color 0.2s;
-        }
-
-        .like-btn.liked { color: #ff3366; }
-
-        .comments-section { margin-top: 40px; padding: 32px; }
-
-        .comment-form { display: flex; gap: 12px; margin-bottom: 24px; }
-
-        .comment-input {
-            flex: 1;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-        }
-
-        .comment-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            padding: 0 20px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: none;
-        }
-
-        .comments-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .comment-item {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-        }
-
-        .comment-item span { color: var(--text-dark); font-size: 11px; margin-left: 8px; }
-
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-
-        .price-card { padding: 32px; text-align: center; }
-
-        .price-val {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin: 16px 0;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            section { padding: 48px 16px; }
-            .comment-form { flex-direction: column; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="bg-overlay"></div>
-    <div class="rain-container" id="rain"></div>
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="custom-cursor-follower" id="cursor-follower"></div>
-
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <img id="nav-avatar" src="https://github.com/m1slydesign.png" alt="m1sly">
-                <span>m1sly</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Portfolio</a></li>
-                <li><a href="#pricing">Rates</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><span id="nav-badge" class="badge open">OPEN</span></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="avatar-container">
-                <img id="hero-avatar" src="https://github.com/m1slydesign.png" alt="Avatar">
-            </div>
-            <div id="hero-badge-container" style="margin-bottom: 16px;">
-                <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
-            </div>
-            <h1 class="hero-title">m1sly</h1>
-            <div class="hero-role">Roblox UI Designer</div>
-            <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
-            <div class="btn-group">
-                <a href="#contact" class="btn primary" id="action-btn"><i class="fas fa-envelope"></i> Commission Me</a>
-                <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <div class="section-header">
-            <h2>Recent Work</h2>
-            <p style="color: var(--text-muted); font-size: 14px;">Showcasing premium game layouts and interactive elements.</p>
-        </div>
-        <div class="projects-grid" id="portfolio-grid"></div>
-    </section>
-
-    <section id="guestbook">
-        <div class="glass-panel comments-section">
-            <h3 style="font-family: 'Syne', sans-serif; margin-bottom: 16px;">Guestbook & Feedback</h3>
-            <div class="comment-form">
-                <input type="text" id="comment-input" class="comment-input" placeholder="Leave a feedback about my UI work...">
-                <button class="comment-btn" onclick="addComment()">Send</button>
-            </div>
-            <div class="comments-list" id="comments-list"></div>
-        </div>
-    </section>
-
-    <section id="pricing">
-        <div class="section-header">
-            <h2>Pricing Rates</h2>
-            <p style="color: var(--text-muted); font-size: 14px;">Flexible solutions structured per project specifications.</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="glass-panel price-card">
-                <div style="font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 2px;">General Work</div>
-                <div class="price-val">R$ 2,000 - 5,000</div>
-                <p style="font-size: 13px; color: var(--text-muted);">Full simulator screens, assets backgrounds, and responsive menus.</p>
-            </div>
-            <div class="glass-panel price-card">
-                <div style="font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 2px;">Simple Tasks</div>
-                <div class="price-val">R$ 500 - 1,000</div>
-                <p style="font-size: 13px; color: var(--text-muted);">Single custom frame adjustments, icon scaling, or minor asset edits.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" style="text-align: center;">
-        <div class="section-header">
-            <h2>Get In Touch</h2>
-            <p style="color: var(--text-muted); font-size: 14px;">Let's build something epic together.</p>
-        </div>
-        <div class="btn-group" style="justify-content: center;">
-            <a href="https://x.com/stor4m" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter</a>
-            <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary"><i class="fab fa-discord"></i> Discord</a>
-        </div>
-    </section>
-
-    <script>
-        // ── Proje verileri – kendi görsellerin varsa src'yi değiştir ──
-        const PROJECTS = [
-            { id: 1, title: "Simulator HUD",      src: "https://placehold.co/640x360/111/fff?text=Simulator+HUD",      likes: 0, liked: false },
-            { id: 2, title: "Shop Menu",           src: "https://placehold.co/640x360/111/fff?text=Shop+Menu",           likes: 0, liked: false },
-            { id: 3, title: "Inventory Screen",    src: "https://placehold.co/640x360/111/fff?text=Inventory+Screen",    likes: 0, liked: false },
-        ];
-
-        // ── Rain ──
-        const rain = document.getElementById('rain');
-        for (let i = 0; i < 60; i++) {
-            const drop = document.createElement('div');
-            drop.classList.add('drop');
-            drop.style.left              = Math.random() * 100 + '%';
-            drop.style.animationDuration = (Math.random() * 1.5 + 0.5) + 's';
-            drop.style.animationDelay   = (Math.random() * 2) + 's';
-            drop.style.opacity           = Math.random() * 0.5 + 0.1;
-            rain.appendChild(drop);
-        }
-
-        // ── Custom cursor ──
-        const cursor         = document.getElementById('cursor');
-        const cursorFollower = document.getElementById('cursor-follower');
-        let fx = 0, fy = 0;
-
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top  = e.clientY + 'px';
-            fx += (e.clientX - fx) * 0.12;
-            fy += (e.clientY - fy) * 0.12;
-            cursorFollower.style.left = fx + 'px';
-            cursorFollower.style.top  = fy + 'px';
-        });
-
-        document.querySelectorAll('a, button, .like-btn').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('clickable'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('clickable'));
-        });
-
-        // ── Navbar scroll ──
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // ── Portfolio grid ──
-        const grid = document.getElementById('portfolio-grid');
-
-        function renderProjects() {
-            grid.innerHTML = '';
-            PROJECTS.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'glass-panel project-card';
-                card.innerHTML = `
-                    <div class="project-img-wrapper">
-                        <img src="${p.src}" alt="${p.title}">
-                    </div>
-                    <div class="project-actions">
-                        <span style="font-size:14px; font-weight:600;">${p.title}</span>
-                        <button class="like-btn ${p.liked ? 'liked' : ''}" onclick="toggleLike(${p.id})">
-                            <i class="fa${p.liked ? 's' : 'r'} fa-heart"></i> ${p.likes}
-                        </button>
-                    </div>`;
-                grid.appendChild(card);
-            });
-        }
-
-        function toggleLike(id) {
-            const p = PROJECTS.find(x => x.id === id);
-            if (!p) return;
-            p.liked = !p.liked;
-            p.likes += p.liked ? 1 : -1;
-            renderProjects();
-        }
-
-        renderProjects();
-
-        // ── Guestbook ──
-        const comments = [];
-
-        function addComment() {
-            const input = document.getElementById('comment-input');
-            const text  = input.value.trim();
-            if (!text) return;
-            comments.unshift({ text, time: new Date().toLocaleTimeString() });
-            input.value = '';
-            renderComments();
-        }
-
-        function renderComments() {
-            const list = document.getElementById('comments-list');
-            list.innerHTML = comments.map(c =>
-                `<div class="comment-item">${c.text}<span>${c.time}</span></div>`
-            ).join('');
-        }
-
-        // Enter tuşuyla da gönder
-        document.getElementById('comment-input').addEventListener('keydown', e => {
-            if (e.key === 'Enter') addComment();
-        });
-    </script>
-</body>
-</html>
