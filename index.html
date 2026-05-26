@@ -1,303 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>m1sly | Portfolio</title>
-    
-    <meta name="referrer" content="no-referrer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>m1sly | Portfolio</title>
+<meta name="referrer" content="no-referrer">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg: #030303;
+  --text: #ffffff;
+  --text-muted: #b0b0b0;
+  --text-dark: #666666;
+  --border: rgba(255,255,255,0.08);
+  --card-bg: rgba(10,10,10,0.6);
+  --accent-open: #00ff66;
+  --accent-closed: #ff3333;
+}
+* { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',sans-serif;
+  background-color:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  cursor:none;
+}
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #030303;
-            --text: #ffffff;
-            --text-muted: #b0b0b0;
-            --text-dark: #666666;
-            --border: rgba(255,255,255,0.08);
-            --card-bg: rgba(10,10,10,0.6);
-            --accent-open: #00ff66;
-            --accent-closed: #ff3333;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
-        html { scroll-behavior:smooth; }
-        body {
-            font-family:'Inter',sans-serif;
-            background-color:var(--bg);
-            color:var(--text);
-            overflow-x:hidden;
-            cursor:none;
-        }
+/* ── BG ── */
+.bg-overlay {
+  position:fixed; inset:0;
+  background:linear-gradient(180deg,rgba(3,3,3,0.5) 0%,rgba(3,3,3,0.8) 100%);
+  backdrop-filter:blur(4px);
+  z-index:-2;
+}
 
-        /* ── ARKA PLAN (arkaplan.jpg ve Blur Efekti) ── */
-        .bg-overlay {
-            position:fixed; inset:0;
-            background: url('arkaplan.jpg') no-repeat center center fixed;
-            background-size: cover;
-            z-index:-2;
-        }
-        .bg-blur {
-            position:fixed; inset:0;
-            background: linear-gradient(180deg, rgba(3,3,3,0.4) 0%, rgba(3,3,3,0.7) 100%);
-            backdrop-filter: blur(10px); /* Arka planı yumuşatan blur */
-            z-index:-1;
-        }
+/* ── RAIN (OPTIMIZED WITH GPU ACCELERATION) ── */
+.rain-container { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; overflow:hidden; }
+.drop { position:absolute; width:1px; height:60px; background:linear-gradient(transparent,rgba(255,255,255,0.15)); animation:fall linear infinite; will-change: transform; }
+@keyframes fall { 0%{transform:translate3d(0,-100px,0)} 100%{transform:translate3d(0,100vh,0)} }
 
-        /* ── CURSOR CANVAS ── */
-        #cursor-canvas { position:fixed; inset:0; pointer-events:none; z-index:10000; }
+/* ── CURSOR ── */
+#cursor-canvas { position:fixed; inset:0; pointer-events:none; z-index:10000; }
 
-        /* ── TYPEWRITER HERO ── */
-        .hero-title .char {
-            display:inline-block;
-            opacity:0;
-            transform:translateY(15px);
-            animation:charIn 0.05s forwards;
-        }
-        @keyframes charIn {
-            to { opacity:1; transform:translateY(0); }
-        }
+/* ── ANIME GIRL (GPU ACCELERATED) ── */
+#anime-girl {
+  position:fixed;
+  bottom:0; left:-160px;
+  width:130px; height:220px;
+  z-index:500;
+  pointer-events:none;
+  animation:walkAcross 28s linear infinite;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+@keyframes walkAcross {
+  0%   { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(calc(110vw + 160px), 0, 0); }
+}
 
-        /* ── BENTO GLASS PANEL ── */
-        .glass-panel {
-            background:var(--card-bg);
-            backdrop-filter:blur(10px);
-            border:1px solid var(--border);
-            border-radius:20px;
-            transition:all 0.3s cubic-bezier(0.25,0.8,0.25,1);
-        }
-        .glass-panel:hover { border-color:rgba(255,255,255,0.2); background:rgba(15,15,15,0.7); }
+/* ── TYPEWRITER HERO ── */
+.hero-title .char {
+  display:inline-block;
+  opacity:0;
+  transform:translateY(20px);
+  animation:charIn 0.06s forwards;
+}
+@keyframes charIn {
+  to { opacity:1; transform:translateY(0); }
+}
 
-        /* ── NAV ── */
-        nav { position:fixed; top:0; width:100%; z-index:1000; padding:24px 0; transition:all 0.3s; }
-        nav.scrolled { background:rgba(3,3,3,0.85); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); padding:16px 0; }
-        .nav-container { max-width:1100px; margin:0 auto; padding:0 32px; display:flex; justify-content:space-between; align-items:center; }
-        .logo { display:flex; align-items:center; gap:12px; text-decoration:none; font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--text); }
-        .logo img { width:36px; height:36px; border-radius:10px; object-fit:cover; }
-        .nav-links { display:flex; list-style:none; gap:32px; align-items:center; }
-        .nav-links a { color:var(--text-muted); text-decoration:none; font-size:14px; font-weight:500; transition:color 0.3s; }
-        .nav-links a:hover { color:var(--text); }
-        .badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:30px; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
-        .badge.open   { background:rgba(0,255,102,0.1); color:var(--accent-open);   border:1px solid rgba(0,255,102,0.2); }
+/* ── GLASS (PERFORMANCE OPTIMIZED BLUR) ── */
+.glass-panel {
+  background:var(--card-bg);
+  backdrop-filter:blur(10px); /* 16px'den 10px'e optimize edilerek kasma önlendi */
+  border:1px solid var(--border);
+  border-radius:16px;
+  transition:all 0.3s cubic-bezier(0.25,0.8,0.25,1);
+}
+.glass-panel:hover { border-color:rgba(255,255,255,0.2); background:rgba(15,15,15,0.7); }
 
-        /* ── HERO SECTION ── */
-        .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:160px 24px 100px; text-align:center; }
-        .hero-content { max-width:800px; }
-        .avatar-container { width:120px; height:120px; margin:0 auto 32px; position:relative; }
-        .avatar-container img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:2.5px solid var(--border); }
-        .hero-title { font-family:'Syne',sans-serif; font-size:clamp(40px,7vw,68px); font-weight:800; line-height:1.15; margin-bottom:20px; letter-spacing:-2px; min-height:85px; }
-        .hero-role { font-size:13px; color:var(--text-dark); letter-spacing:5px; text-transform:uppercase; margin-bottom:24px; font-weight:700; }
-        .hero-bio { font-size:17px; color:var(--text-muted); line-height:1.8; margin-bottom:44px; max-width:680px; margin-left:auto; margin-right:auto; }
-        
-        .btn-group { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-        .btn { display:inline-flex; align-items:center; gap:10px; padding:16px 36px; border-radius:14px; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.3s; }
-        .btn.primary  { background:#fff; color:#000; }
-        .btn.primary:hover  { transform:translateY(-3px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
-        .btn.secondary { background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border); }
-        .btn.secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-3px); }
+/* ── NAV ── */
+nav { position:fixed; top:0; width:100%; z-index:1000; padding:20px 0; transition:all 0.3s; }
+nav.scrolled { background:rgba(3,3,3,0.85); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); padding:12px 0; }
+.nav-container { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; align-items:center; }
+.logo { display:flex; align-items:center; gap:12px; text-decoration:none; font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); }
+.logo img { width:32px; height:32px; border-radius:8px; object-fit:cover; }
+.nav-links { display:flex; list-style:none; gap:24px; align-items:center; }
+.nav-links a { color:var(--text-muted); text-decoration:none; font-size:13px; font-weight:500; transition:color 0.3s; }
+.nav-links a:hover { color:var(--text); }
+.badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:30px; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.badge.open   { background:rgba(0,255,102,0.1); color:var(--accent-open);   border:1px solid rgba(0,255,102,0.2); }
+.badge.closed { background:rgba(255,51,51,0.1);  color:var(--accent-closed); border:1px solid rgba(255,51,51,0.2); }
 
-        /* ── SECTIONS ── */
-        section { max-width:1100px; margin:0 auto; padding:110px 32px; }
-        .section-header { text-align:center; margin-bottom:64px; }
-        .section-header h2 { font-family:'Syne',sans-serif; font-size:clamp(28px,5vw,42px); margin-bottom:12px; letter-spacing:-1px; }
+/* ── HERO ── */
+.hero { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 24px 60px; text-align:center; }
+.hero-content { max-width:750px; }
+.avatar-container { width:110px; height:110px; margin:0 auto 24px; }
+.avatar-container img { width:100%; height:100%; border-radius:50%; object-fit:cover; border:2px solid var(--border); }
+.hero-title { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; line-height:1.1; margin-bottom:12px; letter-spacing:-2px; min-height:80px; }
+.hero-role { font-size:12px; color:var(--text-dark); letter-spacing:4px; text-transform:uppercase; margin-bottom:16px; font-weight:700; }
+.hero-bio { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:32px; }
+.btn-group { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:12px; font-size:13px; font-weight:600; text-decoration:none; transition:all 0.3s; }
+.btn.primary  { background:#fff; color:#000; }
+.btn.primary:hover  { transform:translateY(-2px); opacity:0.9; }
+.btn.secondary { background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border); }
+.btn.secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
 
-        /* ── PROJELER GRİD ── */
-        .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:32px; }
-        .project-card { overflow:hidden; display:flex; flex-direction:column; cursor:none; padding:20px; }
-        .project-img-wrapper { position:relative; width:100%; padding-top:56.25%; overflow:hidden; border-radius:14px; margin-bottom:20px; }
-        .project-img-wrapper img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
-        .project-card:hover .project-img-wrapper img { transform:scale(1.02); }
-        .project-actions { display:flex; justify-content:space-between; align-items:center; padding: 4px 2px; }
-        .project-title-text { font-size:17px; font-weight:700; color:#fff; font-family:'Syne', sans-serif; }
-        
-        .like-btn { background:rgba(255,255,255,0.03); border:1px solid var(--border); color:var(--text-muted); font-family:'Inter',sans-serif; font-size:12px; display:flex; align-items:center; gap:6px; cursor:none; padding:8px 16px; border-radius:30px; transition:all 0.2s; }
-        .like-btn:hover { color:#fff; background:rgba(255,255,255,0.08); }
-        .like-btn.liked { color:#ff3366; background:rgba(255,51,102,0.1); border-color:rgba(255,51,102,0.2); }
+/* ── SECTIONS ── */
+section { max-width:1100px; margin:0 auto; padding:80px 24px; }
+.section-header { text-align:center; margin-bottom:48px; }
+.section-header h2 { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); margin-bottom:8px; }
 
-        /* ── PROJECT MODAL ── */
-        #project-modal {
-            display:none;
-            position:fixed; inset:0;
-            z-index:9000;
-            background:rgba(0,0,0,0.88);
-            backdrop-filter:blur(12px);
-            align-items:center;
-            justify-content:center;
-            flex-direction:column;
-        }
-        #project-modal.open { display:flex; }
-        #modal-title { font-family:'Syne',sans-serif; font-size:clamp(22px,3vw,32px); font-weight:800; margin-bottom:24px; letter-spacing:-1px; }
-        #modal-img-wrap { position:relative; width:min(85vw,760px); aspect-ratio:16/9; border-radius:20px; overflow:hidden; border:1px solid var(--border); perspective:1000px; }
-        #modal-img { width:100%; height:100%; object-fit:cover; border-radius:20px; transition:transform 0.05s linear; }
-        .modal-controls { display:flex; gap:16px; margin-top:28px; }
-        .modal-btn { background:rgba(255,255,255,0.08); border:1px solid var(--border); color:#fff; padding:12px 28px; border-radius:12px; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; cursor:none; transition:all 0.2s; }
-        .modal-btn:hover { background:rgba(255,255,255,0.18); transform:translateY(-2px); }
-        .modal-btn.danger { background:rgba(255,51,51,0.15); border-color:rgba(255,51,51,0.3); color:#ff3333; }
-        .modal-btn.spin-active { background:rgba(0,255,102,0.12); border-color:rgba(0,255,102,0.3); color:#00ff66; }
+/* ── PROJECTS ── */
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
+.project-card { overflow:hidden; display:flex; flex-direction:column; cursor:none; }
+.project-img-wrapper { position:relative; width:100%; padding-top:56.25%; overflow:hidden; border-radius:12px; }
+.project-img-wrapper img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+.project-card:hover .project-img-wrapper img { transform:scale(1.04); }
+.project-actions { padding:16px; display:flex; justify-content:space-between; align-items:center; }
+.like-btn { background:transparent; border:none; color:var(--text-muted); font-family:'Inter',sans-serif; font-size:13px; display:flex; align-items:center; gap:6px; cursor:none; transition:color 0.2s; }
+.like-btn.liked { color:#ff3366; }
 
-        /* ── GUESTBOOK ── */
-        .comments-section { padding:44px; }
-        .comment-form { display:flex; gap:16px; margin-bottom:32px; }
-        .comment-input { flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:12px; padding:16px 20px; color:#fff; font-family:'Inter',sans-serif; outline:none; font-size:14px; }
-        .comment-btn { background:#fff; color:#000; border:none; border-radius:12px; padding:0 28px; font-weight:600; font-family:'Inter',sans-serif; cursor:none; transition: opacity 0.2s; }
-        .comment-btn:hover { opacity:0.9; }
-        .comments-list { display:flex; flex-direction:column; gap:16px; max-height:320px; overflow-y:auto; }
-        .comment-item { padding:16px 4px; border-bottom:1px solid var(--border); font-size:15px; line-height:1.6; }
-        .comment-item span { color:var(--text-dark); font-size:12px; margin-left:12px; }
+/* ── PROJECT MODAL ── */
+#project-modal {
+  display:none;
+  position:fixed; inset:0;
+  z-index:9000;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(12px);
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+#project-modal.open { display:flex; }
+#modal-title {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(18px,3vw,28px);
+  font-weight:800;
+  margin-bottom:20px;
+  letter-spacing:-1px;
+  opacity:0;
+  transform:translateY(-16px);
+  transition:all 0.4s 0.1s;
+}
+#project-modal.open #modal-title { opacity:1; transform:translateY(0); }
+#modal-img-wrap {
+  position:relative;
+  width:min(80vw,700px);
+  aspect-ratio:16/9;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  transform-style:preserve-3d;
+  perspective:1000px;
+}
+#modal-img {
+  width:100%; height:100%;
+  object-fit:cover;
+  border-radius:16px;
+  transition:transform 0.05s linear;
+  transform-origin:center center;
+}
+.modal-controls {
+  display:flex; gap:16px; margin-top:20px;
+}
+.modal-btn {
+  background:rgba(255,255,255,0.08);
+  border:1px solid var(--border);
+  color:#fff;
+  padding:10px 22px;
+  border-radius:10px;
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:13px;
+  cursor:none;
+  transition:background 0.2s;
+}
+.modal-btn:hover { background:rgba(255,255,255,0.18); }
+.modal-btn.danger { background:rgba(255,51,51,0.15); border-color:rgba(255,51,51,0.3); color:#ff3333; }
+.modal-btn.spin-active { background:rgba(0,255,102,0.12); border-color:rgba(0,255,102,0.3); color:#00ff66; }
 
-        /* ── PRICING ── */
-        .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; }
-        .price-card { padding:44px 32px; text-align:center; }
-        .price-val { font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; margin:20px 0; color:#fff; }
+/* ── GUESTBOOK ── */
+.comments-section { margin-top:40px; padding:32px; }
+.comment-form { display:flex; gap:12px; margin-bottom:24px; }
+.comment-input { flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px; padding:12px 16px; color:#fff; font-family:'Inter',sans-serif; outline:none; }
+.comment-btn { background:#fff; color:#000; border:none; border-radius:8px; padding:0 20px; font-weight:600; font-family:'Inter',sans-serif; cursor:none; }
+.comments-list { display:flex; flex-direction:column; gap:12px; max-height:300px; overflow-y:auto; }
+.comment-item { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; }
+.comment-item span { color:var(--text-dark); font-size:11px; margin-left:8px; }
 
-        @media(max-width:768px){
-            .nav-links{display:none;}
-            section{padding:80px 20px;}
-            .comment-form{flex-direction:column;}
-        }
-    </style>
+/* ── PRICING ── */
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+.price-card { padding:32px; text-align:center; }
+.price-val { font-family:'Space Grotesk',sans-serif; font-size:32px; font-weight:700; margin:16px 0; }
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  section{padding:48px 16px;}
+  .comment-form{flex-direction:column;}
+}
+</style>
 </head>
 <body>
 
 <div class="bg-overlay"></div>
-<div class="bg-blur"></div>
-
+<div class="rain-container" id="rain"></div>
 <canvas id="cursor-canvas"></canvas>
 
+<svg id="anime-girl" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
+  <g id="umbrella">
+    <path d="M52 70 Q65 45 78 70" fill="#c084fc" stroke="#9333ea" stroke-width="1.5"/>
+    <path d="M52 70 Q58 55 65 54 Q72 55 78 70" fill="#a855f7" stroke="#9333ea" stroke-width="1"/>
+    <line x1="65" y1="54" x2="52" y2="70" stroke="#9333ea" stroke-width="1"/>
+    <line x1="65" y1="54" x2="65" y2="70" stroke="#9333ea" stroke-width="1"/>
+    <line x1="65" y1="54" x2="78" y2="70" stroke="#9333ea" stroke-width="1"/>
+    <line x1="65" y1="54" x2="65" y2="95" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M65 95 Q62 101 59 99" fill="none" stroke="#9333ea" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <path d="M50 130 Q45 165 42 185 Q65 195 88 185 Q85 165 80 130 Z" fill="#f0abfc" stroke="#c084fc" stroke-width="1"/>
+  <path d="M50 130 Q55 148 65 152 Q75 148 80 130 Z" fill="#e879f9" opacity="0.5"/>
+  <rect x="52" y="108" width="26" height="26" rx="4" fill="#fde8d8"/>
+  <path d="M52 112 Q65 118 78 112" fill="none" stroke="#c084fc" stroke-width="1.5"/>
+  <ellipse cx="65" cy="92" rx="16" ry="18" fill="#fde8d8"/>
+  <path d="M49 86 Q50 68 65 65 Q80 68 81 86 Q75 78 65 77 Q55 78 49 86Z" fill="#1e1b4b"/>
+  <path d="M49 86 Q44 100 47 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
+  <path d="M81 86 Q86 100 83 112" fill="#1e1b4b" stroke="#1e1b4b" stroke-width="1"/>
+  <path d="M65 65 Q68 55 72 58" fill="none" stroke="#1e1b4b" stroke-width="2" stroke-linecap="round"/>
+  <ellipse cx="58" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
+  <ellipse cx="72" cy="91" rx="4" ry="5" fill="#1e1b4b"/>
+  <circle cx="59.5" cy="89.5" r="1.2" fill="#fff"/>
+  <circle cx="73.5" cy="89.5" r="1.2" fill="#fff"/>
+  <ellipse cx="58" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
+  <ellipse cx="72" cy="92" rx="2.5" ry="3" fill="#7c3aed"/>
+  <path d="M61 99 Q65 103 69 99" fill="none" stroke="#c084fc" stroke-width="1.2" stroke-linecap="round"/>
+  <ellipse cx="52" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
+  <ellipse cx="78" cy="96" rx="4" ry="2.5" fill="#fca5a5" opacity="0.5"/>
+  <path d="M78 118 Q84 110 72 97" fill="none" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
+  <g id="legs">
+    <line id="leg-l" x1="57" y1="185" x2="54" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
+    <line id="leg-r" x1="73" y1="185" x2="76" y2="212" stroke="#fde8d8" stroke-width="5" stroke-linecap="round"/>
+    <ellipse id="shoe-l" cx="54" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
+    <ellipse id="shoe-r" cx="76" cy="213" rx="6" ry="3" fill="#1e1b4b"/>
+  </g>
+</svg>
+
 <div id="project-modal">
-    <div id="modal-title">m1sly portfolio</div>
-    <div id="modal-img-wrap">
-        <img id="modal-img" src="" alt="project">
-    </div>
-    <div class="modal-controls">
-        <button class="modal-btn" id="spin-btn" onclick="toggleSpin()"><i class="fas fa-rotate"></i> 360° Spin</button>
-        <button class="modal-btn danger" onclick="closeModal()"><i class="fas fa-xmark"></i> Close</button>
-    </div>
+  <div id="modal-title">m1sly portfolio</div>
+  <div id="modal-img-wrap">
+    <img id="modal-img" src="" alt="project">
+  </div>
+  <div class="modal-controls">
+    <button class="modal-btn" id="spin-btn" onclick="toggleSpin()"><i class="fas fa-rotate"></i> 360° Spin</button>
+    <button class="modal-btn danger" onclick="closeModal()"><i class="fas fa-xmark"></i> Close</button>
+  </div>
 </div>
 
 <nav id="navbar">
-    <div class="nav-container">
-        <a href="#home" class="logo">
-            <img src="https://github.com/m1slydesign.png" alt="m1sly">
-            <span>m1sly</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Portfolio</a></li>
-            <li><a href="#pricing">Rates</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><span class="badge open">OPEN</span></li>
-        </ul>
-    </div>
+  <div class="nav-container">
+    <a href="#home" class="logo">
+      <img src="https://github.com/m1slydesign.png" alt="m1sly">
+      <span>m1sly</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Portfolio</a></li>
+      <li><a href="#pricing">Rates</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><span class="badge open">OPEN</span></li>
+    </ul>
+  </div>
 </nav>
 
 <section class="hero" id="home">
-    <div class="hero-content">
-        <div class="avatar-container">
-            <img src="https://github.com/m1slydesign.png" alt="Avatar">
-        </div>
-        <div style="margin-bottom:20px;">
-            <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
-        </div>
-        <h1 class="hero-title" id="hero-title"></h1>
-        <div class="hero-role">Roblox UI Designer</div>
-        <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
-        <div class="btn-group">
-            <a href="#contact" class="btn primary"><i class="fas fa-envelope"></i> Commission Me</a>
-            <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
-        </div>
+  <div class="hero-content">
+    <div class="avatar-container">
+      <img src="https://github.com/m1slydesign.png" alt="Avatar">
     </div>
+    <div style="margin-bottom:16px;">
+      <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
+    </div>
+    <h1 class="hero-title" id="hero-title"></h1>
+    <div class="hero-role">Roblox UI Designer</div>
+    <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn primary"><i class="fas fa-envelope"></i> Commission Me</a>
+      <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
+    </div>
+  </div>
 </section>
 
 <section id="projects">
-    <div class="section-header">
-        <h2>Recent Work</h2>
-        <p style="color:var(--text-muted);font-size:15px;">Click a project to explore. Drag to spin 360°.</p>
-    </div>
-    <div class="projects-grid" id="portfolio-grid">
-        
-        <div class="glass-panel project-card" onclick="openModalFromSrc(this)">
-            <div class="project-img-wrapper">
-                <img src="https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD" alt="Project">
-            </div>
-            <div class="project-actions">
-                <span class="project-title-text">Simulator HUD</span>
-                <button class="like-btn" onclick="event.stopPropagation();toggleLike(this)">
-                    <i class="far fa-heart"></i> <span class="like-count">0</span>
-                </button>
-            </div>
-        </div>
-
-        <div class="glass-panel project-card" onclick="openModalFromSrc(this)">
-            <div class="project-img-wrapper">
-                <img src="https://placehold.co/700x394/111827/a855f7?text=Shop+Menu" alt="Project">
-            </div>
-            <div class="project-actions">
-                <span class="project-title-text">Shop Menu</span>
-                <button class="like-btn" onclick="event.stopPropagation();toggleLike(this)">
-                    <i class="far fa-heart"></i> <span class="like-count">0</span>
-                </button>
-            </div>
-        </div>
-
-        <div class="glass-panel project-card" onclick="openModalFromSrc(this)">
-            <div class="project-img-wrapper">
-                <img src="https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen" alt="Project">
-            </div>
-            <div class="project-actions">
-                <span class="project-title-text">Inventory Screen</span>
-                <button class="like-btn" onclick="event.stopPropagation();toggleLike(this)">
-                    <i class="far fa-heart"></i> <span class="like-count">0</span>
-                </button>
-            </div>
-        </div>
-
-    </div>
+  <div class="section-header">
+    <h2>Recent Work</h2>
+    <p style="color:var(--text-muted);font-size:14px;">Click a project to explore. Drag to spin 360°.</p>
+  </div>
+  <div class="projects-grid" id="portfolio-grid"></div>
 </section>
 
 <section id="guestbook">
-    <div class="glass-panel comments-section">
-        <h3 style="font-family:'Syne',sans-serif;margin-bottom:20px;">Guestbook & Feedback</h3>
-        <div class="comment-form">
-            <input type="text" id="comment-input" class="comment-input" placeholder="Leave a feedback about my UI work...">
-            <button class="comment-btn" onclick="addComment()">Send</button>
-        </div>
-        <div class="comments-list" id="comments-list"></div>
+  <div class="glass-panel comments-section">
+    <h3 style="font-family:'Syne',sans-serif;margin-bottom:16px;">Guestbook & Feedback</h3>
+    <div class="comment-form">
+      <input type="text" id="comment-input" class="comment-input" placeholder="Leave a feedback about my UI work...">
+      <button class="comment-btn" onclick="addComment()">Send</button>
     </div>
+    <div class="comments-list" id="comments-list"></div>
+  </div>
 </section>
 
 <section id="pricing">
-    <div class="section-header">
-        <h2>Pricing Rates</h2>
-        <p style="color:var(--text-muted);font-size:15px;">Flexible solutions structured per project specifications.</p>
+  <div class="section-header">
+    <h2>Pricing Rates</h2>
+    <p style="color:var(--text-muted);font-size:14px;">Flexible solutions structured per project specifications.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="glass-panel price-card">
+      <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">General Work</div>
+      <div class="price-val">R$ 2,000 - 5,000</div>
+      <p style="font-size:13px;color:var(--text-muted);">Full simulator screens, assets backgrounds, and responsive menus.</p>
     </div>
-    <div class="pricing-grid">
-        <div class="glass-panel price-card">
-            <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">General Work</div>
-            <div class="price-val">400 USD</div>
-            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Full simulator UI sets, bento design layout setups, and responsive frames.</p>
-        </div>
-        <div class="glass-panel price-card">
-            <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">Assets & Scripts</div>
-            <div class="price-val">R$ 5,000</div>
-            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Custom game icons, layout scaling fixes, or single complex HUD additions.</p>
-        </div>
+    <div class="glass-panel price-card">
+      <div style="font-size:11px;text-transform:uppercase;color:var(--text-dark);letter-spacing:2px;">Simple Tasks</div>
+      <div class="price-val">R$ 500 - 1,000</div>
+      <p style="font-size:13px;color:var(--text-muted);">Single custom frame adjustments, icon scaling, or minor asset edits.</p>
     </div>
+  </div>
 </section>
 
 <section id="contact" style="text-align:center;">
-    <div class="section-header">
-        <h2>Get In Touch</h2>
-        <p style="color:var(--text-muted);font-size:15px;">Let's build something epic together.</p>
-    </div>
-    <div class="btn-group" style="justify-content:center;">
-        <a href="https://x.com/m1sly" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter</a>
-        <a href="#" class="btn secondary"><i class="fab fa-discord"></i> Discord</a>
-    </div>
+  <div class="section-header">
+    <h2>Get In Touch</h2>
+    <p style="color:var(--text-muted);font-size:14px;">Let's build something epic together.</p>
+  </div>
+  <div class="btn-group" style="justify-content:center;">
+    <a href="https://x.com/stor4m" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter</a>
+    <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary"><i class="fab fa-discord"></i> Discord</a>
+  </div>
 </section>
 
 <script>
-/* ── İMLEÇ PARTICLE EFEKTİ (60 FPS SABİT) ── */
+/* ══════════════════════════════════════
+   PROJECTS DATA (Buradaki linkleri değiştirdiğinde otomatik yüklenir kanka)
+══════════════════════════════════════ */
+const PROJECTS = [
+  { id:1, title:"Simulator HUD",   src:"https://placehold.co/700x394/111827/a855f7?text=Simulator+HUD",   likes:0, liked:false },
+  { id:2, title:"Shop Menu",       src:"https://placehold.co/700x394/111827/a855f7?text=Shop+Menu",       likes:0, liked:false },
+  { id:3, title:"Inventory Screen",src:"https://placehold.co/700x394/111827/a855f7?text=Inventory+Screen",likes:0, liked:false },
+];
+
+/* ══════════════════════════════════════
+   RAIN (OPTIMIZED FOR PERFORMANCE)
+══════════════════════════════════════ */
+const rainEl = document.getElementById('rain');
+for(let i=0;i<40;i++){ /* Yoğunluk düşürüldü */
+  const d=document.createElement('div');
+  d.className='drop';
+  d.style.left=(Math.random()*100)+'%';
+  d.style.animationDuration=(Math.random()*1.2+0.6)+'s';
+  d.style.animationDelay=(Math.random()*2)+'s';
+  d.style.opacity=Math.random()*0.4+0.1;
+  rainEl.appendChild(d);
+}
+
+/* ══════════════════════════════════════
+   CURSOR CANVAS — particle trail (LIMIT APPLIED)
+══════════════════════════════════════ */
 const canvas = document.getElementById('cursor-canvas');
 const ctx = canvas.getContext('2d');
 let W, H;
@@ -305,157 +378,225 @@ function resizeCanvas(){ W=canvas.width=window.innerWidth; H=canvas.height=windo
 resizeCanvas();
 window.addEventListener('resize',resizeCanvas);
 
-let mx=window.innerWidth/2, my=window.innerHeight/2;
+let mx=W/2, my=H/2;
 const particles=[];
 const COLORS=['#ffffff','#e9d5ff','#c084fc','#a855f7','#7c3aed'];
 
 document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; });
 
 function spawnParticle(){
-    if(particles.length > 45) return;
-    particles.push({
-        x:mx, y:my,
-        vx:(Math.random()-0.5)*1.5,
-        vy:(Math.random()-0.5)*1.5 - 0.3,
-        r:Math.random()*3+1.5,
-        alpha:1,
-        color:COLORS[Math.floor(Math.random()*COLORS.length)],
-        decay:Math.random()*0.04+0.02,
-        glow:Math.random()>0.7
-    });
+  if(particles.length > 40) return; /* Maksimum particle limiti eklenerek kasma önlendi */
+  particles.push({
+    x:mx, y:my,
+    vx=(Math.random()-0.5)*1.5,
+    vy=(Math.random()-0.5)*1.5 - 0.3,
+    r:Math.random()*3+1.5,
+    alpha:1,
+    color:COLORS[Math.floor(Math.random()*COLORS.length)],
+    decay:Math.random()*0.04+0.02,
+    glow:Math.random()>0.7
+  });
 }
 
 function drawCursor(){
-    ctx.save();
-    ctx.shadowColor='#c084fc';
-    ctx.shadowBlur=12;
-    ctx.beginPath();
-    ctx.arc(mx,my,5,0,Math.PI*2);
-    ctx.fillStyle='#fff';
-    ctx.fill();
-    ctx.restore();
+  ctx.save();
+  ctx.shadowColor='#c084fc';
+  ctx.shadowBlur=12;
+  ctx.beginPath();
+  ctx.arc(mx,my,5,0,Math.PI*2);
+  ctx.fillStyle='#fff';
+  ctx.fill();
+  ctx.restore();
 
-    const t=Date.now()/600;
-    const pulse=13+Math.sin(t)*3;
-    ctx.save();
-    ctx.strokeStyle='rgba(192,132,252,0.5)';
-    ctx.lineWidth=1.2;
-    ctx.beginPath();
-    ctx.arc(mx,my,pulse,0,Math.PI*2);
-    ctx.stroke();
-    ctx.restore();
+  const t=Date.now()/600;
+  const pulse=13+Math.sin(t)*3;
+  ctx.save();
+  ctx.strokeStyle='rgba(192,132,252,0.5)';
+  ctx.lineWidth=1.2;
+  ctx.beginPath();
+  ctx.arc(mx,my,pulse,0,Math.PI*2);
+  ctx.stroke();
+  ctx.restore();
 }
 
 function animLoop(){
-    ctx.clearRect(0,0,W,H);
-    spawnParticle();
+  ctx.clearRect(0,0,W,H);
+  spawnParticle();
 
-    for(let i=particles.length-1;i>=0;i--){
-        const p=particles[i];
-        p.x+=p.vx; p.y+=p.vy;
-        p.alpha-=p.decay;
-        if(p.alpha<=0){ particles.splice(i,1); continue; }
-        ctx.save();
-        if(p.glow){ ctx.shadowColor=p.color; ctx.shadowBlur=6; }
-        ctx.globalAlpha=p.alpha;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r*p.alpha,0,Math.PI*2);
-        ctx.fillStyle=p.color;
-        ctx.fill();
-        ctx.restore();
-    }
-    drawCursor();
-    requestAnimationFrame(animLoop);
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.x+=p.vx; p.y+=p.vy;
+    p.alpha-=p.decay;
+    if(p.alpha<=0){ particles.splice(i,1); continue; }
+    ctx.save();
+    if(p.glow){ ctx.shadowColor=p.color; ctx.shadowBlur=6; }
+    ctx.globalAlpha=p.alpha;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r*p.alpha,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  drawCursor();
+  requestAnimationFrame(animLoop);
 }
 animLoop();
 
+/* ══════════════════════════════════════
+   ANIME GIRL LEGS WALK
+══════════════════════════════════════ */
+(function walkLegs(){
+  const legL=document.getElementById('leg-l');
+  const legR=document.getElementById('leg-r');
+  const shoeL=document.getElementById('shoe-l');
+  const shoeR=document.getElementById('shoe-r');
+  let t=0;
+  function step(){
+    t+=0.12;
+    const lx2=54+Math.sin(t)*10;
+    const ly2=212+Math.cos(t)*6;
+    legL.setAttribute('x2',lx2);
+    legL.setAttribute('y2',ly2);
+    shoeL.setAttribute('cx',lx2);
+    shoeL.setAttribute('cy',ly2+1);
+    
+    const rx2=76-Math.sin(t)*10;
+    const ry2=212-Math.cos(t)*6;
+    legR.setAttribute('x2',rx2);
+    legR.setAttribute('y2',ry2);
+    shoeR.setAttribute('cx',rx2);
+    shoeR.setAttribute('cy',ry2+1);
+    requestAnimationFrame(step);
+  }
+  step();
+})();
+
+/* ══════════════════════════════════════
+   NAVBAR SCROLL
+══════════════════════════════════════ */
 window.addEventListener('scroll',()=>{
-    document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
 },{passive:true});
 
-/* ── YAZI EFEKTİ ── */
+/* ══════════════════════════════════════
+   TYPEWRITER HERO TITLE
+══════════════════════════════════════ */
 function typeWriter(el, text, delay=100){
-    el.innerHTML='';
-    [...text].forEach((ch,i)=>{
-        const span=document.createElement('span');
-        span.className='char';
-        span.textContent=ch;
-        span.style.animationDelay=(i*delay)+'ms';
-        el.appendChild(span);
-    });
+  el.innerHTML='';
+  [...text].forEach((ch,i)=>{
+    const span=document.createElement('span');
+    span.className='char';
+    span.textContent=ch;
+    span.style.animationDelay=(i*delay)+'ms';
+    el.appendChild(span);
+  });
 }
-typeWriter(document.getElementById('hero-title'),'m1sly portfolio',100);
+typeWriter(document.getElementById('hero-title'),'m1sly',120);
 
-/* ── BEĞENİ VE MODAL İŞLEMLERİ ── */
-function toggleLike(btn){
-    const icon = btn.querySelector('i');
-    const countSpan = btn.querySelector('.like-count');
-    let currentCount = parseInt(countSpan.textContent);
+/* ══════════════════════════════════════
+   PROJECT GRID (DOM PERMANENT PERFORMANCE FIX)
+══════════════════════════════════════ */
+const grid=document.getElementById('portfolio-grid');
+
+function renderProjects(){
+  grid.innerHTML='';
+  PROJECTS.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='glass-panel project-card';
+    card.id = `project-card-${p.id}`;
+    card.innerHTML=`
+      <div class="project-img-wrapper">
+        <img src="${p.src}" alt="${p.title}">
+      </div>
+      <div class="project-actions">
+        <span style="font-size:14px;font-weight:600;">${p.title}</span>
+        <button class="like-btn ${p.liked?'liked':''}" id="like-btn-${p.id}">
+          <i class="fa${p.liked?'s':'r'} fa-heart"></i> <span class="count-span">${p.likes}</span>
+        </button>
+      </div>`;
     
-    if(icon.classList.contains('far')){
-        icon.className = 'fas fa-heart';
-        btn.classList.add('liked');
-        countSpan.textContent = currentCount + 1;
-    } else {
-        icon.className = 'far fa-heart';
-        btn.classList.remove('liked');
-        countSpan.textContent = currentCount - 1;
-    }
+    // Like butonuna ayrı tıklama olayı
+    card.querySelector('.like-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleLike(p.id);
+    });
+    
+    card.addEventListener('click',()=>openModal(p));
+    grid.appendChild(card);
+  });
 }
 
+// Tüm grid'i baştan yaratmak yerine sadece ilgili DOM elementini güncelleyen performans yaması
+function toggleLike(id){
+  const p=PROJECTS.find(x=>x.id===id);
+  if(!p) return;
+  p.liked=!p.liked; 
+  p.likes+=p.liked?1:-1;
+  
+  const btn = document.getElementById(`like-btn-${id}`);
+  if(btn){
+    btn.className = `like-btn ${p.liked?'liked':''}`;
+    btn.querySelector('i').className = `fa${p.liked?'s':'r'} fa-heart`;
+    btn.querySelector('.count-span').textContent = p.likes;
+  }
+}
+
+renderProjects();
+
+/* ══════════════════════════════════════
+   MODAL + 360° SPIN
+══════════════════════════════════════ */
 const modal    = document.getElementById('project-modal');
 const modalImg = document.getElementById('modal-img');
 const spinBtn  = document.getElementById('spin-btn');
 let spinning=false, spinAngle=0, spinRAF=null;
 let dragging=false, dragStartX=0, dragAngleStart=0;
 
-function openModalFromSrc(cardEl){
-    const imgSrc = cardEl.querySelector('.project-img-wrapper img').src;
-    const imgTitle = cardEl.querySelector('.project-title-text').textContent;
-    
-    document.getElementById('modal-title').textContent = imgTitle;
-    modalImg.src = imgSrc;
-    modal.classList.add('open');
-    spinning=false; spinAngle=0;
-    modalImg.style.transform='rotateY(0deg)';
-    spinBtn.className='modal-btn';
-    spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin';
-    document.body.style.overflow='hidden';
+function openModal(p){
+  modalImg.src=p.src;
+  modal.classList.add('open');
+  spinning=false; spinAngle=0;
+  modalImg.style.transform='rotateY(0deg)';
+  spinBtn.className='modal-btn';
+  spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin';
+  document.body.style.overflow='hidden';
 }
 
 function closeModal(){
-    modal.classList.remove('open');
-    stopSpin();
-    document.body.style.overflow='';
+  modal.classList.remove('open');
+  stopSpin();
+  document.body.style.overflow='';
 }
 
 modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
 
 function toggleSpin(){
-    spinning=!spinning;
-    if(spinning){
-        spinBtn.className='modal-btn spin-active';
-        spinBtn.innerHTML='<i class="fas fa-pause"></i> Stop';
-        doSpin();
-    } else {
-        stopSpin();
-        spinBtn.className='modal-btn';
-        spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin';
-    }
+  spinning=!spinning;
+  if(spinning){
+    spinBtn.className='modal-btn spin-active';
+    spinBtn.innerHTML='<i class="fas fa-pause"></i> Stop';
+    doSpin();
+  } else {
+    stopSpin();
+    spinBtn.className='modal-btn';
+    spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin';
+  }
 }
 
 function doSpin(){
-    if(!spinning) return;
-    spinAngle=(spinAngle+1.2)%360;
-    modalImg.style.transform=`rotateY(${spinAngle}deg)`;
-    spinRAF=requestAnimationFrame(doSpin);
+  if(!spinning) return;
+  spinAngle=(spinAngle+1.2)%360;
+  modalImg.style.transform=`rotateY(${spinAngle}deg)`;
+  spinRAF=requestAnimationFrame(doSpin);
 }
 
 function stopSpin(){
-    spinning=false;
-    if(spinRAF) cancelAnimationFrame(spinRAF);
+  spinning=false;
+  if(spinRAF) cancelAnimationFrame(spinRAF);
 }
 
+/* drag to rotate manually */
 const wrap=document.getElementById('modal-img-wrap');
 wrap.addEventListener('mousedown',e=>{ dragging=true; dragStartX=e.clientX; dragAngleStart=spinAngle; stopSpin(); spinBtn.className='modal-btn'; spinBtn.innerHTML='<i class="fas fa-rotate"></i> 360° Spin'; });
 window.addEventListener('mousemove',e=>{ if(!dragging) return; const dx=e.clientX-dragStartX; spinAngle=(dragAngleStart+dx)%360; modalImg.style.transform=`rotateY(${spinAngle}deg)`; });
@@ -464,19 +605,22 @@ wrap.addEventListener('touchstart',e=>{ dragging=true; dragStartX=e.touches[0].c
 window.addEventListener('touchmove',e=>{ if(!dragging) return; const dx=e.touches[0].clientX-dragStartX; spinAngle=(dragAngleStart+dx)%360; modalImg.style.transform=`rotateY(${spinAngle}deg)`; },{passive:true});
 window.addEventListener('touchend',()=>dragging=false);
 
+/* ESC close */
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-/* ── GUESTBOOK ── */
+/* ══════════════════════════════════════
+   GUESTBOOK
+══════════════════════════════════════ */
 const comments=[];
 function addComment(){
-    const inp=document.getElementById('comment-input');
-    const txt=inp.value.trim(); if(!txt) return;
-    comments.unshift({text:txt,time:new Date().toLocaleTimeString()});
-    inp.value=''; renderComments();
+  const inp=document.getElementById('comment-input');
+  const txt=inp.value.trim(); if(!txt) return;
+  comments.unshift({text:txt,time:new Date().toLocaleTimeString()});
+  inp.value=''; renderComments();
 }
 function renderComments(){
-    document.getElementById('comments-list').innerHTML=
-        comments.map(c=>`<div class="comment-item">${c.text}<span>${c.time}</span></div>`).join('');
+  document.getElementById('comments-list').innerHTML=
+    comments.map(c=>`<div class="comment-item">${c.text}<span>${c.time}</span></div>`).join('');
 }
 document.getElementById('comment-input').addEventListener('keydown',e=>{ if(e.key==='Enter') addComment(); });
 </script>
