@@ -12,10 +12,11 @@
   --bg: #030304;
   --text: #ffffff;
   --text-muted: #71717a;
-  --border: rgba(255, 255, 255, 0.05);
-  --card-bg: rgba(9, 9, 11, 0.45);
-  --accent: #8b5cf6;
+  --border: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(5, 5, 6, 0.65);
   --green-neon: #00ff66;
+  /* Leopar Deseni Global Linki */
+  --leopard-url: url('https://img.freepik.com/free-vector/leopard-fur-pattern-design_1048-3575.jpg');
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,27 +24,30 @@ html { scroll-behavior: smooth; background-color: var(--bg); }
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg);
+  
+  /* ── ARKAPLAN GÖRSELİN BURADA ARTIK NET GÖZÜKECEK ── */
   background-image: url('arkaplan.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  
   color: var(--text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── HIGH-END STREETWEAR BLUR FILTER ── */
+/* ── MODERN STREETWEAR ARTIK DAHA SEFFAF GÖZÜKSÜN DİYE AYARLANDI ── */
 .bg-overlay {
   position: fixed; inset: 0;
-  background: linear-gradient(180deg, rgba(3, 3, 4, 0.3) 0%, rgba(3, 3, 4, 0.85) 100%);
-  backdrop-filter: blur(12px) brightness(0.25);
-  -webkit-backdrop-filter: blur(12px) brightness(0.25);
+  background: linear-gradient(180deg, rgba(3, 3, 4, 0.1) 0%, rgba(3, 3, 4, 0.65) 100%);
+  backdrop-filter: blur(4px) brightness(0.4);
+  -webkit-backdrop-filter: blur(4px) brightness(0.4);
   z-index: 0;
 }
 
-/* ── LUXURY ULTRA-FINE RAIN EFFECT (SIFIR LAG) ── */
+/* ── LUXURY ULTRA-FINE RAIN EFFECT ── */
 .fine-rain {
-  position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.22;
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.25;
 }
 .fine-rain span {
   position: absolute; width: 1px; height: 100px;
@@ -62,7 +66,7 @@ body {
 .fine-rain span:nth-child(5) { left: 78%; animation-duration: 0.7s;  animation-delay: 0.5s; }
 .fine-rain span:nth-child(6) { left: 92%; animation-duration: 0.9s;  animation-delay: 0.3s; }
 
-/* ── BERSHKA LANSMAN STYLE VERTICAL SPLIT LOADER ── */
+/* ── BERSHKA LANSMAN STYLE LOADER ── */
 #instagram-loader {
   position: fixed; inset: 0; z-index: 99999; display: flex; background: #000;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
@@ -82,30 +86,41 @@ body {
   color: var(--text-muted); margin-top: 12px; font-weight: 600;
 }
 
-/* MAIN APP STRUCTURE */
 #app-view { opacity: 0; transform: scale(0.98); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); z-index: 5; position: relative; }
 
-/* ── PREMIUM BENTO GLASS CARDS ── */
+/* ── PREMIUM BENTO CARDS ── */
 .bento-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
   position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bento-card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  background: rgba(12, 12, 14, 0.8);
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(12, 12, 14, 0.85);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
 /* ── TOP NAV ── */
 nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 32px 0; transition: all 0.3s ease; }
-nav.scrolled { background: rgba(3, 3, 4, 0.6); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); padding: 18px 0; }
+nav.scrolled { background: rgba(3, 3, 4, 0.7); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-bottom: 1px solid var(--border); padding: 18px 0; }
 .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
-.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -1px; text-transform: uppercase; }
-.logo img { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); object-fit: cover; }
+
+/* ── LEOPARD LOGO STYLE ── */
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -1px; text-transform: uppercase; }
+.logo img { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); object-fit: cover; }
+.logo span {
+  background-image: var(--leopard-url);
+  background-size: cover;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .nav-links { display: flex; list-style: none; gap: 36px; align-items: center; }
 .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
 .nav-links a:hover { color: #fff; }
@@ -127,8 +142,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.6); backdrop-filter: blur(24px); -web
   text-transform: uppercase;
 }
 .commission-badge span {
-  width: 7px;
-  height: 7px;
+  width: 7px; height: 7px;
   background-color: var(--green-neon);
   border-radius: 50%;
   display: inline-block;
@@ -142,7 +156,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.6); backdrop-filter: blur(24px); -web
 
 .hero-alert { margin-bottom: 24px; display: inline-flex; }
 
-/* ── HIGH-END LEOPARD TEXT EFFECT (PURE CSS HYPEBEAST DOKU) ── */
+/* ── LEOPARD GLOBAL TEXT EFFECT ── */
 .leopard-title {
   font-family: 'Syne', sans-serif;
   font-size: clamp(52px, 10vw, 92px);
@@ -151,28 +165,33 @@ nav.scrolled { background: rgba(3, 3, 4, 0.6); backdrop-filter: blur(24px); -web
   margin-bottom: 24px;
   letter-spacing: -3px;
   text-transform: uppercase;
-  
-  /* Leopar Deseni CSS Masking */
-  background-image: url('https://img.freepik.com/free-vector/leopard-fur-pattern-design_1048-3575.jpg');
+  background-image: var(--leopard-url);
   background-size: cover;
   background-position: center;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.6)) brightness(1.25) contrast(1.1);
+  filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.7)) brightness(1.3) contrast(1.1);
 }
 
-/* ── MINIMALIST HEAVY HERO ── */
+/* ── HERO AND AVATAR ── */
 .hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: 160px 24px 80px; }
 .hero-content { max-width: 800px; text-align: center; }
 .avatar-container { width: 100px; height: 100px; margin: 0 auto 20px; }
-.avatar-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 16px 32px rgba(0,0,0,0.4); }
+.avatar-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.15); box-shadow: 0 16px 32px rgba(0,0,0,0.6); }
 .hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.7; max-width: 540px; margin: 0 auto 36px; font-weight: 400; }
 
 .btn-group { display: flex; gap: 14px; justify-content: center; }
 .btn { display: inline-flex; align-items: center; padding: 14px 32px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.25s ease; font-family: 'Space Grotesk', sans-serif; }
-.btn.primary { background: #fff; color: #000; }
-.btn.primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* LEOPARD HOVER ACTION BUTTON */
+.btn.primary { background: #fff; color: #000; position: relative; overflow: hidden; z-index: 1; transition: color 0.3s ease; }
+.btn.primary:hover { color: #fff; opacity: 1; transform: translateY(-1px); }
+.btn.primary::before {
+  content: ''; position: absolute; inset: 0; background-image: var(--leopard-url); background-size: cover; z-index: -1; opacity: 0; transition: opacity 0.3s ease;
+}
+.btn.primary:hover::before { opacity: 1; }
+
 .btn.secondary { background: transparent; color: #fff; border: 1px solid var(--border); }
 .btn.secondary:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-1px); }
 
@@ -180,12 +199,12 @@ nav.scrolled { background: rgba(3, 3, 4, 0.6); backdrop-filter: blur(24px); -web
 section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
 .section-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 36px; }
 
-/* ── PORTFOLIO GRID ── */
+/* ── FIXED PROJECTS GRID FRAMEWORK ── */
 .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.project-card { padding: 16px; cursor: pointer; display: flex; flex-direction: column; }
-.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 10px; background: #09090b; }
+.project-card { padding: 16px; cursor: pointer; display: flex; flex-direction: column; text-decoration: none; }
+.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 10px; background: #09090b; border: 1px solid rgba(255,255,255,0.05); }
 .project-img-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-.project-card:hover .project-img-wrapper img { transform: scale(1.015); }
+.project-card:hover .project-img-wrapper img { transform: scale(1.02); }
 .project-meta { padding: 16px 4px 4px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
 .project-name { font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -0.2px; }
 .project-action { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
@@ -210,8 +229,11 @@ section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
 .rate-value { font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 800; color: #fff; margin: 14px 0 10px; letter-spacing: -0.5px; }
 .rate-info { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-/* BRAND FOOTER SIGNATURE */
-.brand-signature { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-top: 60px; text-transform: uppercase; }
+/* LEOPARD FOOTER SIGNATURE */
+.brand-signature {
+  font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: -0.5px; margin-top: 60px; text-transform: uppercase;
+  background-image: var(--leopard-url); background-size: cover; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
 
 @media(max-width: 768px) {
   .nav-links { display: none; }
@@ -285,7 +307,39 @@ section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
 
   <section id="projects">
     <div class="section-title">Selected Projections</div>
-    <div class="portfolio-grid" id="portfolio-grid"></div>
+    <div class="portfolio-grid">
+      
+      <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
+        <div class="project-img-wrapper">
+          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Project 1">
+        </div>
+        <div class="project-meta">
+          <span class="project-name">Custom Simulator HUD Framework</span>
+          <span class="project-action">Inspect</span>
+        </div>
+      </div>
+
+      <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
+        <div class="project-img-wrapper">
+          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Project 2">
+        </div>
+        <div class="project-meta">
+          <span class="project-name">Symmetrical Bento Market View</span>
+          <span class="project-action">Inspect</span>
+        </div>
+      </div>
+
+      <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGMCh3zW4AAf3N5?format=png&name=large')">
+        <div class="project-img-wrapper">
+          <img src="https://pbs.twimg.com/media/GGMCh3zW4AAf3N5?format=png&name=large" alt="Project 3">
+        </div>
+        <div class="project-meta">
+          <span class="project-name">Modular Premium Trading Screen</span>
+          <span class="project-action">Inspect</span>
+        </div>
+      </div>
+
+      </div>
   </section>
 
   <section id="rates">
@@ -317,15 +371,6 @@ section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
 </div>
 
 <script>
-/* ══════════════════════════════════════════════════════════════════
-   X (TWITTER) DIRECT RESİM ADRESLERİ (@stor4m)
-══════════════════════════════════════════════════════════════════ */
-const PROJECTS = [
-  { id: 1, title: "Custom Simulator HUD Framework", src: "https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" },
-  { id: 2, title: "Symmetrical Bento Market View", src: "https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" },
-  { id: 3, title: "Modular Premium Trading Screen", src: "https://pbs.twimg.com/media/GGMCh3zW4AAf3N5?format=png&name=large" }
-];
-
 /* ── BERSHKA LANSMAN STYLE VERTICAL SPLIT TIMING ── */
 window.addEventListener('DOMContentLoaded', () => {
   const text = document.getElementById('loader-text');
@@ -357,27 +402,6 @@ window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-/* RENDERING CARDS */
-const grid = document.getElementById('portfolio-grid');
-function renderProjects() {
-  grid.innerHTML = '';
-  PROJECTS.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'bento-card project-card';
-    card.innerHTML = `
-      <div class="project-img-wrapper">
-        <img src="${p.src}" alt="${p.title}">
-      </div>
-      <div class="project-meta">
-        <span class="project-name">${p.title}</span>
-        <span class="project-action">Inspect</span>
-      </div>`;
-    card.addEventListener('click', () => openModal(p));
-    grid.appendChild(card);
-  });
-}
-renderProjects();
-
 /* ── 360 SPIN CONTROLLER ENGINE ── */
 const modal = document.getElementById('spin-modal');
 const modalImg = document.getElementById('modal-img');
@@ -386,8 +410,8 @@ let dragging = false;
 let dragStartX = 0;
 let dragAngleStart = 0;
 
-function openModal(p) {
-  modalImg.src = p.src;
+function openModal(imgSrc) {
+  modalImg.src = imgSrc;
   modal.classList.add('open');
   spinAngle = 0;
   modalImg.style.transform = 'rotateY(0deg)';
