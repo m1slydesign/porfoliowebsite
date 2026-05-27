@@ -18,9 +18,10 @@
   --card-bg: rgba(5, 5, 6, 0.6);
   --green-neon: #00ff66;
   
-  /* BURALARI KENDİ GITHUB BİLGİLERİNLE DEĞİŞTİR KANKA */
-  --site-logo-url: url('https://raw.githubusercontent.com/KULLANICI_ADIN/REPO_ADIN/main/site-logosu.jpg');
-  --acilis-logo-url: 'https://raw.githubusercontent.com/KULLANICI_ADIN/REPO_ADIN/main/acilis-logosu.jpg';
+  /* REPO BİLGİLERİNİ TAM BURAYA JİLET GİBİ İŞLEDİM KANKA */
+  --site-logo-url: url('https://raw.githubusercontent.com/m1slydesign/porfoliowebsite/main/site-logosu.jpg');
+  --acilis-logo-url: 'https://raw.githubusercontent.com/m1slydesign/porfoliowebsite/main/acilis-logosu.jpg';
+  --arkaplan-url: url('https://raw.githubusercontent.com/m1slydesign/porfoliowebsite/main/arkaplan.jpg');
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,25 +35,36 @@ body {
   position: relative;
 }
 
-/* ARKA PLANDAKİ PARLAYAN NEON SPOTLAR */
+/* YÜKLEDİĞİN ARKAPLAN.JPG DOSYASINI BURAYA BAĞLADIM, ÜZERİNE DE PARLAYAN SPOTLARI ATTIM */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: var(--arkaplan-url);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35; /* Arka plan çok patlamasın, arayüzler net gözüksün diye hafif kıstım */
+  z-index: -2;
+  pointer-events: none;
+}
+
 .glow-bg-1 {
   position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
-  background: radial-gradient(circle, rgba(120, 0, 255, 0.18) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(120, 0, 255, 0.2) 0%, rgba(0,0,0,0) 70%);
   filter: blur(90px); pointer-events: none; z-index: -1;
 }
 .glow-bg-2 {
   position: fixed; bottom: 10%; right: -5%; width: 45vw; height: 45vw;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
   filter: blur(110px); pointer-events: none; z-index: -1;
 }
 
 .bg-overlay {
   position: fixed; inset: 0;
-  background: linear-gradient(180deg, rgba(3, 3, 4, 0.4) 0%, rgba(3, 3, 4, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(3, 3, 4, 0.6) 0%, rgba(3, 3, 4, 0.9) 100%);
   z-index: 0; pointer-events: none;
 }
 
-/* SİTE AÇILIŞ LOGOSU VE SİSTEMİ */
+/* SİTE AÇILIŞ LOGOSU SİSTEMİ */
 #instagram-loader {
   position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column;
   background: #000; align-items: center; justify-content: center;
@@ -91,7 +103,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* EN ÜST ALAN - HUE SHIFT FLUFFY YAZISI */
+/* CHROMATIC HERO SPLIT */
 .top-showcase-banner {
   width: 100%; max-width: 1100px; margin: 120px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
@@ -325,3 +337,4 @@ modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 </script>
 </body>
 </html>
+
