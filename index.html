@@ -11,11 +11,11 @@
 :root {
   --bg: #030303;
   --text: #ffffff;
-  --text-muted: #999999;
-  --text-dark: #444444;
-  --border: rgba(255, 255, 255, 0.05);
-  --card-bg: rgba(10, 10, 10, 0.6);
-  --accent-open: #00ff66;
+  --text-muted: #8c8c8c;
+  --text-dark: #3a3a3a;
+  --border: rgba(255, 255, 255, 0.04);
+  --card-bg: rgba(8, 8, 8, 0.65);
+  --accent: #bc7eff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,93 +23,98 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg);
+  background-image: url('arkaplan.jpg'); /* Arka plan görselin */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── BACKGROUND ── */
+/* Swissmono Blur Overlay */
 .bg-overlay {
   position: fixed; inset: 0;
-  background: radial-gradient(circle at 50% 20%, rgba(25, 15, 40, 0.15) 0%, rgba(3, 3, 3, 1) 70%);
+  background: linear-gradient(180deg, rgba(3, 3, 3, 0.4) 0%, rgba(3, 3, 3, 0.85) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: -1;
 }
 
 /* ── PREMIUM BENTO GLASS PANELS ── */
 .glass-panel {
   background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  transition: border-color 0.25s ease, background-color 0.25s ease;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .glass-panel:hover { 
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(14, 14, 14, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(12, 12, 12, 0.8);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 /* ── NAV ── */
 nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 24px 0; transition: all 0.25s ease; }
-nav.scrolled { background: rgba(3, 3, 3, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 14px 0; }
+nav.scrolled { background: rgba(3, 3, 3, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 14px 0; }
 .nav-container { max-width: 1050px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
-.logo img { width: 30px; height: 30px; border-radius: 8px; object-fit: cover; }
+.logo img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
 .nav-links { display: flex; list-style: none; gap: 28px; align-items: center; }
 .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
 .nav-links a:hover { color: var(--text); }
-.badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 30px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; }
-.badge.open { background: rgba(0, 255, 102, 0.06); color: var(--accent-open); border: 1px solid rgba(0, 255, 102, 0.15); }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 30px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; background: rgba(0, 255, 102, 0.06); color: #00ff66; border: 1px solid rgba(0, 255, 102, 0.15); }
 
-/* ── HERO ── */
-.hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: 140px 24px 40px; text-align: center; }
+/* ── HERO (Rofishy Style Typography) ── */
+.hero { min-height: 85vh; display: flex; align-items: center; justify-content: center; padding: 140px 24px 40px; text-align: center; }
 .hero-content { max-width: 680px; }
-.avatar-container { width: 100px; height: 100px; margin: 0 auto 24px; }
+.avatar-container { width: 95px; height: 95px; margin: 0 auto 24px; }
 .avatar-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.1); }
-.hero-title { font-family: 'Syne', sans-serif; font-size: clamp(44px, 7vw, 68px); font-weight: 800; line-height: 1.05; margin-bottom: 12px; letter-spacing: -2.5px; }
-.hero-role { font-size: 11px; color: var(--text-dark); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
-.hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; font-weight: 400; }
+.hero-title { font-family: 'Syne', sans-serif; font-size: clamp(48px, 8vw, 76px); font-weight: 800; line-height: 0.95; margin-bottom: 16px; letter-spacing: -3px; }
+.hero-role { font-size: 11px; color: var(--text-dark); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 24px; font-weight: 800; }
+.hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; font-weight: 400; max-width: 540px; margin-left: auto; margin-right: auto; }
 
 /* BUTTONS */
 .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .btn.primary { background: #fff; color: #000; }
 .btn.primary:hover { opacity: 0.9; transform: translateY(-1px); }
-.btn.secondary { background: rgba(255, 255, 255, 0.03); color: #fff; border: 1px solid var(--border); }
-.btn.secondary:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.15); transform: translateY(-1px); }
+.btn.secondary { background: rgba(255, 255, 255, 0.02); color: #fff; border: 1px solid var(--border); }
+.btn.secondary:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.15); transform: translateY(-1px); }
 
 /* ── SECTIONS ── */
-section { max-width: 1050px; margin: 0 auto; padding: 60px 24px; }
-.section-header { text-align: left; margin-bottom: 36px; border-left: 2px solid rgba(255, 255, 255, 0.2); padding-left: 16px; }
-.section-header h2 { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+section { max-width: 1050px; margin: 0 auto; padding: 50px 24px; }
+.section-header { text-align: left; margin-bottom: 32px; border-left: 2px solid var(--text-dark); padding-left: 16px; }
+.section-header h2 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
 
-/* ── PROJECTS BENTO GRID (CLEAN & PERFECT SHAPE) ── */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
-.project-card { overflow: hidden; display: flex; flex-direction: column; padding: 10px; cursor: pointer; }
-.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 10px; background: #080808; border: 1px solid rgba(255, 255, 255, 0.02); }
-.project-img-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+/* ── PROJECTS BENTO GRID (Swissmono / Rofishy Layout) ── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.project-card { overflow: hidden; display: flex; flex-direction: column; padding: 12px; cursor: pointer; }
+.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 12px; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.01); }
+.project-img-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .project-card:hover .project-img-wrapper img { transform: scale(1.02); }
-.project-info { padding: 12px 6px 4px; display: flex; justify-content: space-between; align-items: center; }
+.project-info { padding: 12px 4px 2px; display: flex; justify-content: space-between; align-items: center; }
 .project-info span { font-size: 13px; font-weight: 600; color: #fff; letter-spacing: -0.2px; }
-.project-info i { color: var(--text-dark); font-size: 12px; transition: color 0.2s; }
-.project-card:hover .project-info i { color: #fff; }
+.project-info i { color: var(--text-dark); font-size: 11px; transition: color 0.2s; }
+.project-card:hover .project-info i { color: var(--accent); }
 
-/* ── MODAL (NO SPIN / STRICTLY CLEAN) ── */
+/* ── MODAL (360 SPIN RESTORED & SUPER SMOOTH) ── */
 #project-modal {
   display: none; position: fixed; inset: 0; z-index: 9000;
-  background: rgba(3, 3, 3, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: rgba(3, 3, 3, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   align-items: center; justify-content: center; flex-direction: column; padding: 24px;
 }
 #project-modal.open { display: flex; }
-#modal-img-wrap { position: relative; width: 100%; max-width: 800px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); }
-#modal-img { width: 100%; height: 100%; object-fit: cover; }
-.modal-close-btn { margin-top: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.2s; }
-.modal-close-btn:hover { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.2); }
+#modal-img-wrap { position: relative; width: 100%; max-width: 780px; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06); perspective: 1000px; }
+#modal-img { width: 100%; height: 100%; object-fit: cover; transform-origin: center center; will-change: transform; transition: transform 0.05s linear; }
+.modal-info-text { margin-top: 12px; font-size: 12px; color: var(--text-muted); letter-spacing: 0.5px; }
+.modal-close-btn { margin-top: 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: #fff; padding: 10px 22px; border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.modal-close-btn:hover { background: rgba(255, 51, 51, 0.12); border-color: rgba(255, 51, 51, 0.25); color: #ff4444; }
 
-/* ── PRICING BENTO ── */
+/* ── PRICING BENTO (ROBUX RESTRUCTURED) ── */
 .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .price-card { padding: 32px; text-align: left; }
-.price-tag { font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 1.5px; font-weight: 700; }
+.price-tag { font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 1.5px; font-weight: 800; }
 .price-val { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; margin: 12px 0 8px; color: #fff; letter-spacing: -0.5px; }
 .price-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
@@ -123,17 +128,18 @@ section { max-width: 1050px; margin: 0 auto; padding: 60px 24px; }
 
 <div class="bg-overlay"></div>
 
-<div id="project-modal" onclick="closeModal()">
-  <div id="modal-img-wrap" onclick="event.stopPropagation()">
+<div id="project-modal">
+  <div id="modal-img-wrap">
     <img id="modal-img" src="" alt="project display">
   </div>
+  <div class="modal-info-text"><i class="fas fa-arrows-left-right"></i> Drag or swipe horizontally to spin 360°</div>
   <button class="modal-close-btn" onclick="closeModal()">Close Interface</button>
 </div>
 
 <nav id="navbar">
   <div class="nav-container">
     <a href="#home" class="logo">
-      <img src="https://unavatar.io/twitter/stor4m" alt="m1sly logo">
+      <img src="https://unavatar.io/twitter/stor4m" alt="m1sly">
       <span>m1sly</span>
     </a>
     <ul class="nav-links">
@@ -141,7 +147,7 @@ section { max-width: 1050px; margin: 0 auto; padding: 60px 24px; }
       <li><a href="#projects">Portfolio</a></li>
       <li><a href="#pricing">Rates</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><span class="badge open">OPEN</span></li>
+      <li><span class="badge">OPEN</span></li>
     </ul>
   </div>
 </nav>
@@ -175,13 +181,13 @@ section { max-width: 1050px; margin: 0 auto; padding: 60px 24px; }
   <div class="pricing-grid">
     <div class="glass-panel price-card">
       <div class="price-tag">Full UI Package</div>
-      <div class="price-val">400 USD</div>
-      <p class="price-desc">Complete simulator layout implementation, responsive hud design setups, and professional bento style patterns.</p>
+      <div class="price-val">R$ 5,000+</div>
+      <p class="price-desc">Complete simulator layout implementation, custom bento setups, main HUD assets, and core game loops menu structures.</p>
     </div>
     <div class="glass-panel price-card">
-      <div class="price-tag">Assets & Adjustments</div>
-      <div class="price-val">R$ 5,000</div>
-      <p class="price-desc">Custom icon vector setups, manual frame layout scaling fixes, or single high-tier menu designs.</p>
+      <div class="price-tag">Per Frame Tasks</div>
+      <div class="price-val">R$ 500 - 1,000</div>
+      <p class="price-desc">Single responsive window scaling adjustments, layout re-designs, or individual frame compositions.</p>
     </div>
   </div>
 </section>
@@ -197,21 +203,23 @@ section { max-width: 1050px; margin: 0 auto; padding: 60px 24px; }
 </section>
 
 <script>
-/* ══════════════════════════════════════
-   RAW X PROFILE LINKLERINDEN ÇEKİLEN PROJELER
-══════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   PROJELERİ BURADAN DEĞİŞTİR KANKA:
+   X'te tweetlerdeki kendi tasarımlarına sağ tıklayıp 
+   "Resim adresini kopyala" de ve tırnak içindeki linklerle değiştir.
+══════════════════════════════════════════════════════════════════ */
 const PROJECTS = [
-  { id: 1, title: "Simulator HUD Interface", src: "https://unavatar.io/twitter/stor4m?fallback=https://images.unavatar.io/twitter/stor4m" },
-  { id: 2, title: "Bento Layout Shop Menu", src: "https://unavatar.io/twitter/stor4m?fallback=https://images.unavatar.io/twitter/stor4m" },
-  { id: 3, title: "Inventory Screen System", src: "https://unavatar.io/twitter/stor4m?fallback=https://images.unavatar.io/twitter/stor4m" }
+  { id: 1, title: "Simulator HUD Interface", src: "https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" },
+  { id: 2, title: "Bento Layout Shop Menu", src: "https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" },
+  { id: 3, title: "Inventory Screen System", src: "https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" }
 ];
 
-/* NAVBAR STATE ADJUSTMENT */
+/* NAVBAR SCROLL STATE */
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-/* RENDER SIMETRIK BENTO GRID */
+/* RENDER PORTFOLIO */
 const grid = document.getElementById('portfolio-grid');
 function renderProjects() {
   grid.innerHTML = '';
@@ -232,13 +240,19 @@ function renderProjects() {
 }
 renderProjects();
 
-/* CLEAN LIGHTWEIGHT MODAL */
+/* ── MODAL ENGINE WITH DRAG-TO-SPIN 360° ── */
 const modal = document.getElementById('project-modal');
 const modalImg = document.getElementById('modal-img');
+let spinAngle = 0;
+let dragging = false;
+let dragStartX = 0;
+let dragAngleStart = 0;
 
 function openModal(p) {
   modalImg.src = p.src;
   modal.classList.add('open');
+  spinAngle = 0;
+  modalImg.style.transform = 'rotateY(0deg)';
   document.body.style.overflow = 'hidden';
 }
 
@@ -247,6 +261,41 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
+/* Mouse and Touch 360 Spin Matrix */
+const wrap = document.getElementById('modal-img-wrap');
+
+wrap.addEventListener('mousedown', e => { 
+  dragging = true; 
+  dragStartX = e.clientX; 
+  dragAngleStart = spinAngle; 
+});
+
+window.addEventListener('mousemove', e => { 
+  if (!dragging) return; 
+  const dx = e.clientX - dragStartX; 
+  spinAngle = (dragAngleStart + dx * 0.6) % 360; // Smooth multiplier
+  modalImg.style.transform = `rotateY(${spinAngle}deg)`; 
+});
+
+window.addEventListener('mouseup', () => dragging = false);
+
+// Mobile touch compatibility
+wrap.addEventListener('touchstart', e => { 
+  dragging = true; 
+  dragStartX = e.touches[0].clientX; 
+  dragAngleStart = spinAngle; 
+}, { passive: true });
+
+window.addEventListener('touchmove', e => { 
+  if (!dragging) return; 
+  const dx = e.touches[0].clientX - dragStartX; 
+  spinAngle = (dragAngleStart + dx * 0.6) % 360; 
+  modalImg.style.transform = `rotateY(${spinAngle}deg)`; 
+}, { passive: true });
+
+window.addEventListener('touchend', () => dragging = false);
+
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
