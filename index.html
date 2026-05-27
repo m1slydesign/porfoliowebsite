@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fʅυϝϝყ | Professional Studio Portfolio</title>
+<title>M1SLY | Professional UI Studio</title>
 <meta name="referrer" content="no-referrer">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root {
   --bg: #030304;
   --text: #ffffff;
   --text-muted: #71717a;
   --border: rgba(255, 255, 255, 0.08);
-  --card-bg: rgba(5, 5, 6, 0.7);
+  --card-bg: rgba(5, 5, 6, 0.73);
   --green-neon: #00ff66;
   --leopard-url: url('https://img.freepik.com/free-vector/leopard-fur-pattern-design_1048-3575.jpg');
 }
@@ -23,7 +23,7 @@ html { scroll-behavior: smooth; background-color: var(--bg); }
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg);
-  background-image: url('arkaplan.jpg');
+  background-image: url('arkaplan.jpg'); /* Kendi arka plan dosyanı buraya yazabilirsin kanka */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -34,97 +34,56 @@ body {
 
 .bg-overlay {
   position: fixed; inset: 0;
-  background: linear-gradient(180deg, rgba(3, 3, 4, 0.2) 0%, rgba(3, 3, 4, 0.7) 100%);
-  backdrop-filter: blur(6px) brightness(0.45);
-  -webkit-backdrop-filter: blur(6px) brightness(0.45);
+  background: linear-gradient(180deg, rgba(3, 3, 4, 0.3) 0%, rgba(3, 3, 4, 0.8) 100%);
+  backdrop-filter: blur(8px) brightness(0.4);
+  -webkit-backdrop-filter: blur(8px) brightness(0.4);
   z-index: 0;
 }
 
-/* KASMA YAPMAYAN HAFİF YAĞMUR EFEKTİ */
-.fine-rain { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.18; }
+/* KASMA YAPMAYAN YAĞMUR CİZGİLERİ */
+.fine-rain { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.15; }
 .fine-rain span {
-  position: absolute; width: 1px; height: 100px;
+  position: absolute; width: 1px; height: 90px;
   background: linear-gradient(to bottom, transparent, #ffffff);
   will-change: transform; animation: smoothfall linear infinite;
 }
 @keyframes smoothfall {
-  0% { transform: translateY(-110px); }
+  0% { transform: translateY(-100px); }
   100% { transform: translateY(105vh); }
 }
-.fine-rain span:nth-child(1) { left: 15%; animation-duration: 0.7s; }
-.fine-rain span:nth-child(2) { left: 35%; animation-duration: 0.9s; animation-delay: 0.1s; }
-.fine-rain span:nth-child(3) { left: 55%; animation-duration: 0.8s; animation-delay: 0.3s; }
-.fine-rain span:nth-child(4) { left: 75%; animation-duration: 1.1s; animation-delay: 0.2s; }
-.fine-rain span:nth-child(5) { left: 90%; animation-duration: 0.75s; animation-delay: 0.4s; }
+.fine-rain span:nth-child(1) { left: 10%; animation-duration: 0.6s; }
+.fine-rain span:nth-child(2) { left: 30%; animation-duration: 0.8s; animation-delay: 0.1s; }
+.fine-rain span:nth-child(3) { left: 50%; animation-duration: 0.7s; animation-delay: 0.3s; }
+.fine-rain span:nth-child(4) { left: 70%; animation-duration: 0.9s; animation-delay: 0.2s; }
+.fine-rain span:nth-child(5) { left: 90%; animation-duration: 0.65s; animation-delay: 0.4s; }
 
-/* LOADING SCREEN */
+/* ── LEOPARLI AÇILIŞ EKRANI (LOADER) ── */
 #instagram-loader {
-  position: fixed; inset: 0; z-index: 99999; display: flex; background: #000;
-  transition: opacity 0.5s ease, visibility 0.5s;
+  position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column;
+  background: #000; align-items: center; justify-content: center;
+  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease;
 }
-.loader-panel { flex: 1; background: #030304; transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1); will-change: transform; }
-.loader-center-text {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800;
-  letter-spacing: -1px; color: #fff; text-transform: uppercase; text-align: center; z-index: 10;
+.loader-logo-wrap { width: 140px; height: 140px; margin-bottom: 20px; animation: pulseLogo 2s infinite ease-in-out; }
+.loader-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+.loader-text {
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800;
+  letter-spacing: 4px; color: #fff; text-transform: uppercase; opacity: 0.8;
+}
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(0.96); filter: drop-shadow(0 0 10px rgba(255,255,255,0.05)); }
+  50% { transform: scale(1.03); filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); }
 }
 
 #app-view { opacity: 0; transform: scale(0.99); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 5; position: relative; }
 
-/* ── CHROME SPLIT (BEFORE/AFTER) HEADER GRID ── */
-.chrome-split-container {
-  width: 100%; max-width: 1100px; margin: 120px auto 40px;
-  border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
-  display: flex; position: relative; min-height: 380px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-}
-/* Sol Taraf: PNG Transparan Arka Plan Ekranı (Before) */
-.split-side.left-png {
-  flex: 1; background-color: #ededed;
-  background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%), linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e0e0e0 75%), linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
-  background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-  display: flex; align-items: center; justify-content: flex-end; padding-right: 0; overflow: hidden; position: relative;
-}
-/* Sağ Taraf: Derin Karanlık Stüdyo Ekranı (After) */
-.split-side.right-dark {
-  flex: 1; background: #09090b; display: flex; align-items: center; justify-content: flex-start; padding-left: 0; overflow: hidden; position: relative;
-}
-/* İçerideki Devasa Tipografi */
-.split-huge-text {
-  font-family: 'Syne', sans-serif; font-size: clamp(45px, 7vw, 85px); font-weight: 800;
-  line-height: 0.85; text-transform: uppercase; letter-spacing: -4px; position: absolute; top: 50%; transform: translateY(-50%); width: 200%; text-align: center;
-}
-.left-png .split-huge-text { color: #000; left: 0; }
-.right-dark .split-huge-text {
-  left: -100%; background-image: var(--leopard-url); background-size: cover;
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: smoothHueFlow 4s linear infinite; /* SMOOTH HUE ROTATION ANIMATION */
-}
-
-/* ── SMOOTH HUE ANIMATION ENGINE ── */
-@keyframes smoothHueFlow {
-  0% { filter: hue-rotate(0deg) brightness(1.3); }
-  50% { filter: hue-rotate(180deg) brightness(1.5); }
-  100% { filter: hue-rotate(360deg) brightness(1.3); }
-}
-
-/* BENTO CARDS */
-.bento-card {
-  background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
-  position: relative; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
-}
-.bento-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-
 /* NAV */
-nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 24px 0; transition: all 0.3s; }
-nav.scrolled { background: rgba(3, 3, 4, 0.8); border-bottom: 1px solid var(--border); padding: 14px 0; backdrop-filter: blur(20px); }
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 24px 0; transition: all 0.3s ease; }
+nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--border); padding: 14px 0; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
 
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; text-transform: uppercase; }
-/* TRANSPARAN HALE GETIRILEN NAV LOGO */
-.logo img { width: 34px; height: 34px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(255,255,255,0.1)); }
-.logo span { background-image: var(--leopard-url); background-size: cover; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: smoothHueFlow 4s linear infinite; }
+.logo img { width: 34px; height: 34px; object-fit: contain; border-radius: 4px; }
+.logo span { color: #fff; letter-spacing: -0.5px; }
 
 .nav-links { display: flex; list-style: none; gap: 32px; align-items: center; }
 .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
@@ -137,27 +96,99 @@ nav.scrolled { background: rgba(3, 3, 4, 0.8); border-bottom: 1px solid var(--bo
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* HERO BIO & BUTTONS */
-.hero-mini { max-width: 650px; margin: 40px auto; text-align: center; padding: 0 24px; }
-.hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
+/* ── MULTI-STAGE SHOWCASE DEĞİŞEN STRIP ENGINE ── */
+.showcase-slider {
+  width: 100%; max-width: 1100px; margin: 120px auto 30px;
+  border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+  position: relative; height: 420px; box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+}
+.slide-stage {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.slide-stage.active { opacity: 1; visibility: visible; }
+
+/* STAGE 1: CHROME SPLIT (BEFORE/AFTER) */
+.stage-chrome { background: #000; display: flex; }
+.chrome-half { flex: 1; height: 100%; display: flex; align-items: center; overflow: hidden; position: relative; }
+.chrome-half.left-grid {
+  background-color: #ededed;
+  background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%), linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e0e0e0 75%), linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+  background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  justify-content: flex-end;
+}
+.chrome-half.right-plain { background: #070708; justify-content: flex-start; }
+.chrome-huge-text {
+  font-family: 'Syne', sans-serif; font-size: clamp(40px, 7vw, 80px); font-weight: 800;
+  line-height: 0.85; text-transform: uppercase; letter-spacing: -3px; position: absolute; width: 200%; text-align: center;
+}
+.left-grid .chrome-huge-text { color: #000; left: 0; }
+.right-plain .chrome-huge-text {
+  left: -100%; background-image: var(--leopard-url); background-size: cover;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: smoothHueFlow 3s linear infinite;
+}
+
+/* STAGE 2: STREETWEAR ANIME STYLE (FLUFFY DESIGNS) */
+.stage-anime {
+  background-image: var(--leopard-url); background-size: cover; background-position: center;
+  position: relative;
+}
+.stage-anime::before { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }
+.anime-center-box {
+  position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px;
+}
+.anime-avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.anime-title {
+  font-family: 'Syne', sans-serif; font-size: clamp(40px, 6vw, 70px); font-weight: 800;
+  color: #fff; text-transform: uppercase; letter-spacing: -2px; line-height: 0.9;
+  background: #000; padding: 10px 24px; border-radius: 4px;
+}
+
+/* STAGE 3: MINIMAL FURRY LOGO DISPLAY */
+.stage-furry { background: #050506; display: flex; align-items: center; justify-content: center; }
+.furry-logo-img { max-width: 440px; width: 85%; height: auto; object-fit: contain; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7)); }
+
+/* HUE ANIMATION */
+@keyframes smoothHueFlow {
+  0% { filter: hue-rotate(0deg) brightness(1.2); }
+  50% { filter: hue-rotate(180deg) brightness(1.4); }
+  100% { filter: hue-rotate(360deg) brightness(1.2); }
+}
+
+/* BENTO CARDS */
+.bento-card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
+  position: relative; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bento-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateY(-2px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+
+/* HERO MINI BIO */
+.hero-mini { max-width: 650px; margin: 35px auto 45px; text-align: center; padding: 0 24px; }
+.hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-weight: 400; }
 .btn-group { display: flex; gap: 12px; justify-content: center; }
 .btn { display: inline-flex; align-items: center; padding: 12px 28px; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; font-family: 'Space Grotesk', sans-serif; }
 .btn.primary { background: #fff; color: #000; }
 .btn.primary:hover { background: #e4e4e7; transform: translateY(-1px); }
 .btn.secondary { background: transparent; color: #fff; border: 1px solid var(--border); }
-.btn.secondary:hover { background: rgba(255,255,255,0.05); border-color: #fff; }
+.btn.secondary:hover { background: rgba(255,255,255,0.04); border-color: #fff; }
 
 /* PORTFOLIO GRID */
-section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
-.section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; }
+section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
+.section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .project-card { padding: 14px; cursor: pointer; display: flex; flex-direction: column; }
-.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 8px; background: #000; }
+.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 8px; background: #000; border: 1px solid rgba(255,255,255,0.03); }
 .project-img-wrapper img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .project-card:hover .project-img-wrapper img { transform: scale(1.02); }
 .project-meta { padding: 12px 4px 2px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
 .project-name { font-size: 14px; font-weight: 600; color: #fff; }
-.project-action { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+
+/* FIXING ICON DISPLAY IN ACTION BUTTON */
+.project-action { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.project-card:hover .project-action { color: #fff; }
 
 /* RATES */
 .rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -186,15 +217,17 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
 @media(max-width: 768px) {
   .nav-links { display: none; }
   .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
-  .chrome-split-container { min-height: 260px; }
+  .showcase-slider { height: 320px; }
 }
 </style>
 </head>
 <body>
 
 <div id="instagram-loader">
-  <div class="loader-panel" style="position:absolute; inset:0;"></div>
-  <div class="loader-center-text">FLUFFY DESIGNS</div>
+  <div class="loader-logo-wrap">
+    <img src="1000050178.jpg" alt="Leopard Core F">
+  </div>
+  <div class="loader-text">Loading System</div>
 </div>
 
 <div class="fine-rain"><span></span><span></span><span></span><span></span><span></span></div>
@@ -202,7 +235,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
 
 <div id="spin-modal">
   <div id="modal-canvas"><img id="modal-img" src="" alt="preview"></div>
-  <button class="modal-close" onclick="closeModal()">Close Preview</button>
+  <button class="modal-close" onclick="closeModal()">Close System Preview</button>
 </div>
 
 <div id="app-view">
@@ -210,7 +243,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
   <nav id="navbar">
     <div class="nav-container">
       <a href="#home" class="logo">
-        <img src="1000050178.jpg" alt="Fluffy logo">
+        <img src="1000050178.jpg" alt="Studio Icon">
         <span>Fluffy</span>
       </a>
       <ul class="nav-links">
@@ -223,13 +256,28 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
     </div>
   </nav>
 
-  <div class="chrome-split-container" id="home">
-    <div class="split-side left-png">
-      <div class="split-huge-text">FLUFFY<br>STUDIO</div>
+  <div class="showcase-slider" id="home">
+    
+    <div class="slide-stage active stage-chrome">
+      <div class="chrome-half left-grid">
+        <div class="chrome-huge-text">CHROME<br>FONT</div>
+      </div>
+      <div class="chrome-half right-plain">
+        <div class="chrome-huge-text">CHROME<br>FONT</div>
+      </div>
     </div>
-    <div class="split-side right-dark">
-      <div class="split-huge-text">FLUFFY<br>STUDIO</div>
+
+    <div class="slide-stage stage-anime">
+      <div class="anime-center-box">
+        <img class="anime-avatar" src="1000050178.jpg" alt="Anime Visual Focus">
+        <div class="anime-title">Fluffy Designs</div>
+      </div>
     </div>
+
+    <div class="slide-stage stage-furry">
+      <img class="furry-logo-img" src="1000050174.jpg" alt="3D Furry Concept">
+    </div>
+
   </div>
 
   <div class="hero-mini">
@@ -241,7 +289,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
   </div>
 
   <section id="projects">
-    <div class="section-title">Selected Works</div>
+    <div class="section-title">Selected Portfolio</div>
     <div class="portfolio-grid">
       
       <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
@@ -250,7 +298,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
         </div>
         <div class="project-meta">
           <span class="project-name">Custom Simulator HUD Framework</span>
-          <span class="project-action">Inspect</span>
+          <span class="project-action">Inspect <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
         </div>
       </div>
 
@@ -260,12 +308,11 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
         </div>
         <div class="project-meta">
           <span class="project-name">Symmetrical Bento Market View</span>
-          <span class="project-action">Inspect</span>
+          <span class="project-action">Inspect <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
         </div>
       </div>
 
-      Yeni bir çalışma eklemek istediğinde üstteki kart bloklarından birini kopyala, 
-           bu satırın tam altına yapıştır. İçindeki resim linklerini ve isimleri değiştir, bitti! -->
+      Yeni bir kart eklemek istersen burayı kullanabilirsin kanka. -->
 
     </div>
   </section>
@@ -286,11 +333,11 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
     </div>
   </section>
 
-  <section id="contact" style="text-align: center; padding-bottom: 100px;">
+  <section id="contact" style="text-align: center; padding-bottom: 90px;">
     <div class="section-title" style="text-align: center;">Direct Access</div>
     <div class="btn-group" style="justify-content: center;">
-      <a href="https://x.com/stor4m" target="_blank" class="btn secondary">Twitter / X</a>
-      <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary">Discord</a>
+      <a href="https://x.com/stor4m" target="_blank" class="btn secondary"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
+      <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary"><i class="fa-brands fa-discord"></i> Discord</a>
     </div>
     <div class="brand-signature">® Fluffy Designs</div>
   </section>
@@ -298,23 +345,33 @@ section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
 </div>
 
 <script>
-/* LOADER CONTROLLER */
+/* LOADER SCRIPT */
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('instagram-loader');
   const app = document.getElementById('app-view');
   setTimeout(() => {
-    loader.style.opacity = '0';
+    loader.style.transform = 'translateY(-100%)';
     app.style.opacity = '1';
     app.style.transform = 'scale(1)';
-    setTimeout(() => { loader.style.display = 'none'; }, 500);
-  }, 1000);
+    setTimeout(() => { loader.style.display = 'none'; }, 800);
+  }, 1400);
 });
 
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-/* MODAL CONTROLLERS */
+/* AUTOMATIC SHOWCASE LOOP ENGINE */
+const stages = document.querySelectorAll('.slide-stage');
+let currentStageIndex = 0;
+
+setInterval(() => {
+  stages[currentStageIndex].classList.remove('active');
+  currentStageIndex = (currentStageIndex + 1) % stages.length;
+  stages[currentStageIndex].classList.add('active');
+}, 4000); /* Her 4 saniyede bir diğer tasarıma geçiş yapar */
+
+/* MODAL ENGINE */
 const modal = document.getElementById('spin-modal');
 const modalImg = document.getElementById('modal-img');
 
