@@ -1,565 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>m1sly | Portfolio</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>m1sly | Portfolio</title>
+<meta name="referrer" content="no-referrer">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg: #030303;
+  --text: #ffffff;
+  --text-muted: #999999;
+  --text-dark: #444444;
+  --border: rgba(255, 255, 255, 0.05);
+  --card-bg: rgba(10, 10, 10, 0.6);
+  --accent-open: #00ff66;
+}
 
-    <style>
-        :root {
-            --bg: #030303;
-            --text: #ffffff;
-            --text-muted: #b0b0b0;
-            --text-dark: #666666;
-            --border: rgba(255, 255, 255, 0.08);
-            --card-bg: rgba(10, 10, 10, 0.6);
-            --accent-open: #00ff66;
-            --accent-closed: #ff3333;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        html { scroll-behavior: smooth; }
+/* ── BACKGROUND ── */
+.bg-overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(circle at 50% 20%, rgba(25, 15, 40, 0.15) 0%, rgba(3, 3, 3, 1) 70%);
+  z-index: -1;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            cursor: none;
-        }
+/* ── PREMIUM BENTO GLASS PANELS ── */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+.glass-panel:hover { 
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(14, 14, 14, 0.8);
+}
 
-        .bg-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.8) 100%);
-            backdrop-filter: blur(4px);
-            z-index: -2;
-        }
+/* ── NAV ── */
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 24px 0; transition: all 0.25s ease; }
+nav.scrolled { background: rgba(3, 3, 3, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 14px 0; }
+.nav-container { max-width: 1050px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+.logo img { width: 30px; height: 30px; border-radius: 8px; object-fit: cover; }
+.nav-links { display: flex; list-style: none; gap: 28px; align-items: center; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 30px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; }
+.badge.open { background: rgba(0, 255, 102, 0.06); color: var(--accent-open); border: 1px solid rgba(0, 255, 102, 0.15); }
 
-        .rain-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
+/* ── HERO ── */
+.hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: 140px 24px 40px; text-align: center; }
+.hero-content { max-width: 680px; }
+.avatar-container { width: 100px; height: 100px; margin: 0 auto 24px; }
+.avatar-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.1); }
+.hero-title { font-family: 'Syne', sans-serif; font-size: clamp(44px, 7vw, 68px); font-weight: 800; line-height: 1.05; margin-bottom: 12px; letter-spacing: -2.5px; }
+.hero-role { font-size: 11px; color: var(--text-dark); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
+.hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; font-weight: 400; }
 
-        .drop {
-            position: absolute;
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(transparent, rgba(255,255,255,0.15));
-            animation: fall linear infinite;
-        }
+/* BUTTONS */
+.btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
+.btn.primary { background: #fff; color: #000; }
+.btn.primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn.secondary { background: rgba(255, 255, 255, 0.03); color: #fff; border: 1px solid var(--border); }
+.btn.secondary:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.15); transform: translateY(-1px); }
 
-        @keyframes fall {
-            0%   { transform: translateY(-100px); }
-            100% { transform: translateY(100vh); }
-        }
+/* ── SECTIONS ── */
+section { max-width: 1050px; margin: 0 auto; padding: 60px 24px; }
+.section-header { text-align: left; margin-bottom: 36px; border-left: 2px solid rgba(255, 255, 255, 0.2); padding-left: 16px; }
+.section-header h2 { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
 
-        .custom-cursor {
-            width: 8px; height: 8px;
-            background: #fff;
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 10000;
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
+/* ── PROJECTS BENTO GRID (CLEAN & PERFECT SHAPE) ── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
+.project-card { overflow: hidden; display: flex; flex-direction: column; padding: 10px; cursor: pointer; }
+.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 10px; background: #080808; border: 1px solid rgba(255, 255, 255, 0.02); }
+.project-img-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.project-card:hover .project-img-wrapper img { transform: scale(1.02); }
+.project-info { padding: 12px 6px 4px; display: flex; justify-content: space-between; align-items: center; }
+.project-info span { font-size: 13px; font-weight: 600; color: #fff; letter-spacing: -0.2px; }
+.project-info i { color: var(--text-dark); font-size: 12px; transition: color 0.2s; }
+.project-card:hover .project-info i { color: #fff; }
 
-        .custom-cursor-follower {
-            width: 24px; height: 24px;
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.08s ease-out;
-        }
+/* ── MODAL (NO SPIN / STRICTLY CLEAN) ── */
+#project-modal {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(3, 3, 3, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  align-items: center; justify-content: center; flex-direction: column; padding: 24px;
+}
+#project-modal.open { display: flex; }
+#modal-img-wrap { position: relative; width: 100%; max-width: 800px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); }
+#modal-img { width: 100%; height: 100%; object-fit: cover; }
+.modal-close-btn { margin-top: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.modal-close-btn:hover { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.2); }
 
-        .clickable { width: 16px; height: 16px; background-color: rgba(255,255,255,0.2); }
+/* ── PRICING BENTO ── */
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.price-card { padding: 32px; text-align: left; }
+.price-tag { font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 1.5px; font-weight: 700; }
+.price-val { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; margin: 12px 0 8px; color: #fff; letter-spacing: -0.5px; }
+.price-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-        .glass-panel {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
-        }
-
-        .glass-panel:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(15,15,15,0.7);
-        }
-
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            transition: all 0.3s;
-        }
-
-        nav.scrolled {
-            background: rgba(3,3,3,0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 0;
-        }
-
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            font-family: 'Syne', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--text);
-        }
-
-        .logo img {
-            width: 32px; height: 32px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--text); }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .badge.open   { background: rgba(0,255,102,0.1); color: var(--accent-open);   border: 1px solid rgba(0,255,102,0.2); }
-        .badge.closed { background: rgba(255,51,51,0.1);  color: var(--accent-closed); border: 1px solid rgba(255,51,51,0.2); }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 24px 60px;
-            text-align: center;
-        }
-
-        .hero-content { max-width: 750px; }
-
-        .avatar-container {
-            width: 110px; height: 110px;
-            margin: 0 auto 24px;
-            position: relative;
-        }
-
-        .avatar-container img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--border);
-        }
-
-        .hero-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 12px;
-            letter-spacing: -2px;
-        }
-
-        .hero-role {
-            font-size: 12px;
-            color: var(--text-dark);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            font-weight: 700;
-        }
-
-        .hero-bio {
-            font-size: 16px;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 32px;
-            font-weight: 400;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn.primary  { background: #fff; color: #000; }
-        .btn.primary:hover  { transform: translateY(-2px); opacity: 0.9; }
-        .btn.secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
-        .btn.secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-
-        section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 80px 24px;
-        }
-
-        .section-header { text-align: center; margin-bottom: 48px; }
-
-        .section-header h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(24px, 4vw, 36px);
-            margin-bottom: 8px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card { overflow: hidden; display: flex; flex-direction: column; }
-
-        .project-img-wrapper {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .project-img-wrapper img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .project-card:hover .project-img-wrapper img { transform: scale(1.04); }
-
-        .project-actions {
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .like-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: none;
-            transition: color 0.2s;
-        }
-
-        .like-btn.liked { color: #ff3366; }
-
-        .comments-section { margin-top: 40px; padding: 32px; }
-
-        .comment-form { display: flex; gap: 12px; margin-bottom: 24px; }
-
-        .comment-input {
-            flex: 1;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-        }
-
-        .comment-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            padding: 0 20px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: none;
-        }
-
-        .comments-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .comment-item {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-        }
-
-        .comment-item span { color: var(--text-dark); font-size: 11px; margin-left: 8px; }
-
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-
-        .price-card { padding: 32px; text-align: center; }
-
-        .price-val {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin: 16px 0;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            section { padding: 48px 16px; }
-            .comment-form { flex-direction: column; }
-        }
-    </style>
+@media(max-width: 768px) {
+  .nav-links { display: none; }
+  section { padding: 40px 16px; }
+}
+</style>
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
-    <div class="rain-container" id="rain"></div>
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="custom-cursor-follower" id="cursor-follower"></div>
+<div class="bg-overlay"></div>
 
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <img id="nav-avatar" src="https://github.com/m1slydesign.png" alt="m1sly">
-                <span>m1sly</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Portfolio</a></li>
-                <li><a href="#pricing">Rates</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><span id="nav-badge" class="badge open">OPEN</span></li>
-            </ul>
-        </div>
-    </nav>
+<div id="project-modal" onclick="closeModal()">
+  <div id="modal-img-wrap" onclick="event.stopPropagation()">
+    <img id="modal-img" src="" alt="project display">
+  </div>
+  <button class="modal-close-btn" onclick="closeModal()">Close Interface</button>
+</div>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="avatar-container">
-                <img id="hero-avatar" src="https://github.com/m1slydesign.png" alt="Avatar">
-            </div>
-            <div id="hero-badge-container" style="margin-bottom: 16px;">
-                <span class="badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Commissions Open</span>
-            </div>
-            <h1 class="hero-title">m1sly</h1>
-            <div class="hero-role">Roblox UI Designer</div>
-            <p class="hero-bio">I design clean, modern, and in-game friendly user interfaces for Roblox games. Highly focused on layout symmetry, bento style patterns, and perfect game usability.</p>
-            <div class="btn-group">
-                <a href="#contact" class="btn primary" id="action-btn"><i class="fas fa-envelope"></i> Commission Me</a>
-                <a href="#projects" class="btn secondary"><i class="fas fa-eye"></i> View Work</a>
-            </div>
-        </div>
-    </section>
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="logo">
+      <img src="https://unavatar.io/twitter/stor4m" alt="m1sly logo">
+      <span>m1sly</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Portfolio</a></li>
+      <li><a href="#pricing">Rates</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><span class="badge open">OPEN</span></li>
+    </ul>
+  </div>
+</nav>
 
-    <section id="projects">
-        <div class="section-header">
-            <h2>Recent Work</h2>
-            <p style="color: var(--text-muted); font-size: 14px;">Showcasing premium game layouts and interactive elements.</p>
-        </div>
-        <div class="projects-grid" id="portfolio-grid"></div>
-    </section>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="avatar-container">
+      <img src="https://unavatar.io/twitter/stor4m" alt="m1sly avatar">
+    </div>
+    <h1 class="hero-title">m1sly</h1>
+    <div class="hero-role">Roblox UI Designer</div>
+    <p class="hero-bio">I design high-end, modern user interfaces optimized for professional Roblox games. Specialized in layout symmetry, clean bento structures, and seamless usability.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn primary">Inquire Commission</a>
+      <a href="#projects" class="btn secondary">Explore Work</a>
+    </div>
+  </div>
+</section>
 
-    <section id="guestbook">
-        <div class="glass-panel comments-section">
-            <h3 style="font-family: 'Syne', sans-serif; margin-bottom: 16px;">Guestbook & Feedback</h3>
-            <div class="comment-form">
-                <input type="text" id="comment-input" class="comment-input" placeholder="Leave a feedback about my UI work...">
-                <button class="comment-btn" onclick="addComment()">Send</button>
-            </div>
-            <div class="comments-list" id="comments-list"></div>
-        </div>
-    </section>
+<section id="projects">
+  <div class="section-header">
+    <h2>Selected Work</h2>
+  </div>
+  <div class="projects-grid" id="portfolio-grid"></div>
+</section>
 
-    <section id="pricing">
-        <div class="section-header">
-            <h2>Pricing Rates</h2>
-            <p style="color: var(--text-muted); font-size: 14px;">Flexible solutions structured per project specifications.</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="glass-panel price-card">
-                <div style="font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 2px;">General Work</div>
-                <div class="price-val">R$ 2,000 - 5,000</div>
-                <p style="font-size: 13px; color: var(--text-muted);">Full simulator screens, assets backgrounds, and responsive menus.</p>
-            </div>
-            <div class="glass-panel price-card">
-                <div style="font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 2px;">Simple Tasks</div>
-                <div class="price-val">R$ 500 - 1,000</div>
-                <p style="font-size: 13px; color: var(--text-muted);">Single custom frame adjustments, icon scaling, or minor asset edits.</p>
-            </div>
-        </div>
-    </section>
+<section id="pricing">
+  <div class="section-header">
+    <h2>Service Rates</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="glass-panel price-card">
+      <div class="price-tag">Full UI Package</div>
+      <div class="price-val">400 USD</div>
+      <p class="price-desc">Complete simulator layout implementation, responsive hud design setups, and professional bento style patterns.</p>
+    </div>
+    <div class="glass-panel price-card">
+      <div class="price-tag">Assets & Adjustments</div>
+      <div class="price-val">R$ 5,000</div>
+      <p class="price-desc">Custom icon vector setups, manual frame layout scaling fixes, or single high-tier menu designs.</p>
+    </div>
+  </div>
+</section>
 
-    <section id="contact" style="text-align: center;">
-        <div class="section-header">
-            <h2>Get In Touch</h2>
-            <p style="color: var(--text-muted); font-size: 14px;">Let's build something epic together.</p>
-        </div>
-        <div class="btn-group" style="justify-content: center;">
-            <a href="https://x.com/stor4m" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter</a>
-            <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary"><i class="fab fa-discord"></i> Discord</a>
-        </div>
-    </section>
+<section id="contact" style="text-align: center; padding-bottom: 120px;">
+  <div class="section-header" style="border: none; text-align: center; padding: 0;">
+    <h2>Get In Touch</h2>
+  </div>
+  <div class="btn-group" style="justify-content: center; margin-top: 16px;">
+    <a href="https://x.com/stor4m" target="_blank" class="btn secondary"><i class="fab fa-x-twitter"></i> Twitter</a>
+    <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary"><i class="fab fa-discord"></i> Discord</a>
+  </div>
+</section>
 
-    <script>
-        // ── Proje verileri – kendi görsellerin varsa src'yi değiştir ──
-        const PROJECTS = [
-            { id: 1, title: "Simulator HUD",      src: "https://placehold.co/640x360/111/fff?text=Simulator+HUD",      likes: 0, liked: false },
-            { id: 2, title: "Shop Menu",           src: "https://placehold.co/640x360/111/fff?text=Shop+Menu",           likes: 0, liked: false },
-            { id: 3, title: "Inventory Screen",    src: "https://placehold.co/640x360/111/fff?text=Inventory+Screen",    likes: 0, liked: false },
-        ];
+<script>
+/* ══════════════════════════════════════
+   RAW X PROFILE LINKLERINDEN ÇEKİLEN PROJELER
+══════════════════════════════════════ */
+const PROJECTS = [
+  { id: 1, title: "Simulator HUD Interface", src: "https://unavatar.io/twitter/stor4m?fallback=https://images.unavatar.io/twitter/stor4m" },
+  { id: 2, title: "Bento Layout Shop Menu", src: "https://unavatar.io/twitter/stor4m?fallback=https://images.unavatar.io/twitter/stor4m" },
+  { id: 3, title: "Inventory Screen System", src: "https://unavatar.io/twitter/stor4m?fallback=https://images.unavatar.io/twitter/stor4m" }
+];
 
-        // ── Rain ──
-        const rain = document.getElementById('rain');
-        for (let i = 0; i < 60; i++) {
-            const drop = document.createElement('div');
-            drop.classList.add('drop');
-            drop.style.left              = Math.random() * 100 + '%';
-            drop.style.animationDuration = (Math.random() * 1.5 + 0.5) + 's';
-            drop.style.animationDelay   = (Math.random() * 2) + 's';
-            drop.style.opacity           = Math.random() * 0.5 + 0.1;
-            rain.appendChild(drop);
-        }
+/* NAVBAR STATE ADJUSTMENT */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
 
-        // ── Custom cursor ──
-        const cursor         = document.getElementById('cursor');
-        const cursorFollower = document.getElementById('cursor-follower');
-        let fx = 0, fy = 0;
+/* RENDER SIMETRIK BENTO GRID */
+const grid = document.getElementById('portfolio-grid');
+function renderProjects() {
+  grid.innerHTML = '';
+  PROJECTS.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'glass-panel project-card';
+    card.innerHTML = `
+      <div class="project-img-wrapper">
+        <img src="${p.src}" alt="${p.title}">
+      </div>
+      <div class="project-info">
+        <span>${p.title}</span>
+        <i class="fas fa-arrow-up-right-from-square"></i>
+      </div>`;
+    card.addEventListener('click', () => openModal(p));
+    grid.appendChild(card);
+  });
+}
+renderProjects();
 
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top  = e.clientY + 'px';
-            fx += (e.clientX - fx) * 0.12;
-            fy += (e.clientY - fy) * 0.12;
-            cursorFollower.style.left = fx + 'px';
-            cursorFollower.style.top  = fy + 'px';
-        });
+/* CLEAN LIGHTWEIGHT MODAL */
+const modal = document.getElementById('project-modal');
+const modalImg = document.getElementById('modal-img');
 
-        document.querySelectorAll('a, button, .like-btn').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('clickable'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('clickable'));
-        });
+function openModal(p) {
+  modalImg.src = p.src;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-        // ── Navbar scroll ──
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-        // ── Portfolio grid ──
-        const grid = document.getElementById('portfolio-grid');
-
-        function renderProjects() {
-            grid.innerHTML = '';
-            PROJECTS.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'glass-panel project-card';
-                card.innerHTML = `
-                    <div class="project-img-wrapper">
-                        <img src="${p.src}" alt="${p.title}">
-                    </div>
-                    <div class="project-actions">
-                        <span style="font-size:14px; font-weight:600;">${p.title}</span>
-                        <button class="like-btn ${p.liked ? 'liked' : ''}" onclick="toggleLike(${p.id})">
-                            <i class="fa${p.liked ? 's' : 'r'} fa-heart"></i> ${p.likes}
-                        </button>
-                    </div>`;
-                grid.appendChild(card);
-            });
-        }
-
-        function toggleLike(id) {
-            const p = PROJECTS.find(x => x.id === id);
-            if (!p) return;
-            p.liked = !p.liked;
-            p.likes += p.liked ? 1 : -1;
-            renderProjects();
-        }
-
-        renderProjects();
-
-        // ── Guestbook ──
-        const comments = [];
-
-        function addComment() {
-            const input = document.getElementById('comment-input');
-            const text  = input.value.trim();
-            if (!text) return;
-            comments.unshift({ text, time: new Date().toLocaleTimeString() });
-            input.value = '';
-            renderComments();
-        }
-
-        function renderComments() {
-            const list = document.getElementById('comments-list');
-            list.innerHTML = comments.map(c =>
-                `<div class="comment-item">${c.text}<span>${c.time}</span></div>`
-            ).join('');
-        }
-
-        // Enter tuşuyla da gönder
-        document.getElementById('comment-input').addEventListener('keydown', e => {
-            if (e.key === 'Enter') addComment();
-        });
-    </script>
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
 </body>
 </html>
 
