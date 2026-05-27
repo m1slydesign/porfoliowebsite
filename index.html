@@ -130,7 +130,7 @@ nav.scrolled {
   100% { background-position: 0% 50%;   filter: brightness(1.2); }
 }
 
-/* HERO ALT METİN */
+/* HERO ALT */
 .hero-mini { max-width: 650px; margin: 35px auto 45px; text-align: center; padding: 0 24px; }
 .hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-weight: 400; }
 .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -145,7 +145,7 @@ nav.scrolled {
 .btn.secondary { background: transparent; color: #fff; border: 1px solid var(--border); }
 .btn.secondary:hover { background: rgba(255,255,255,0.04); border-color: #fff; }
 
-/* BENTO KARTLAR */
+/* BENTO */
 .bento-card {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
   position: relative; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -228,7 +228,8 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
 <!-- AÇILIŞ EKRANI -->
 <div id="instagram-loader">
   <div class="loader-logo-wrap">
-    <img src="acilis-logosu.jpg" alt="Fluffy">
+    <img src="https://m1slydesign.github.io/porfoliowebsite/acilis-logosu.jpg" alt="Fluffy"
+         onerror="this.style.display='none'">
   </div>
   <div class="loader-text">Loading System</div>
 </div>
@@ -247,7 +248,8 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
   <nav id="navbar">
     <div class="nav-container">
       <a href="#home" class="logo">
-        <img src="site-logosu.jpg" alt="Fluffy Logo">
+        <img src="https://m1slydesign.github.io/porfoliowebsite/site-logosu.jpg" alt="Fluffy Logo"
+             onerror="this.style.display='none'">
         <span>Fluffy</span>
       </a>
       <ul class="nav-links">
@@ -264,10 +266,10 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
   <!-- HERO BANNER -->
   <div class="top-showcase-banner" id="home">
     <div class="chrome-half left-grid">
-      <div class="chrome-huge-text">ROBLOX<br>UI</div>
+      <div class="chrome-huge-text">FLUFFY<br>DESIGN</div>
     </div>
     <div class="chrome-half right-plain">
-      <div class="chrome-huge-text">ROBLOX<br>UI</div>
+      <div class="chrome-huge-text">FLUFFY<br>DESIGN</div>
     </div>
   </div>
 
@@ -379,4 +381,4 @@ function closeModal()    { modal.classList.remove('open'); document.body.style.o
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 </script>
 </body>
-  </html>
+</html>
