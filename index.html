@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M1SLY | Professional UI Studio</title>
 <meta name="referrer" content="no-referrer">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
+/* [NOT]: Global Renk Kodlari, Tasarim Degiskenleri ve Leopar Arka Plan Tanimi */
 :root {
   --bg: #030304;
   --text: #ffffff;
@@ -15,7 +18,7 @@
   --border: rgba(255, 255, 255, 0.08);
   --card-bg: rgba(5, 5, 6, 0.73);
   --green-neon: #00ff66;
-  --leopard-url: url('https://img.freepik.com/free-vector/leopard-fur-pattern-design_1048-3575.jpg');
+  --leopard-url: url('1000050178.jpg');
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,7 +26,7 @@ html { scroll-behavior: smooth; background-color: var(--bg); }
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg);
-  background-image: url('arkaplan.jpg'); /* Kendi arka plan dosyanı buraya yazabilirsin kanka */
+  background-image: url('arkaplan.jpg'); /* [NOT]: Sitenin ana arka plan resmini buraya bagla kanka */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -32,6 +35,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* [NOT]: Arka Plan Yumusatma ve Karartma Filtresi */
 .bg-overlay {
   position: fixed; inset: 0;
   background: linear-gradient(180deg, rgba(3, 3, 4, 0.3) 0%, rgba(3, 3, 4, 0.8) 100%);
@@ -40,7 +44,7 @@ body {
   z-index: 0;
 }
 
-/* KASMA YAPMAYAN YAĞMUR CİZGİLERİ */
+/* [NOT]: Performans Yemeyen Hafif Streetwear Yagmur Cizgileri Efekti */
 .fine-rain { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.15; }
 .fine-rain span {
   position: absolute; width: 1px; height: 90px;
@@ -57,26 +61,26 @@ body {
 .fine-rain span:nth-child(4) { left: 70%; animation-duration: 0.9s; animation-delay: 0.2s; }
 .fine-rain span:nth-child(5) { left: 90%; animation-duration: 0.65s; animation-delay: 0.4s; }
 
-/* ── LEOPARLI AÇILIŞ EKRANI (LOADER) ── */
+/* [NOT]: İlk Acilista Gelen Leoparlı Anime F Logo Giriş Ekrani Sytemi */
 #instagram-loader {
   position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column;
   background: #000; align-items: center; justify-content: center;
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease;
 }
-.loader-logo-wrap { width: 140px; height: 140px; margin-bottom: 20px; animation: pulseLogo 2s infinite ease-in-out; }
+.loader-logo-wrap { width: 150px; height: 150px; margin-bottom: 20px; animation: pulseLogo 2s infinite ease-in-out; }
 .loader-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
 .loader-text {
-  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800;
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800;
   letter-spacing: 4px; color: #fff; text-transform: uppercase; opacity: 0.8;
 }
 @keyframes pulseLogo {
   0%, 100% { transform: scale(0.96); filter: drop-shadow(0 0 10px rgba(255,255,255,0.05)); }
-  50% { transform: scale(1.03); filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); }
+  50% { transform: scale(1.03); filter: drop-shadow(0 0 25px rgba(255,255,255,0.2)); }
 }
 
 #app-view { opacity: 0; transform: scale(0.99); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 5; position: relative; }
 
-/* NAV */
+/* [NOT]: Ust Navigasyon Bari (Scrolled Olunca Arka Plani Flu Lasir) */
 nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 24px 0; transition: all 0.3s ease; }
 nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--border); padding: 14px 0; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
@@ -96,7 +100,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* ── MULTI-STAGE SHOWCASE DEĞİŞEN STRIP ENGINE ── */
+/* [NOT]: Surekli Degisen 3 Farkli Sahneli Dev Vitrin Düzeni (Showcase Slider) */
 .showcase-slider {
   width: 100%; max-width: 1100px; margin: 120px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
@@ -109,8 +113,8 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .slide-stage.active { opacity: 1; visibility: visible; }
 
-/* STAGE 1: CHROME SPLIT (BEFORE/AFTER) */
-.stage-chrome { background: #000; display: flex; }
+/* SAHNE 1: Yarisi Seffaf Kareli Yarisi Parlak Metalik Chrome Font Alani */
+.stage-chrome { background: #000; display: flex; width: 100%; height: 100%; }
 .chrome-half { flex: 1; height: 100%; display: flex; align-items: center; overflow: hidden; position: relative; }
 .chrome-half.left-grid {
   background-color: #ededed;
@@ -125,39 +129,35 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .left-grid .chrome-huge-text { color: #000; left: 0; }
 .right-plain .chrome-huge-text {
-  left: -100%; background-image: var(--leopard-url); background-size: cover;
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: smoothHueFlow 3s linear infinite;
+  left: -100%; background: linear-gradient(135deg, #ff0055, #00ffaa, #00bcff, #ff0055);
+  background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; animation: chromeGradientFlow 4s ease infinite;
+}
+@keyframes chromeGradientFlow {
+  0% { background-position: 0% 50%; filter: brightness(1.2); }
+  50% { background-position: 100% 50%; filter: brightness(1.5); }
+  100% { background-position: 0% 50%; filter: brightness(1.2); }
 }
 
-/* STAGE 2: STREETWEAR ANIME STYLE (FLUFFY DESIGNS) */
+/* SAHNE 2: Tam Ortalanmis Leoparli Anime Tasarimi Katmani */
 .stage-anime {
   background-image: var(--leopard-url); background-size: cover; background-position: center;
-  position: relative;
+  position: relative; width: 100%; height: 100%;
 }
 .stage-anime::before { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }
-.anime-center-box {
-  position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px;
-}
-.anime-avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.anime-center-box { position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.anime-avatar { width: 110px; height: 110px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
 .anime-title {
-  font-family: 'Syne', sans-serif; font-size: clamp(40px, 6vw, 70px); font-weight: 800;
-  color: #fff; text-transform: uppercase; letter-spacing: -2px; line-height: 0.9;
-  background: #000; padding: 10px 24px; border-radius: 4px;
+  font-family: 'Syne', sans-serif; font-size: clamp(32px, 5vw, 55px); font-weight: 800;
+  color: #fff; text-transform: uppercase; letter-spacing: -1px; line-height: 1;
+  background: #000; padding: 12px 28px; border-radius: 6px; border: 1px solid var(--border);
 }
 
-/* STAGE 3: MINIMAL FURRY LOGO DISPLAY */
-.stage-furry { background: #050506; display: flex; align-items: center; justify-content: center; }
-.furry-logo-img { max-width: 440px; width: 85%; height: auto; object-fit: contain; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7)); }
+/* SAHNE 3: Karanlikta Parlayan 3D Kurklu Fluffy Tekstur Alani */
+.stage-furry { background: #050506; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.furry-logo-img { max-width: 450px; width: 85%; height: 100%; object-fit: contain; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.7)); }
 
-/* HUE ANIMATION */
-@keyframes smoothHueFlow {
-  0% { filter: hue-rotate(0deg) brightness(1.2); }
-  50% { filter: hue-rotate(180deg) brightness(1.4); }
-  100% { filter: hue-rotate(360deg) brightness(1.2); }
-}
-
-/* BENTO CARDS */
+/* [NOT]: Bento Grid Kartlarinin Premium Bulanik Cam Efekti Ayarlari */
 .bento-card {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
   position: relative; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -165,7 +165,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .bento-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateY(-2px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
 
-/* HERO MINI BIO */
+/* HERO BIO */
 .hero-mini { max-width: 650px; margin: 35px auto 45px; text-align: center; padding: 0 24px; }
 .hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; font-weight: 400; }
 .btn-group { display: flex; gap: 12px; justify-content: center; }
@@ -175,7 +175,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 .btn.secondary { background: transparent; color: #fff; border: 1px solid var(--border); }
 .btn.secondary:hover { background: rgba(255,255,255,0.04); border-color: #fff; }
 
-/* PORTFOLIO GRID */
+/* [NOT]: Portfolyo Alani Izgara (Grid) Yerlesimi */
 section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
 .section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -186,9 +186,13 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
 .project-meta { padding: 12px 4px 2px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
 .project-name { font-size: 14px; font-weight: 600; color: #fff; }
 
-/* FIXING ICON DISPLAY IN ACTION BUTTON */
+/* [NOT]: KÜTÜPHANE ÇÖKSE BİLE SİTENİN KIRILMASINI ENGELLEYEN GÜVENLİ İKON ALANI */
 .project-action { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.project-action i { display: inline-block; }
+/* FontAwesome gelmezse arkada yedek ok işareti çıkarma kuralı */
+.project-action::after { content: ' ↗'; font-family: 'Inter', sans-serif; font-size: 14px; display: inline-block; transition: transform 0.2s; }
 .project-card:hover .project-action { color: #fff; }
+.project-card:hover .project-action::after { transform: translate(2px, -2px); color: #fff; }
 
 /* RATES */
 .rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -197,7 +201,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
 .rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
 .rate-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-/* MODAL SYSTEMS */
+/* [NOT]: Tiklandiginda Acilan Pop-up (Modal) Ekran Ayarlari */
 #spin-modal {
   display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2, 2, 3, 0.96);
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px;
@@ -210,8 +214,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
 
 .brand-signature {
   font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; margin-top: 40px; text-transform: uppercase;
-  background-image: var(--leopard-url); background-size: cover; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  animation: smoothHueFlow 4s linear infinite;
+  background-image: url('1000050178.jpg'); background-size: cover; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
 @media(max-width: 768px) {
@@ -312,8 +315,6 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
         </div>
       </div>
 
-      Yeni bir kart eklemek istersen burayı kullanabilirsin kanka. -->
-
     </div>
   </section>
 
@@ -345,7 +346,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; }
 </div>
 
 <script>
-/* LOADER SCRIPT */
+/* [NOT]: Giriş Ekranı Süre Kontrol Motoru */
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('instagram-loader');
   const app = document.getElementById('app-view');
@@ -361,7 +362,7 @@ window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-/* AUTOMATIC SHOWCASE LOOP ENGINE */
+/* [NOT]: Ust Showcase Alaninin Otomatik 4 Saniyede Bir Donmesini Saglayan Dongu */
 const stages = document.querySelectorAll('.slide-stage');
 let currentStageIndex = 0;
 
@@ -369,9 +370,9 @@ setInterval(() => {
   stages[currentStageIndex].classList.remove('active');
   currentStageIndex = (currentStageIndex + 1) % stages.length;
   stages[currentStageIndex].classList.add('active');
-}, 4000); /* Her 4 saniyede bir diğer tasarıma geçiş yapar */
+}, 4000);
 
-/* MODAL ENGINE */
+/* [NOT]: Pop-up Tiklama ve Kapatma Fonksiyonlari */
 const modal = document.getElementById('spin-modal');
 const modalImg = document.getElementById('modal-img');
 
