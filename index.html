@@ -17,11 +17,6 @@
   --border: rgba(255, 255, 255, 0.08);
   --card-bg: rgba(5, 5, 6, 0.6);
   --green-neon: #00ff66;
-  
-  /* REPO BİLGİLERİNİ TAM BURAYA JİLET GİBİ İŞLEDİM KANKA */
-  --site-logo-url: url('https://raw.githubusercontent.com/m1slydesign/porfoliowebsite/main/site-logosu.jpg');
-  --acilis-logo-url: 'https://raw.githubusercontent.com/m1slydesign/porfoliowebsite/main/acilis-logosu.jpg';
-  --arkaplan-url: url('https://raw.githubusercontent.com/m1slydesign/porfoliowebsite/main/arkaplan.jpg');
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,14 +30,13 @@ body {
   position: relative;
 }
 
-/* YÜKLEDİĞİN ARKAPLAN.JPG DOSYASINI BURAYA BAĞLADIM, ÜZERİNE DE PARLAYAN SPOTLARI ATTIM */
 body::before {
   content: '';
   position: fixed; inset: 0;
-  background-image: var(--arkaplan-url);
+  background-image: url('https://i.ibb.co/6cC3yYZM/arkaplan.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.35; /* Arka plan çok patlamasın, arayüzler net gözüksün diye hafif kıstım */
+  opacity: 0.35;
   z-index: -2;
   pointer-events: none;
 }
@@ -64,7 +58,7 @@ body::before {
   z-index: 0; pointer-events: none;
 }
 
-/* SİTE AÇILIŞ LOGOSU SİSTEMİ */
+/* AÇILIŞ LOADER */
 #instagram-loader {
   position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column;
   background: #000; align-items: center; justify-content: center;
@@ -89,7 +83,12 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
 
 .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; text-transform: uppercase; }
-.logo .logo-img-wrapper { width: 36px; height: 36px; background-image: var(--site-logo-url); background-size: cover; background-position: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background-color: #111; }
+.logo .logo-img-wrapper {
+  width: 36px; height: 36px;
+  background-image: url('https://i.ibb.co/7J2PX37g/site-logosu.jpg');
+  background-size: cover; background-position: center;
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background-color: #111;
+}
 .logo span { color: #fff; letter-spacing: -0.5px; }
 
 .nav-links { display: flex; list-style: none; gap: 32px; align-items: center; }
@@ -103,7 +102,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* CHROMATIC HERO SPLIT */
+/* HERO BANNER */
 .top-showcase-banner {
   width: 100%; max-width: 1100px; margin: 120px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
@@ -134,7 +133,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
   100% { background-position: 0% 50%; filter: brightness(1.2); }
 }
 
-/* BENTO VE KARTLAR */
+/* KARTLAR */
 .bento-card {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
   position: relative; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -160,19 +159,16 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 .project-card:hover .project-img-wrapper img { transform: scale(1.02); }
 .project-meta { padding: 12px 4px 2px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
 .project-name { font-size: 14px; font-weight: 600; color: #fff; }
-
 .project-action { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
 .project-action::after { content: ' ↗'; font-family: 'Inter', sans-serif; font-size: 14px; display: inline-block; transition: transform 0.2s; }
 .project-card:hover .project-action::after { transform: translate(2px, -2px); color: #fff; }
 
-/* FİYATLANDIRMA DÜZENİ */
 .rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .rate-card { padding: 36px; }
 .rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
 .rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
 .rate-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-/* MODAL PREVIEW */
 #spin-modal {
   display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2, 2, 3, 0.96);
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px;
@@ -201,12 +197,10 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 <div class="glow-bg-2"></div>
 <div class="bg-overlay"></div>
 
+<!-- AÇILIŞ EKRANI - acilis logosu -->
 <div id="instagram-loader">
   <div class="loader-logo-wrap">
-    <script>
-      const loaderSrc = getComputedStyle(document.documentElement).getPropertyValue('--acilis-logo-url').replace(/'/g, "").trim();
-      document.write('<img src="' + loaderSrc + '" alt="FLUFFY DESIGNS">');
-    </script>
+    <img src="https://i.ibb.co/7J2PX37g/site-logosu.jpg" alt="FLUFFY DESIGNS">
   </div>
   <div class="loader-text">Loading System</div>
 </div>
@@ -254,7 +248,6 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
   <section id="projects">
     <div class="section-title">Seçilmiş Çalışmalar</div>
     <div class="portfolio-grid">
-      
       <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
         <div class="project-img-wrapper">
           <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Work 1">
@@ -264,7 +257,6 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
           <span class="project-action">İncele</span>
         </div>
       </div>
-
       <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
         <div class="project-img-wrapper">
           <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Work 2">
@@ -274,7 +266,6 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
           <span class="project-action">İncele</span>
         </div>
       </div>
-
     </div>
   </section>
 
