@@ -7,7 +7,7 @@
 <meta name="referrer" content="no-referrer">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -69,7 +69,6 @@ body {
   100% { transform: translateX(0%) scaleX(1); }
 }
 
-/* SADECE BRIGHTNESS - acik koyu acik koyu */
 @keyframes brightDance {
   0%   { filter: brightness(0.5); }
   25%  { filter: brightness(1.6); }
@@ -79,7 +78,7 @@ body {
 }
 
 .brand-text {
-  font-family: 'Instrument Serif', serif; font-size: 44px; font-weight: 400;
+  font-family: 'Syne', sans-serif; font-size: 44px; font-weight: 800;
   letter-spacing: 4px; color: #fff; text-transform: uppercase;
   opacity: 0; animation: fadeUp 1s 1.5s ease forwards;
 }
@@ -110,8 +109,8 @@ nav {
 nav.scrolled { background: rgba(15, 15, 15, 0.95); border-color: var(--border-strong); }
 
 .nav-logo {
-  font-family: 'Instrument Serif', serif; font-size: 18px; font-weight: 400;
-  color: #fff; text-decoration: none; letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800;
+  color: #fff; text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
   white-space: nowrap;
 }
 .nav-links { display: flex; list-style: none; gap: 2px; align-items: center; }
@@ -125,7 +124,7 @@ nav.scrolled { background: rgba(15, 15, 15, 0.95); border-color: var(--border-st
 
 .nav-cta {
   background: #fff; color: #000; padding: 9px 16px;
-  border-radius: 999px; font-size: 11px; font-weight: 600;
+  border-radius: 999px; font-size: 11px; font-weight: 700;
   text-decoration: none; font-family: 'Space Grotesk', sans-serif;
   text-transform: uppercase; letter-spacing: 1px;
   display: inline-flex; align-items: center; gap: 6px;
@@ -155,15 +154,15 @@ nav.scrolled { background: rgba(15, 15, 15, 0.95); border-color: var(--border-st
 .mobile-menu.open { transform: translateX(0); }
 .mobile-menu a {
   color: #fff; text-decoration: none;
-  font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400;
-  padding: 14px 0; border-bottom: 1px solid var(--border);
+  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+  padding: 14px 0; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: -0.5px;
 }
 .mobile-menu .nav-cta { align-self: flex-start; margin-top: 24px; display: inline-flex; }
 .menu-close { position: absolute; top: 28px; right: 28px; background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; }
 .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 
-/* ========== HERO (fugori tarzı - sol hizali) ========== */
+/* ========== HERO ========== */
 .hero {
   padding: 80px 40px 100px;
   max-width: 1400px; margin: 0 auto; position: relative;
@@ -179,15 +178,18 @@ nav.scrolled { background: rgba(15, 15, 15, 0.95); border-color: var(--border-st
 .hero-eyebrow .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: pulse 2s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-.hero-loc { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+.hero-year { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
 
 .hero-title {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Syne', sans-serif;
   font-size: clamp(60px, 13vw, 200px);
-  font-weight: 400; line-height: 0.88; letter-spacing: -5px;
-  margin-bottom: 60px;
+  font-weight: 800; line-height: 0.88; letter-spacing: -5px;
+  margin-bottom: 60px; text-transform: uppercase;
 }
-.hero-title .italic { font-style: italic; color: var(--text-muted); }
+.hero-title .accent {
+  background: linear-gradient(135deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
 
 .hero-foot {
   display: flex; justify-content: space-between; align-items: flex-end;
@@ -202,7 +204,7 @@ nav.scrolled { background: rgba(15, 15, 15, 0.95); border-color: var(--border-st
 
 /* ========== SECTION GENERIC ========== */
 section { max-width: 1400px; margin: 0 auto; padding: 120px 40px; }
-.sec-head { margin-bottom: 80px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+.sec-head { margin-bottom: 60px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
 .sec-eyebrow {
   font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted);
   text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px;
@@ -210,23 +212,27 @@ section { max-width: 1400px; margin: 0 auto; padding: 120px 40px; }
 }
 .sec-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--text-muted); }
 .sec-title {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Syne', sans-serif;
   font-size: clamp(42px, 7vw, 96px);
-  font-weight: 400; letter-spacing: -3px; line-height: 0.95;
+  font-weight: 800; letter-spacing: -3px; line-height: 0.95;
+  text-transform: uppercase;
 }
-.sec-title .italic { font-style: italic; color: var(--text-muted); }
+.sec-title .accent {
+  background: linear-gradient(135deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
 
 /* ========== ABOUT ========== */
 .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 100px; align-items: start; }
 .about-text p { color: var(--text-muted); font-size: 17px; line-height: 1.75; margin-bottom: 24px; }
-.about-text p strong { color: #fff; font-weight: 500; }
+.about-text p strong { color: #fff; font-weight: 600; }
 .about-stats { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
 .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 28px 0; border-bottom: 1px solid var(--border); }
-.stat-num { font-family: 'Instrument Serif', serif; font-size: 64px; font-weight: 400; letter-spacing: -2px; line-height: 1; }
+.stat-num { font-family: 'Syne', sans-serif; font-size: 64px; font-weight: 800; letter-spacing: -3px; line-height: 1; }
 .stat-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; text-align: right; max-width: 140px; }
 
-/* ========== WORKS - fugori tarzı büyük grid ========== */
-.works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+/* ========== WORKS ========== */
+.works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
 .work-item {
   position: relative; cursor: pointer; overflow: hidden;
   border-radius: 16px; background: var(--bg-2);
@@ -234,62 +240,61 @@ section { max-width: 1400px; margin: 0 auto; padding: 120px 40px; }
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .work-item:hover { border-color: var(--border-strong); }
-.work-img { position: relative; width: 100%; padding-top: 65%; overflow: hidden; background: var(--bg-3); }
+.work-img { position: relative; width: 100%; padding-top: 62%; overflow: hidden; background: var(--bg-3); }
 .work-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .work-item:hover .work-img img { transform: scale(1.05); }
 
-.work-info { padding: 28px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.work-info { padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .work-meta { flex: 1; }
-.work-num { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 8px; }
-.work-title { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; margin-bottom: 6px; color: #fff; letter-spacing: -0.5px; }
+.work-num { font-family: 'Space Grotesk', sans-serif; font-size: 10px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; }
+.work-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; letter-spacing: -0.5px; text-transform: uppercase; }
 .work-cat { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
-.work-actions { display: flex; gap: 14px; align-items: center; }
-.act-btn { background: none; border: 1px solid var(--border); border-radius: 999px; padding: 8px 12px; color: var(--text-muted); cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-size: 11px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+.work-actions { display: flex; gap: 10px; align-items: center; }
+.act-btn { background: none; border: 1px solid var(--border); border-radius: 999px; padding: 8px 12px; color: var(--text-muted); cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
 .act-btn:hover { color: #fff; border-color: var(--border-strong); }
 .like-btn.liked { color: #ff3355; border-color: rgba(255,51,85,0.3); }
 
-.comments-panel { display: none; padding: 0 28px 28px; border-top: 1px solid var(--border); }
+.comments-panel { display: none; padding: 0 24px 24px; border-top: 1px solid var(--border); }
 .comments-panel.active { display: block; }
 .comment-list { max-height: 160px; overflow-y: auto; list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 18px 0 14px; }
 .comment-list::-webkit-scrollbar { width: 4px; }
 .comment-list::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
 .comment-list li { background: rgba(255,255,255,0.02); padding: 11px 13px; border-radius: 8px; font-size: 12px; color: #d4d4d8; line-height: 1.5; border: 1px solid var(--border); }
-.comment-list li strong { color: #888; margin-right: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.comment-list li strong { color: #888; margin-right: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 .comment-inputs { display: flex; gap: 8px; }
 .comment-inputs input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; }
 .comment-inputs input:focus { outline: none; border-color: var(--border-strong); }
-.comment-inputs button { background: #fff; color: #000; border: none; padding: 0 18px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+.comment-inputs button { background: #fff; color: #000; border: none; padding: 0 18px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
 
 /* ========== RATES ========== */
 .rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .rate-card { padding: 48px; border-radius: 16px; background: var(--bg-2); border: 1px solid var(--border); transition: all 0.3s; }
 .rate-card:hover { border-color: var(--border-strong); }
-.rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; }
-.rate-value { font-family: 'Instrument Serif', serif; font-size: 56px; font-weight: 400; color: #fff; margin: 18px 0 10px; letter-spacing: -2px; }
+.rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; font-weight: 600; }
+.rate-value { font-family: 'Syne', sans-serif; font-size: 56px; font-weight: 800; color: #fff; margin: 18px 0 10px; letter-spacing: -2px; }
 .rate-desc { font-size: 13px; color: var(--text-dim); }
 
 /* ========== CONTACT ========== */
 .contact-block { text-align: center; padding: 80px 0; }
-.contact-big { font-family: 'Instrument Serif', serif; font-size: clamp(52px, 10vw, 140px); font-weight: 400; letter-spacing: -4px; line-height: 0.92; margin: 28px 0 56px; }
-.contact-big .italic { font-style: italic; color: var(--text-muted); }
+.contact-big { font-family: 'Syne', sans-serif; font-size: clamp(52px, 10vw, 140px); font-weight: 800; letter-spacing: -4px; line-height: 0.92; margin: 28px 0 56px; text-transform: uppercase; }
+.contact-big .accent { background: linear-gradient(135deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .contact-wrapper { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-.btn-contact { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 999px; font-size: 13px; font-weight: 500; text-decoration: none; font-family: 'Space Grotesk', sans-serif; transition: all 0.2s; background: transparent; color: #fff; border: 1px solid var(--border-strong); }
+.btn-contact { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; font-family: 'Space Grotesk', sans-serif; transition: all 0.2s; background: transparent; color: #fff; border: 1px solid var(--border-strong); text-transform: uppercase; letter-spacing: 1px; }
 .btn-contact:hover { background: #fff; color: #000; }
 
 /* ========== MODAL ========== */
 #modal { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2,2,3,0.96); backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px; }
 #modal.open { display: flex; }
-#mcan { width: 100%; max-width: 1100px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; }
-#mimg { width: 100%; height: 100%; object-fit: contain; }
-.mclose { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 24px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
+#mcan { width: 100%; max-width: 1100px; max-height: 80vh; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; display: flex; align-items: center; justify-content: center; }
+#mimg { width: 100%; height: auto; max-height: 80vh; object-fit: contain; display: block; }
+.mclose { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 24px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
 
 /* ========== FOOTER ========== */
 footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40px; }
 .foot-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.foot-brand { font-family: 'Instrument Serif', serif; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
+.foot-brand { font-family: 'Syne', sans-serif; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; font-weight: 800; }
 .foot-copy { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
-/* ========== RESPONSIVE ========== */
 @media(max-width: 880px) {
   :root { --nav-total: 80px; }
   nav { padding: 6px 6px 6px 18px; gap: 8px; top: 12px; height: 48px; }
@@ -347,9 +352,8 @@ footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40
 
 <div id="app">
 
-  <!-- NAVBAR -->
   <nav id="navbar">
-    <a href="#home" class="nav-logo">Fluffy</a>
+    <a href="#home" class="nav-logo">FLUFFY</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#works">Works</a></li>
@@ -360,16 +364,15 @@ footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40
     <button class="hamburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
   </nav>
 
-  <!-- HERO -->
   <section class="hero" id="home">
     <div>
       <div class="hero-top">
         <div class="hero-eyebrow"><span class="dot"></span> Available for commissions</div>
-        <div class="hero-loc">Türkiye / 2025</div>
+        <div class="hero-year">— 2025</div>
       </div>
       <h1 class="hero-title">
         Crafting<br>
-        <span class="italic">interfaces</span><br>
+        <span class="accent">interfaces</span><br>
         that flow.
       </h1>
     </div>
@@ -383,12 +386,11 @@ footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="sec-head">
       <div>
         <div class="sec-eyebrow">About</div>
-        <h2 class="sec-title">Designer with <span class="italic">vision.</span></h2>
+        <h2 class="sec-title">Designer with <span class="accent">vision.</span></h2>
       </div>
     </div>
     <div class="about-grid">
@@ -405,119 +407,20 @@ footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40
     </div>
   </section>
 
-  <!-- WORKS -->
+  <!-- WORKS - DİNAMİK OLARAK JS ILE BASILIYOR -->
   <section id="works">
     <div class="sec-head">
       <div>
         <div class="sec-eyebrow">Selected Works</div>
-        <h2 class="sec-title">Recent <span class="italic">projects.</span></h2>
+        <h2 class="sec-title">Recent <span class="accent">projects.</span></h2>
       </div>
-      <a href="https://x.com/stor4m" target="_blank" class="btn-contact" style="padding: 12px 24px; font-size: 12px;">
+      <a href="https://x.com/stor4m" target="_blank" class="btn-contact" style="padding: 12px 24px; font-size: 11px;">
         <i class="fa-brands fa-x-twitter"></i> View all
       </a>
     </div>
-    <div class="works-grid">
-      
-      <div class="work-item" id="p1">
-        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
-          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="">
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <div class="work-num">01 / Project</div>
-            <div class="work-title">Combat HUD</div>
-            <div class="work-cat">UI / Game Interface</div>
-          </div>
-          <div class="work-actions">
-            <button class="act-btn like-btn" onclick="toggleLike('p1')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
-            <button class="act-btn" onclick="toggleComments('p1')"><i class="fa-solid fa-comment"></i></button>
-          </div>
-        </div>
-        <div class="comments-panel" id="comments-p1">
-          <ul class="comment-list" id="comment-list-p1"></ul>
-          <div class="comment-inputs">
-            <input type="text" placeholder="Yorum bırak..." id="comment-text-p1" onkeydown="if(event.key==='Enter') addComment('p1')">
-            <button onclick="addComment('p1')">Gönder</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="work-item" id="p2">
-        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
-          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="">
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <div class="work-num">02 / Project</div>
-            <div class="work-title">Shop System</div>
-            <div class="work-cat">UI / E-commerce</div>
-          </div>
-          <div class="work-actions">
-            <button class="act-btn like-btn" onclick="toggleLike('p2')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
-            <button class="act-btn" onclick="toggleComments('p2')"><i class="fa-solid fa-comment"></i></button>
-          </div>
-        </div>
-        <div class="comments-panel" id="comments-p2">
-          <ul class="comment-list" id="comment-list-p2"></ul>
-          <div class="comment-inputs">
-            <input type="text" placeholder="Yorum bırak..." id="comment-text-p2" onkeydown="if(event.key==='Enter') addComment('p2')">
-            <button onclick="addComment('p2')">Gönder</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="work-item" id="p3">
-        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
-          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="">
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <div class="work-num">03 / Project</div>
-            <div class="work-title">Loading Screen</div>
-            <div class="work-cat">UI / Motion</div>
-          </div>
-          <div class="work-actions">
-            <button class="act-btn like-btn" onclick="toggleLike('p3')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
-            <button class="act-btn" onclick="toggleComments('p3')"><i class="fa-solid fa-comment"></i></button>
-          </div>
-        </div>
-        <div class="comments-panel" id="comments-p3">
-          <ul class="comment-list" id="comment-list-p3"></ul>
-          <div class="comment-inputs">
-            <input type="text" placeholder="Yorum bırak..." id="comment-text-p3" onkeydown="if(event.key==='Enter') addComment('p3')">
-            <button onclick="addComment('p3')">Gönder</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="work-item" id="p4">
-        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
-          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="">
-        </div>
-        <div class="work-info">
-          <div class="work-meta">
-            <div class="work-num">04 / Project</div>
-            <div class="work-title">Inventory UI</div>
-            <div class="work-cat">UI / System Design</div>
-          </div>
-          <div class="work-actions">
-            <button class="act-btn like-btn" onclick="toggleLike('p4')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
-            <button class="act-btn" onclick="toggleComments('p4')"><i class="fa-solid fa-comment"></i></button>
-          </div>
-        </div>
-        <div class="comments-panel" id="comments-p4">
-          <ul class="comment-list" id="comment-list-p4"></ul>
-          <div class="comment-inputs">
-            <input type="text" placeholder="Yorum bırak..." id="comment-text-p4" onkeydown="if(event.key==='Enter') addComment('p4')">
-            <button onclick="addComment('p4')">Gönder</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="works-grid" id="works-grid"></div>
   </section>
 
-  <!-- RATES -->
   <section id="rates">
     <div class="sec-head">
       <div>
@@ -539,11 +442,10 @@ footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="contact-block">
       <div class="sec-eyebrow" style="justify-content: center; display: inline-flex;">Get in touch</div>
-      <h2 class="contact-big">Let's build <span class="italic">together.</span></h2>
+      <h2 class="contact-big">Let's build <span class="accent">together.</span></h2>
       <div class="contact-wrapper">
         <a href="https://x.com/stor4m" target="_blank" class="btn-contact"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
         <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn-contact"><i class="fa-brands fa-discord"></i> Discord</a>
@@ -553,7 +455,7 @@ footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40
 
   <footer>
     <div class="foot-inner">
-      <div class="foot-brand">® Fluffy</div>
+      <div class="foot-brand">® FLUFFY</div>
       <div class="foot-copy">Design Studio — 2025</div>
     </div>
   </footer>
@@ -561,10 +463,97 @@ footer { border-top: 1px solid var(--border); padding: 50px 40px; margin-top: 40
 </div>
 
 <script>
+/* ========================================================
+   🐆 PROJELERİ BURADAN EKLE/ÇIKAR/DÜZENLE - ÇOK KOLAY
+   ========================================================
+   Her proje: { id, img, title, cat }
+   id  → benzersiz olmalı (p1, p2, p3...)
+   img → resim URL'i (wsrv proxy ile çekiliyor, Twitter direkt çalışmaz)
+   title → proje adı
+   cat → kategori yazısı (UI / Game vs)
+   
+   Yeni proje eklemek için sona şunu kopyala:
+   { id: "p11", img: "https://...", title: "Yeni Proje", cat: "UI / KATEGORI" },
+   ======================================================== */
+const PROJECTS_DATA = [
+  { id: "p1",  img: "https://pbs.twimg.com/media/HDWXuLsWwAAaZiD?format=jpg&name=large", title: "Project 01", cat: "UI / Game Interface" },
+  { id: "p2",  img: "https://pbs.twimg.com/media/HGBk6rYW4AIjb9P?format=jpg&name=large", title: "Project 02", cat: "UI / Game Interface" },
+  { id: "p3",  img: "https://pbs.twimg.com/media/HFfGmi7X0AAuhCM?format=jpg&name=large", title: "Project 03", cat: "UI / Game Interface" },
+  { id: "p4",  img: "https://pbs.twimg.com/media/HFD9xXvWQAAPDP9?format=jpg&name=large", title: "Project 04", cat: "UI / Game Interface" },
+  { id: "p5",  img: "https://pbs.twimg.com/media/G-uXKuha0AAMyIE?format=jpg&name=large", title: "Project 05", cat: "UI / Game Interface" },
+  { id: "p6",  img: "https://pbs.twimg.com/media/G9gcjgJWcAAOkz-?format=jpg&name=large", title: "Project 06", cat: "UI / Game Interface" },
+  { id: "p7",  img: "https://pbs.twimg.com/media/G8jxdpAXIAEI9Gh?format=jpg&name=large", title: "Project 07", cat: "UI / Game Interface" },
+  { id: "p8",  img: "https://pbs.twimg.com/media/GznZY3eWAAAoBSG?format=jpg&name=medium", title: "Project 08", cat: "UI / Game Interface" },
+  { id: "p9",  img: "https://pbs.twimg.com/media/GwhAGpLXsAIEn5j?format=jpg&name=medium", title: "Project 09", cat: "UI / Game Interface" },
+  { id: "p10", img: "https://pbs.twimg.com/media/GwJnpfcWsAES2Wy?format=jpg&name=900x900", title: "Project 10", cat: "UI / Game Interface" },
+  { id: "p11", img: "https://pbs.twimg.com/media/HGSCGz1aUAAD9Sm?format=jpg&name=large", title: "Project 11", cat: "UI / Game Interface" },
+];
+
+/* Twitter resimleri direkt yüklenmez (referrer engeli),
+   wsrv.nl proxy ile sarmalayıp çekiyoruz - kesin yüklenir */
+function proxyImg(url) {
+  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=1200&output=jpg`;
+}
+
+function renderProjects() {
+  const grid = document.getElementById('works-grid');
+  grid.innerHTML = PROJECTS_DATA.map((p, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const proxied = proxyImg(p.img);
+    return `
+      <div class="work-item" id="${p.id}">
+        <div class="work-img" onclick="openModal('${proxied}')">
+          <img src="${proxied}" alt="${p.title}" loading="lazy">
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <div class="work-num">${num} / Project</div>
+            <div class="work-title">${p.title}</div>
+            <div class="work-cat">${p.cat}</div>
+          </div>
+          <div class="work-actions">
+            <button class="act-btn like-btn" onclick="toggleLike('${p.id}')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
+            <button class="act-btn" onclick="toggleComments('${p.id}')"><i class="fa-solid fa-comment"></i></button>
+          </div>
+        </div>
+        <div class="comments-panel" id="comments-${p.id}">
+          <ul class="comment-list" id="comment-list-${p.id}"></ul>
+          <div class="comment-inputs">
+            <input type="text" placeholder="Yorum bırak..." id="comment-text-${p.id}" onkeydown="if(event.key==='Enter') addComment('${p.id}')">
+            <button onclick="addComment('${p.id}')">Gönder</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Like ve yorum verilerini yükle
+  PROJECTS_DATA.forEach(p => {
+    const id = p.id;
+    const isLiked = localStorage.getItem(`liked_${id}`) === 'true';
+    const btn = document.querySelector(`#${id} .like-btn`);
+    const countEl = btn.querySelector('.like-count');
+    let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || 0;
+    countEl.innerText = likes;
+    if(isLiked) btn.classList.add('liked');
+    
+    const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
+    const listEl = document.getElementById(`comment-list-${id}`);
+    savedComments.forEach(c => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>guest</strong> ${c.text}`;
+      listEl.appendChild(li);
+    });
+  });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader');
   const app = document.getElementById('app');
   app.classList.add('show');
+  
+  renderProjects();
+  
   setTimeout(() => {
     loader.classList.add('gone');
     setTimeout(() => { loader.style.display = 'none'; }, 900);
@@ -579,26 +568,6 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
   document.getElementById('menuOverlay').classList.toggle('open');
 }
-
-const PROJECTS = ['p1','p2','p3','p4'];
-
-document.addEventListener('DOMContentLoaded', () => {
-  PROJECTS.forEach(id => {
-    const isLiked = localStorage.getItem(`liked_${id}`) === 'true';
-    const btn = document.querySelector(`#${id} .like-btn`);
-    const countEl = btn.querySelector('.like-count');
-    let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || 0;
-    countEl.innerText = likes;
-    if(isLiked) btn.classList.add('liked');
-    const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
-    const listEl = document.getElementById(`comment-list-${id}`);
-    savedComments.forEach(c => {
-      const li = document.createElement('li');
-      li.innerHTML = `<strong>guest</strong> ${c.text}`;
-      listEl.appendChild(li);
-    });
-  });
-});
 
 function toggleLike(id) {
   const btn = document.querySelector(`#${id} .like-btn`);
