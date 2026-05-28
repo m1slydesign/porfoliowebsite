@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLUFFY — Design Studio</title>
+<title>FLUFFY — Roblox UI Designer</title>
 <meta name="referrer" content="no-referrer">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -30,14 +30,10 @@
 html { scroll-behavior: smooth; background: var(--bg); }
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-  padding-top: var(--nav-total);
-  position: relative;
-  text-align: center;
+  background: var(--bg); color: var(--text);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  line-height: 1.5; padding-top: var(--nav-total);
+  position: relative; text-align: center;
 }
 
 /* ========== ARKA PLAN ========== */
@@ -55,7 +51,7 @@ body {
 .meteors { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .meteor { position: absolute; width: 2px; height: 2px; background: #fff; border-radius: 50%; box-shadow: 0 0 6px 1px rgba(255,255,255,0.8); }
 .meteor::before { content: ''; position: absolute; top: 50%; left: 0; width: 100px; height: 1px; background: linear-gradient(90deg, rgba(168,216,255,0.8), transparent); transform: translateY(-50%); }
-.meteor:nth-child(1){top:5%;left:10%;animation:meteor 5s infinite linear;animation-delay:0s;}
+.meteor:nth-child(1){top:5%;left:10%;animation:meteor 5s infinite linear;}
 .meteor:nth-child(2){top:15%;left:30%;animation:meteor 7s infinite linear;animation-delay:2s;}
 .meteor:nth-child(3){top:25%;left:50%;animation:meteor 6s infinite linear;animation-delay:4s;}
 .meteor:nth-child(4){top:8%;left:70%;animation:meteor 8s infinite linear;animation-delay:1s;}
@@ -77,7 +73,6 @@ body {
 .ice-half img { width: 200%; height: auto; object-fit: contain; display: block; animation: brightDance 2.5s 1.5s infinite ease-in-out; }
 .ice-half.left { justify-content: flex-start; transform: translateX(-160%) scaleX(0.25); animation: inLeft 1.3s cubic-bezier(0.22, 1.4, 0.36, 1) forwards; }
 .ice-half.right { justify-content: flex-end; transform: translateX(160%) scaleX(0.25); animation: inRight 1.3s cubic-bezier(0.22, 1.4, 0.36, 1) forwards; }
-
 @keyframes inLeft { 0%{transform:translateX(-160%) scaleX(0.25);} 60%{transform:translateX(10%) scaleX(1.2);} 80%{transform:translateX(-4%) scaleX(0.93);} 100%{transform:translateX(0%) scaleX(1);} }
 @keyframes inRight { 0%{transform:translateX(160%) scaleX(0.25);} 60%{transform:translateX(-10%) scaleX(1.2);} 80%{transform:translateX(4%) scaleX(0.93);} 100%{transform:translateX(0%) scaleX(1);} }
 @keyframes brightDance { 0%{filter:brightness(0.5) drop-shadow(0 0 20px rgba(168,216,255,0.3));} 25%{filter:brightness(1.6) drop-shadow(0 0 40px rgba(168,216,255,0.9));} 50%{filter:brightness(0.4) drop-shadow(0 0 15px rgba(168,216,255,0.2));} 75%{filter:brightness(1.8) drop-shadow(0 0 50px rgba(168,216,255,1));} 100%{filter:brightness(0.5) drop-shadow(0 0 20px rgba(168,216,255,0.3));} }
@@ -116,15 +111,16 @@ nav.scrolled { background: rgba(15,15,15,0.92); border-color: var(--border-stron
 .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 
-/* ========== HERO - CENTER ========== */
+/* ========== HERO - TAM CENTER ========== */
 .hero {
-  padding: 60px 24px 60px;
+  padding: 60px 20px;
   max-width: 1200px; margin: 0 auto; position: relative;
   min-height: calc(100vh - var(--nav-total));
-  display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 50px;
 }
 
-.hero-top { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 50px; width: 100%; }
+.hero-top { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px; }
 
 .hero-status {
   display: inline-flex; align-items: center; gap: 12px;
@@ -137,24 +133,23 @@ nav.scrolled { background: rgba(15,15,15,0.92); border-color: var(--border-stron
 .hero-status .live-dot { width: 9px; height: 9px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 12px var(--accent); animation: livePulse 1.5s infinite; }
 @keyframes livePulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.3);opacity:0.6;} }
 
-.hero-tag-right { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; display: inline-flex; align-items: center; gap: 8px; }
-.hero-tag-right::before { content: ''; width: 20px; height: 1px; background: var(--text-muted); }
+.hero-tag-right { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; }
 
+.hero-title-block { display: flex; flex-direction: column; align-items: center; }
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(56px, 11vw, 170px);
-  font-weight: 800; line-height: 0.88; letter-spacing: -5px;
-  margin-bottom: 20px; text-transform: uppercase;
-  text-align: center;
+  font-size: clamp(48px, 10vw, 160px);
+  font-weight: 800; line-height: 0.88; letter-spacing: -4px;
+  text-transform: uppercase; text-align: center;
 }
 .hero-title .accent { background: linear-gradient(135deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-/* DEV FLUFFY - NEON */
+/* DEV FLUFFY */
 .fluffy-mega {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(90px, 22vw, 340px);
+  font-size: clamp(72px, 20vw, 320px);
   font-weight: 800; letter-spacing: -8px; line-height: 0.85;
-  text-transform: uppercase; margin: 20px auto 50px;
+  text-transform: uppercase; margin-top: 12px;
   color: transparent;
   -webkit-text-stroke: 2px rgba(255,255,255,0.15);
   text-stroke: 2px rgba(255,255,255,0.15);
@@ -170,7 +165,7 @@ nav.scrolled { background: rgba(15,15,15,0.92); border-color: var(--border-stron
 .fluffy-mega::before { content:'FLUFFY'; position:absolute; top:0; left:0; color:transparent; -webkit-text-stroke:1px rgba(0,229,255,0.4); filter:blur(8px); animation:glowPulse 3s infinite ease-in-out; z-index:-1; }
 @keyframes glowPulse { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
 
-.hero-foot { display: flex; flex-direction: column; align-items: center; gap: 32px; padding-top: 32px; border-top: 1px solid var(--border); width: 100%; max-width: 800px; margin: 0 auto; }
+.hero-foot { display: flex; flex-direction: column; align-items: center; gap: 28px; padding-top: 28px; border-top: 1px solid var(--border); width: 100%; max-width: 760px; }
 .hero-desc { max-width: 580px; font-size: 16px; color: var(--text-muted); line-height: 1.65; text-align: center; }
 .hero-meta { display: flex; gap: 48px; flex-wrap: wrap; justify-content: center; }
 .meta-item { font-family: 'Space Grotesk', sans-serif; text-align: center; }
@@ -178,32 +173,72 @@ nav.scrolled { background: rgba(15,15,15,0.92); border-color: var(--border-stron
 .meta-value { font-size: 13px; color: #fff; }
 
 /* ========== SECTION ========== */
-section { max-width: 1200px; margin: 0 auto; padding: 120px 24px; position: relative; z-index: 1; }
-.sec-head { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.sec-head > div:first-child { display: flex; flex-direction: column; align-items: center; }
+section { max-width: 1200px; margin: 0 auto; padding: 100px 20px; position: relative; z-index: 1; }
+.sec-head { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; gap: 0; }
 .sec-eyebrow { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 12px; justify-content: center; }
-.sec-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--text-muted); }
-.sec-eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--text-muted); }
-.sec-title { font-family: 'Syne', sans-serif; font-size: clamp(42px, 7vw, 96px); font-weight: 800; letter-spacing: -3px; line-height: 0.95; text-transform: uppercase; text-align: center; }
+.sec-eyebrow::before, .sec-eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--text-muted); }
+.sec-title { font-family: 'Syne', sans-serif; font-size: clamp(38px, 6.5vw, 88px); font-weight: 800; letter-spacing: -3px; line-height: 0.95; text-transform: uppercase; text-align: center; }
 .sec-title .accent { background: linear-gradient(135deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-/* ========== ABOUT - CENTER ========== */
-.about-grid { display: flex; flex-direction: column; align-items: center; gap: 60px; max-width: 900px; margin: 0 auto; }
+/* ========== ABOUT ========== */
+.about-container { display: flex; flex-direction: column; align-items: center; gap: 60px; max-width: 800px; margin: 0 auto; }
 .about-text { text-align: center; max-width: 720px; }
 .about-text p { color: var(--text-muted); font-size: 17px; line-height: 1.75; margin-bottom: 24px; }
 .about-text p strong { color: #fff; font-weight: 600; }
 
-.about-stats { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; padding-top: 40px; border-top: 1px solid var(--border); width: 100%; max-width: 720px; }
+.about-stats { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; padding-top: 40px; border-top: 1px solid var(--border); width: 100%; }
 .stat-row { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .stat-num { font-family: 'Syne', sans-serif; font-size: 72px; font-weight: 800; letter-spacing: -3px; line-height: 1; background: linear-gradient(135deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .stat-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
 
-/* ========== WORKS ========== */
-.works-wrapper { position: relative; margin: 0 -24px; }
-.works-scroll { display: flex; gap: 28px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 4px 24px 28px; scrollbar-width: none; }
+/* ========== SERVICES ========== */
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+.service-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 22px 26px; border-radius: 14px;
+  background: rgba(15,15,15,0.6); backdrop-filter: blur(12px);
+  border: 1px solid var(--border); text-align: left;
+  transition: all 0.3s;
+}
+.service-item:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.service-icon { 
+  width: 38px; height: 38px; border-radius: 10px; 
+  background: rgba(77,166,255,0.1); border: 1px solid rgba(77,166,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--neon-blue); font-size: 14px; flex-shrink: 0;
+}
+.service-text { font-family: 'Inter', sans-serif; font-size: 14px; color: #fff; font-weight: 500; }
+
+/* ========== WORKS - TAM CENTER ========== */
+.works-wrapper { 
+  position: relative; 
+  width: 100%; 
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex; justify-content: center;
+}
+.works-scroll { 
+  display: flex; gap: 28px; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding: 4px 0 28px; 
+  scrollbar-width: none;
+  width: 100%;
+  scroll-padding: 0 50%;
+}
+.works-scroll::before, .works-scroll::after { 
+  content: ''; flex: 0 0 calc(50% - 280px); 
+}
 .works-scroll::-webkit-scrollbar { display: none; }
 
-.work-item { flex: 0 0 auto; width: min(560px, 85vw); scroll-snap-align: center; position: relative; cursor: pointer; overflow: hidden; border-radius: 20px; background: rgba(15,15,15,0.6); backdrop-filter: blur(12px); border: 1px solid var(--border); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); text-align: left; }
+.work-item { 
+  flex: 0 0 auto; width: min(560px, 85vw); 
+  scroll-snap-align: center; 
+  position: relative; cursor: pointer; overflow: hidden; 
+  border-radius: 20px; background: rgba(15,15,15,0.6); 
+  backdrop-filter: blur(12px); border: 1px solid var(--border); 
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+  text-align: left; 
+}
 .work-item:hover { border-color: var(--border-strong); }
 .work-img { position: relative; width: 100%; padding-top: 65%; overflow: hidden; background: var(--bg-3); }
 .work-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -219,25 +254,57 @@ section { max-width: 1200px; margin: 0 auto; padding: 120px 24px; position: rela
 .act-btn:hover { color: #fff; border-color: var(--border-strong); }
 .like-btn.liked { color: #ff3355; border-color: rgba(255,51,85,0.3); background: rgba(255,51,85,0.05); }
 
-.works-nav { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 20px; }
-.nav-arrow { background: rgba(15,15,15,0.7); border: 1px solid var(--border); backdrop-filter: blur(10px); width: 44px; height: 44px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s; }
-.nav-arrow:hover { background: var(--bg-3); border-color: var(--border-strong); }
+.works-nav { display: flex; gap: 12px; align-items: center; justify-content: center; margin-top: 24px; }
+.nav-arrow { background: rgba(15,15,15,0.7); border: 1px solid var(--border); backdrop-filter: blur(10px); width: 48px; height: 48px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s; }
+.nav-arrow:hover { background: var(--bg-3); border-color: var(--border-strong); transform: scale(1.05); }
 
-.scroll-hint { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; justify-content: center; }
+.scroll-hint { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 .scroll-hint i { animation: swipeHint 2s infinite; }
 @keyframes swipeHint { 0%,100%{transform:translateX(0);} 50%{transform:translateX(8px);} }
 
 /* ========== RATES ========== */
+.payment-info { 
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+.payment-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 22px; border-radius: 999px;
+  background: rgba(15,15,15,0.6); backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600;
+  color: #fff; text-transform: uppercase; letter-spacing: 1.5px;
+}
+.payment-pill i { color: var(--accent); font-size: 14px; }
+
 .rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
-.rate-card { padding: 48px; border-radius: 20px; background: rgba(15,15,15,0.6); backdrop-filter: blur(12px); border: 1px solid var(--border); transition: all 0.3s; text-align: center; }
-.rate-card:hover { border-color: var(--border-strong); }
+.rate-card { 
+  padding: 44px 32px; border-radius: 20px; 
+  background: rgba(15,15,15,0.6); backdrop-filter: blur(12px); 
+  border: 1px solid var(--border); transition: all 0.3s; 
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.rate-card:hover { border-color: var(--border-strong); transform: translateY(-4px); }
 .rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; font-weight: 600; }
-.rate-value { font-family: 'Syne', sans-serif; font-size: 56px; font-weight: 800; color: #fff; margin: 18px 0 10px; letter-spacing: -2px; }
-.rate-desc { font-size: 13px; color: var(--text-dim); }
+.rate-value { font-family: 'Syne', sans-serif; font-size: 44px; font-weight: 800; color: #fff; margin: 10px 0 4px; letter-spacing: -1.5px; line-height: 1; }
+.rate-value .rbx-icon { 
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; margin-right: 4px;
+  vertical-align: middle;
+}
+.rate-desc { font-size: 13px; color: var(--text-dim); max-width: 280px; line-height: 1.5; }
+
+.rates-note {
+  margin-top: 32px; padding: 16px 24px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 12px;
+  color: var(--text-muted); display: inline-flex; align-items: center; gap: 8px;
+  border: 1px dashed var(--border); border-radius: 999px;
+}
+.rates-note i { color: var(--neon-blue); }
 
 /* ========== CONTACT ========== */
-.contact-block { text-align: center; padding: 80px 0; }
-.contact-big { font-family: 'Syne', sans-serif; font-size: clamp(52px, 10vw, 140px); font-weight: 800; letter-spacing: -4px; line-height: 0.92; margin: 28px 0 56px; text-transform: uppercase; }
+.contact-block { text-align: center; padding: 60px 0; }
+.contact-big { font-family: 'Syne', sans-serif; font-size: clamp(44px, 9vw, 120px); font-weight: 800; letter-spacing: -3px; line-height: 0.92; margin: 24px auto 48px; text-transform: uppercase; max-width: 1100px; }
 .contact-big .accent { background: linear-gradient(135deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .contact-wrapper { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .btn-contact { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; font-family: 'Space Grotesk', sans-serif; transition: all 0.2s; background: rgba(15,15,15,0.5); backdrop-filter: blur(10px); color: #fff; border: 1px solid var(--border-strong); text-transform: uppercase; letter-spacing: 1px; }
@@ -251,11 +318,11 @@ section { max-width: 1200px; margin: 0 auto; padding: 120px 24px; position: rela
 .mclose { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 24px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
 
 /* ========== FOOTER ========== */
-footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40px; position: relative; z-index: 1; }
+footer { border-top: 1px solid var(--border); padding: 40px 20px; margin-top: 40px; position: relative; z-index: 1; }
 .foot-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 16px; }
 .foot-brand { display: flex; align-items: center; gap: 10px; }
 .foot-brand img { height: 36px; }
-.foot-copy { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.foot-copy { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; }
 
 @media(max-width: 880px) {
   :root { --nav-total: 80px; }
@@ -264,27 +331,31 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
   .nav-links { display: none; }
   .nav-cta { padding: 7px 14px; font-size: 10px; }
   .hamburger { display: flex; }
-  .hero { padding: 30px 20px 40px; }
-  section { padding: 80px 20px; }
-  .rates-grid { grid-template-columns: 1fr; gap: 20px; }
-  .hero-meta { gap: 24px; }
-  .hero-status { font-size: 11px; padding: 10px 18px; }
+  .hero { padding: 30px 16px; gap: 36px; min-height: auto; }
+  section { padding: 70px 16px; }
+  .rates-grid, .services-grid { grid-template-columns: 1fr; gap: 16px; }
+  .hero-meta { gap: 22px; }
+  .hero-status { font-size: 11px; padding: 10px 16px; }
   .stat-num { font-size: 52px; }
-  .about-stats { gap: 40px; }
-  .rate-card { padding: 32px; }
-  .rate-value { font-size: 42px; }
+  .about-stats { gap: 40px; padding-top: 32px; }
+  .rate-card { padding: 36px 24px; }
+  .rate-value { font-size: 38px; }
   .work-info { padding: 22px; }
   .work-title { font-size: 22px; }
-  .works-wrapper { margin: 0 -20px; }
-  .works-scroll { padding: 4px 20px 24px; gap: 16px; }
-  .nav-arrow { width: 40px; height: 40px; }
+  .works-scroll::before, .works-scroll::after { flex: 0 0 16px; }
+  .works-scroll { padding: 4px 0 24px; gap: 16px; scroll-padding: 0 16px; }
+  .work-item { scroll-snap-align: start; }
+  .nav-arrow { width: 44px; height: 44px; }
   .blob { filter: blur(80px); opacity: 0.25; }
   .blob-1, .blob-2, .blob-3 { width: 300px; height: 300px; }
   .fluffy-mega { letter-spacing: -4px; -webkit-text-stroke-width: 1.5px; }
+  .service-item { padding: 18px 20px; }
 }
 
 @media(max-width: 480px) {
   nav .nav-cta { display: none; }
+  .hero-foot { padding-top: 24px; }
+  .meta-item { font-size: 12px; }
 }
 </style>
 </head>
@@ -322,6 +393,7 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
   <button class="menu-close" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
   <a href="#home" onclick="toggleMenu()">Home</a>
   <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
   <a href="#works" onclick="toggleMenu()">Works</a>
   <a href="#rates" onclick="toggleMenu()">Rates</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
@@ -336,6 +408,7 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
       <li><a href="#works">Works</a></li>
       <li><a href="#rates">Rates</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -345,11 +418,12 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
   </nav>
 
   <section class="hero" id="home">
-    <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-      <div class="hero-top">
-        <div class="hero-status"><span class="live-dot"></span> Commissions Open</div>
-        <div class="hero-tag-right">UI / UX Designer</div>
-      </div>
+    <div class="hero-top">
+      <div class="hero-status"><span class="live-dot"></span> Commissions Open</div>
+      <div class="hero-tag-right">Roblox UI Designer</div>
+    </div>
+    
+    <div class="hero-title-block">
       <h1 class="hero-title">
         Crafting<br>
         <span class="accent">interfaces</span><br>
@@ -357,11 +431,12 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
       </h1>
       <div class="fluffy-mega">FLUFFY</div>
     </div>
+    
     <div class="hero-foot">
-      <p class="hero-desc">I design modern, intuitive and eye-catching user interfaces for Roblox games. Every pixel serves a purpose, every interaction feels fluid.</p>
+      <p class="hero-desc">I design clean, clear and in-game friendly user interfaces for Roblox games. Focused on layout, readability and usability.</p>
       <div class="hero-meta">
-        <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">UI / UX Designer</div></div>
-        <div class="meta-item"><div class="meta-label">Focus</div><div class="meta-value">Game Interfaces</div></div>
+        <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">UI Designer</div></div>
+        <div class="meta-item"><div class="meta-label">Payment</div><div class="meta-value">Robux · Per Task</div></div>
         <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">Open to work</div></div>
       </div>
     </div>
@@ -369,16 +444,14 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
 
   <section id="about">
     <div class="sec-head">
-      <div>
-        <div class="sec-eyebrow">About</div>
-        <h2 class="sec-title">Designer with <span class="accent">vision.</span></h2>
-      </div>
+      <div class="sec-eyebrow">About</div>
+      <h2 class="sec-title">Designer with <span class="accent">vision.</span></h2>
     </div>
-    <div class="about-grid">
+    <div class="about-container">
       <div class="about-text">
-        <p>I'm <strong>Fluffy</strong>, a UI/UX designer specializing in user interfaces for the Roblox ecosystem. My favorite thing is blending modern web design standards with game interfaces.</p>
-        <p>Every project tells a different story; I bring the most suitable interface, the smoothest animations, and the cleanest typography to that story. <strong>Minimalist</strong>, <strong>functional</strong>, and <strong>memorable</strong> interfaces are my signature.</p>
-        <p>I'm currently available for new projects — if you have an idea, let's talk.</p>
+        <p>I'm <strong>Fluffy</strong>, a UI designer specializing in user interfaces for the Roblox ecosystem. I design clean, clear and in-game friendly user interfaces.</p>
+        <p>I focus on <strong>layout</strong>, <strong>readability</strong> and <strong>usability</strong> — every project tells a different story, and I bring the most suitable interface to that story.</p>
+        <p>I'm currently available for new commissions — if you have an idea, let's talk.</p>
       </div>
       <div class="about-stats">
         <div class="stat-row"><div class="stat-num">50+</div><div class="stat-label">Completed<br>projects</div></div>
@@ -387,12 +460,35 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
     </div>
   </section>
 
+  <section id="services">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Services</div>
+      <h2 class="sec-title">What I <span class="accent">do.</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-icon"><i class="fa-solid fa-display"></i></div>
+        <div class="service-text">All types of UI design for Roblox games</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+        <div class="service-text">Custom UI based on the game's concept</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fa-solid fa-cube"></i></div>
+        <div class="service-text">Roblox Studio–compatible interfaces</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+        <div class="service-text">Revisions if needed</div>
+      </div>
+    </div>
+  </section>
+
   <section id="works">
     <div class="sec-head">
-      <div>
-        <div class="sec-eyebrow">Selected Works</div>
-        <h2 class="sec-title">Recent <span class="accent">projects.</span></h2>
-      </div>
+      <div class="sec-eyebrow">Selected Works</div>
+      <h2 class="sec-title">Recent <span class="accent">projects.</span></h2>
     </div>
     
     <div class="works-wrapper">
@@ -404,35 +500,41 @@ footer { border-top: 1px solid var(--border); padding: 50px 24px; margin-top: 40
       <button class="nav-arrow" onclick="scrollWorks(1)"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
     
-    <div style="text-align: center;">
-      <div class="scroll-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe or use arrows to explore</div>
-    </div>
+    <div><div class="scroll-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe or use arrows to explore</div></div>
   </section>
 
   <section id="rates">
     <div class="sec-head">
-      <div>
-        <div class="sec-eyebrow">Pricing</div>
-        <h2 class="sec-title">Packages.</h2>
-      </div>
+      <div class="sec-eyebrow">Pricing</div>
+      <h2 class="sec-title">Packages.</h2>
     </div>
+    
+    <div class="payment-info">
+      <div class="payment-pill"><i class="fa-solid fa-coins"></i> Robux Only</div>
+      <div class="payment-pill"><i class="fa-solid fa-list-check"></i> Per Task</div>
+    </div>
+    
     <div class="rates-grid">
       <div class="rate-card">
-        <div class="rate-label">Full Game UI</div>
-        <div class="rate-value">R$ 5,000+</div>
-        <div class="rate-desc">Complete game interface design, all systems included.</div>
+        <div class="rate-label">General Work</div>
+        <div class="rate-value">2,000 – 5,000 R$</div>
+        <div class="rate-desc">Standard UI work, pricing depends on complexity.</div>
       </div>
       <div class="rate-card">
-        <div class="rate-label">Per Frame</div>
-        <div class="rate-value">R$ 500–1K</div>
-        <div class="rate-desc">Single panel or frame design work.</div>
+        <div class="rate-label">Simple Tasks</div>
+        <div class="rate-value">500 – 1,000 R$</div>
+        <div class="rate-desc">Single frame or small panel design.</div>
       </div>
+    </div>
+    
+    <div style="margin-top: 32px;">
+      <div class="rates-note"><i class="fa-solid fa-pushpin"></i> Reference-based UI requests are preferred</div>
     </div>
   </section>
 
   <section id="contact">
     <div class="contact-block">
-      <div class="sec-eyebrow" style="justify-content: center; display: inline-flex;">Get in touch</div>
+      <div class="sec-eyebrow">Get in touch</div>
       <h2 class="contact-big">Let's build <span class="accent">together.</span></h2>
       <div class="contact-wrapper">
         <a href="https://x.com/stor4m" target="_blank" class="btn-contact"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
