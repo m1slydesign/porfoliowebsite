@@ -14,10 +14,9 @@
   --bg: #030304;
   --text: #ffffff;
   --text-muted: #71717a;
-  --border: rgba(255, 255, 255, 0.06);
-  --card-bg: rgba(7, 7, 9, 0.6);
+  --border: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(5, 5, 6, 0.6);
   --green-neon: #00ff66;
-  --accent: #7c3aed;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,55 +30,52 @@ body {
   position: relative;
 }
 
-/* 🚀 AÇILIŞ LOGOSU (SPLASH SCREEN) & ANIMASYONU */
-#splash-screen {
-  position: fixed; inset: 0;
-  background: #030304;
-  z-index: 10000;
-  display: flex; align-items: center; justify-content: center;
-  transition: opacity 0.6s ease, visibility 0.6s;
+/* DEKORATİF NEON ARKA PLAN PARLAMALARI */
+.glow-bg-1 {
+  position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
+  background: radial-gradient(circle, rgba(120, 0, 255, 0.18) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(90px); pointer-events: none; z-index: -1;
 }
-.splash-logo {
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  background-image: url('acilis-logosu.jpg');
-  background-size: cover; background-position: center;
-  border: 2px solid rgba(255,255,255,0.1);
-  box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
-  animation: logoPulse 2s infinite ease-in-out;
-}
-@keyframes logoPulse {
-  0% { transform: scale(0.95); filter: brightness(0.8) drop-shadow(0 0 20px rgba(124, 58, 237, 0.2)); }
-  50% { transform: scale(1.05); filter: brightness(1.2) drop-shadow(0 0 50px rgba(124, 58, 237, 0.6)); }
-  100% { transform: scale(0.95); filter: brightness(0.8) drop-shadow(0 0 20px rgba(124, 58, 237, 0.2)); }
+.glow-bg-2 {
+  position: fixed; bottom: 10%; right: -5%; width: 45vw; height: 45vw;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(110px); pointer-events: none; z-index: -1;
 }
 
-/* MODERN NEON BLUR DEKORLARI */
-.blur-circle-1 {
-  position: fixed; top: -15%; left: -10%; width: 60vw; height: 60vw;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(0,0,0,0) 70%);
-  filter: blur(120px); pointer-events: none; z-index: -1;
+/* 🚀 İSTEDİĞİN O YUKARI KAYAN AÇILIŞ SİSTEMİ (DEV LOGOLU VE PULSE EFEKTLİ) */
+#instagram-loader {
+  position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column;
+  background: #000; align-items: center; justify-content: center;
+  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease;
 }
-.blur-circle-2 {
-  position: fixed; bottom: 15%; right: -10%; width: 50vw; height: 50vw;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, rgba(0,0,0,0) 70%);
-  filter: blur(100px); pointer-events: none; z-index: -1;
+.loader-logo-wrap { 
+  width: 260px; height: 260px; /* Logo alanını devasa yaptık kanka */
+  margin-bottom: 24px; 
+  animation: pulseLogo 1.8s infinite ease-in-out; 
+}
+.loader-logo-wrap img { 
+  width: 100%; height: 100%; object-fit: cover; 
+  border-radius: 50%; /* Tam yuvarlak elite görünüm */
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+.loader-text {
+  font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 5px; color: #fff; text-transform: uppercase; opacity: 0.8;
+}
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(0.95); filter: drop-shadow(0 0 20px rgba(120, 0, 255, 0.1)); }
+  50% { transform: scale(1.04); filter: drop-shadow(0 0 50px rgba(120, 0, 255, 0.4)); }
 }
 
-#app-view { z-index: 5; position: relative; }
+/* SİTE İÇERİK ALANI GEÇİŞİ */
+#app-view { opacity: 0; transform: scale(0.99); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 5; position: relative; }
 
-/* NAVBAR */
-nav { 
-  position: fixed; top: 0; width: 100%; z-index: 1000; 
-  height: 85px; display: flex; align-items: center;
-  transition: all 0.3s ease;
-}
-nav.scrolled { 
-  background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--border); 
-  height: 65px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-}
-.nav-container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+/* NAVBAR - TAM SENİN SEÇTİĞİN GİBİ JİLET GİBİ */
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 24px 0; transition: all 0.3s ease; }
+nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--border); padding: 14px 0; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
 
+/* Sol Taraftaki Temiz Yazı Logo (O soktuğumun yuvarlağı uçtu) */
 .logo-text { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -1px; color: #fff; text-decoration: none; text-transform: uppercase; }
 
 .nav-links { display: flex; list-style: none; gap: 32px; align-items: center; }
@@ -87,17 +83,17 @@ nav.scrolled {
 .nav-links a:hover { color: #fff; }
 
 .badge-neon {
-  display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 6px;
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px;
   font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700;
-  background: rgba(0, 255, 102, 0.04); color: var(--green-neon); border: 1px solid rgba(0, 255, 102, 0.12); text-transform: uppercase;
+  background: rgba(0, 255, 102, 0.05); color: var(--green-neon); border: 1px solid rgba(0, 255, 102, 0.15); text-transform: uppercase;
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* CHROMATIC HERO SPLIT */
+/* CHROMATIC HERO BANNER */
 .top-showcase-banner {
   width: 100%; max-width: 1100px; margin: 140px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
-  height: 400px; display: flex; position: relative; background: #000;
+  height: 440px; display: flex; position: relative; background: #000;
 }
 .chrome-half { flex: 1; height: 100%; display: flex; align-items: center; overflow: hidden; position: relative; }
 .chrome-half.left-grid {
@@ -107,19 +103,16 @@ nav.scrolled {
   justify-content: flex-end;
 }
 .chrome-half.right-plain { background: #070708; justify-content: flex-start; }
-
 .chrome-huge-text {
-  font-family: 'Syne', sans-serif; font-size: clamp(34px, 5.5vw, 68px); font-weight: 800;
+  font-family: 'Syne', sans-serif; font-size: clamp(30px, 5.5vw, 68px); font-weight: 800;
   line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; position: absolute; width: 200%; text-align: center;
 }
 .left-grid .chrome-huge-text { color: #000; left: 0; }
 .right-plain .chrome-huge-text {
-  left: -100%; 
-  background: linear-gradient(135deg, #ff0055, #00ffaa, #00bcff, #ff0055);
+  left: -100%; background: linear-gradient(135deg, #ff0055, #00ffaa, #00bcff, #ff0055);
   background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text; animation: chromeGradientFlow 4s ease infinite;
 }
-
 @keyframes chromeGradientFlow {
   0% { background-position: 0% 50%; filter: brightness(1.2); }
   50% { background-position: 100% 50%; filter: brightness(1.5); }
@@ -127,80 +120,92 @@ nav.scrolled {
 }
 
 .hero-mini { max-width: 650px; margin: 35px auto 45px; text-align: center; padding: 0 24px; }
-.hero-bio { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
+.hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
 
 /* SECTIONS */
-section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-.section-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
+section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 2; }
+.section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
 
-/* BENTO PORTFOLIO KARTLARI */
+/* BENTO KARTLAR */
 .bento-card {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.bento-card:hover { border-color: rgba(255, 255, 255, 0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+.bento-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateY(-2px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
 
+/* PORTFOLYO - SADECE GERÇEK ETKİLEŞİM */
 .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .project-card { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
 
-/* Resim Alanı */
-.project-img-display {
-  position: relative; width: 100%; padding-top: 56.25%;
-  border-radius: 8px; overflow: hidden; background: #0b0b0d;
-  border: 1px solid rgba(255,255,255,0.02);
-}
-.project-img-display img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.project-card:hover .project-img-display img { transform: scale(1.02); }
+/* Resim Alanı (Gözükmeyen her şeyi sildim temizlendi) */
+.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 8px; background: #0b0b0d; border: 1px solid rgba(255,255,255,0.03); }
+.project-img-wrapper img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.project-card:hover .project-img-wrapper img { transform: scale(1.02); }
 
-/* Alt Detaylar */
-.project-info-row { display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
-.p-title { font-size: 14px; font-weight: 600; color: #fff; }
+.project-meta { display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
+.project-name { font-size: 14px; font-weight: 600; color: #fff; }
 
 .interactive-bar { display: flex; gap: 16px; align-items: center; }
 .inter-btn { background: none; border: none; color: var(--text-muted); font-family: 'Space Grotesk', sans-serif; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
 .inter-btn:hover { color: #fff; }
 .like-btn.liked { color: #ff0055; }
 
-/* Yorum Kutusu Bölümü */
-.comment-section { display: none; border-top: 1px solid var(--border); margin-top: 12px; padding-top: 14px; }
+/* GERÇEK YORUM SİSTEMİ PANELDEN */
+.comment-section { display: none; border-top: 1px solid var(--border); margin-top: 4px; padding-top: 14px; }
 .comment-section.active { display: block; }
 .comment-list { max-height: 120px; overflow-y: auto; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-.comment-list li { background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: #d4d4d8; }
+.comment-list li { background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #d4d4d8; line-height: 1.4; }
 .comment-list li strong { color: #fff; margin-right: 4px; font-family: 'Space Grotesk', sans-serif; }
 
 .comment-inputs { display: flex; gap: 8px; }
 .comment-inputs input { flex: 1; background: #09090b; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; }
 .comment-inputs input:focus { outline: none; border-color: #71717a; }
-.comment-inputs button { background: #fff; color: #000; border: none; padding: 0 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: background 0.2s; }
-.comment-inputs button:hover { background: #e4e4e7; }
+.comment-inputs button { background: #fff; color: #000; border: none; padding: 0 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Space Grotesk', sans-serif; }
 
-/* RATES GRID */
-.rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.rate-card { padding: 30px; }
+/* PRICING (FİYATLANDIRMA) ALANI */
+.rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.rate-card { padding: 36px; }
 .rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
-.rate-value { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #fff; margin: 10px 0 6px; display: flex; flex-direction: column; }
-.rate-value span.alt-val { font-size: 13px; color: var(--text-muted); font-family: 'Space Grotesk', sans-serif; font-weight: 400; margin-top: 2px; }
-.rate-info { font-size: 13px; color: #a1a1aa; line-height: 1.5; }
+.rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
+.rate-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-.brand-signature { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; margin-top: 60px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; text-align: center; }
+/* MODAL ÖNİZLEME */
+#spin-modal {
+  display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2, 2, 3, 0.96);
+  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px;
+}
+#spin-modal.open { display: flex; }
+#modal-canvas { width: 100%; max-width: 800px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+#modal-img { width: 100%; height: 100%; object-fit: cover; }
+.modal-close { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; cursor: pointer; }
+
+/* FOOTER MARKA SIGNATURE */
+.brand-signature { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; margin-top: 40px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; text-align: center; }
 
 @media(max-width: 768px) {
-  nav { height: 70px; }
   .nav-links { display: none; }
   .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
-  .top-showcase-banner { height: 240px; margin-top: 100px; }
+  .top-showcase-banner { height: 260px; }
 }
 </style>
 </head>
 <body>
 
-<div id="splash-screen">
-  <div class="splash-logo"></div>
+<div class="glow-bg-1"></div>
+<div class="glow-bg-2"></div>
+
+<div id="instagram-loader">
+  <div class="loader-logo-wrap">
+    <img src="https://i.ibb.co/7J2PX37g/site-logosu.jpg" alt="FLUFFY DESIGNS">
+  </div>
+  <div class="loader-text">Loading System</div>
 </div>
 
-<div class="blur-circle-1"></div>
-<div class="blur-circle-2"></div>
+<div id="spin-modal">
+  <div id="modal-canvas"><img id="modal-img" src="" alt="preview"></div>
+  <button class="modal-close" onclick="closeModal()">Close System Preview</button>
+</div>
 
 <div id="app-view">
 
@@ -208,9 +213,10 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
     <div class="nav-container">
       <a href="#home" class="logo-text">FLUFFY</a>
       <ul class="nav-links">
-        <li><a href="#home">Ana Sayfa</a></li>
-        <li><a href="#projects">Portfolyo</a></li>
-        <li><a href="#rates">Fiyatlandırma</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#projects">Portfolio</a></li>
+        <li><a href="#rates">Rates</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li><div class="badge-neon"><span></span>Commissions Open</div></li>
       </ul>
     </div>
@@ -234,11 +240,11 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
     <div class="portfolio-grid">
       
       <div class="bento-card project-card" id="p1">
-        <div class="project-img-display">
-          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Custom Simulator HUD">
+        <div class="project-img-wrapper" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Simulator HUD Framework">
         </div>
-        <div class="project-info-row">
-          <span class="p-title">Simulator HUD Framework</span>
+        <div class="project-meta">
+          <span class="project-name">Simulator HUD Framework</span>
           <div class="interactive-bar">
             <button class="inter-btn like-btn" onclick="toggleLike('p1')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
             <button class="inter-btn" onclick="toggleComments('p1')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
@@ -256,11 +262,11 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
       </div>
 
       <div class="bento-card project-card" id="p2">
-        <div class="project-img-display">
-          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Bento Market View">
+        <div class="project-img-wrapper" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Symmetrical Bento Market View">
         </div>
-        <div class="project-info-row">
-          <span class="p-title">Symmetrical Bento Market</span>
+        <div class="project-meta">
+          <span class="project-name">Symmetrical Bento Market</span>
           <div class="interactive-bar">
             <button class="inter-btn like-btn" onclick="toggleLike('p2')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
             <button class="inter-btn" onclick="toggleComments('p2')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
@@ -281,67 +287,59 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
   </section>
 
   <section id="rates">
-    <div class="section-title">Fiyatlandırma</div>
+    <div class="section-title">Fiyatlandırma & Paketler</div>
     <div class="rates-grid">
-      
       <div class="bento-card rate-card">
-        <div class="rate-label">Basic UI / Tweaks</div>
-        <div class="rate-value">
-          <span>R$ 500 - 1,000</span>
-          <span class="alt-val">veya Frame Başı: $10 - $15</span>
-        </div>
-        <p class="rate-info">Küçük HUD düzenlemeleri, hizalama revizyonları ve basit panel yerleşimleri.</p>
+        <div class="rate-label">Komple Oyun Arayüz Tasarımı</div>
+        <div class="rate-value">R$ 5,000+</div>
+        <p class="rate-info">Complete core HUD framework styling, full custom scale integration rules, and high-fidelity multi-frame views.</p>
       </div>
-
       <div class="bento-card rate-card">
-        <div class="rate-label">Advanced Layouts</div>
-        <div class="rate-value">
-          <span>R$ 2,000 - 5,000+</span>
-          <span class="alt-val">veya Frame Başı: $20 - $25</span>
-        </div>
-        <p class="rate-info">Gelişmiş bento menüler, responsive sistem tasarımları ve oyun döngüsü arayüzleri.</p>
+        <div class="rate-label">Frame / Panel Başı İşler</div>
+        <div class="rate-value">R$ 500 - 1,000</div>
+        <p class="rate-info">Targeted responsive UI fix, custom responsive frame creation, or dedicated alignment protocols.</p>
       </div>
-
     </div>
   </section>
 
-  <div style="padding-bottom: 60px;">
+  <section id="contact" style="padding-bottom: 80px;">
     <div class="brand-signature">® FLUFFY DESIGN</div>
-  </div>
+  </section>
 
 </div>
 
 <script>
-// 🕒 Açılış Ekranı Kontrolü (Görseller yüklenince kapanır)
-window.addEventListener('load', () => {
-  const splash = document.getElementById('splash-screen');
+// Tam istediğin o yukarı kayan animasyon entegrasyonu
+window.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('instagram-loader');
+  const app = document.getElementById('app-view');
   setTimeout(() => {
-    splash.style.opacity = '0';
-    splash.style.visibility = 'hidden';
-  }, 1200); // 1.2 saniye o tatlı logoyu gösterip kapatıyoruz
+    loader.style.transform = 'translateY(-100%)';
+    app.style.opacity = '1';
+    app.style.transform = 'scale(1)';
+    setTimeout(() => { loader.style.display = 'none'; }, 800);
+  }, 1400); // Dev logonun ekranda parlama süresi
 });
 
-// Navbar Scroll Efekti
+// Navbar Scroll Arka Plan
 window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-// Like ve Yorum Veri Tabanı Taklidi (Local Storage)
+// Sıfırdan başlayan ve hafızada tutulan Like / Yorum Sistemi
 document.addEventListener('DOMContentLoaded', () => {
   ['p1', 'p2'].forEach(id => {
-    // Like Kurulumu
+    // Like Kontrolü (Başlangıçta temiz 0)
     const isLiked = localStorage.getItem(`liked_${id}`) === 'true';
     const btn = document.querySelector(`#${id} .like-btn`);
     const countEl = btn.querySelector('.like-count');
-    let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || Math.floor(Math.random() * 40) + 10;
+    let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || 0;
     
-    if(!localStorage.getItem(`likes_count_${id}`)) {
-      localStorage.setItem(`likes_count_${id}`, likes);
-    }
+    localStorage.setItem(`likes_count_${id}`, likes);
     countEl.innerText = likes;
     if(isLiked) btn.classList.add('liked');
     
-    // Yorum Kurulumu
+    // Yorum Getir
     const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
     const listEl = document.getElementById(`comment-list-${id}`);
     savedComments.forEach(c => {
@@ -377,7 +375,6 @@ function toggleComments(id) {
 function addComment(id) {
   const nameInput = document.getElementById(`comment-name-${id}`);
   const textInput = document.getElementById(`comment-text-${id}`);
-  
   const name = nameInput.value.trim() || 'Anonim';
   const text = textInput.value.trim();
   
@@ -394,6 +391,21 @@ function addComment(id) {
   
   textInput.value = '';
 }
+
+// Görsel Önizleme Modalı Kontrolleri
+const modal = document.getElementById('spin-modal');
+const modalImg = document.getElementById('modal-img');
+
+function openModal(imgSrc) {
+  modalImg.src = imgSrc;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 </script>
 </body>
 </html>
