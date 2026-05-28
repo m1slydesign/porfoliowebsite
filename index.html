@@ -12,19 +12,38 @@
 :root {
   --bg: #030304;
   --text: #ffffff;
-  --text-muted: #71717a;
-  --border: rgba(255, 255, 255, 0.08);
-  --card-bg: rgba(5, 5, 6, 0.6);
+  --text-muted: #a1a1aa;
+  --border: rgba(255, 255, 255, 0.12);
+  --card-bg: rgba(8, 8, 12, 0.75);
   --green-neon: #00ff66;
+  --purple-neon: #9d4edd;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; background-color: var(--bg); }
 body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; position: relative; }
 
-.glow-bg-1 { position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(120, 0, 255, 0.2) 0%, rgba(0,0,0,0) 70%); filter: blur(90px); pointer-events: none; z-index: -1; }
-.glow-bg-2 { position: fixed; bottom: 10%; right: -5%; width: 45vw; height: 45vw; background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(0,0,0,0) 70%); filter: blur(110px); pointer-events: none; z-index: -1; }
-.bg-overlay { position: fixed; inset: 0; background: linear-gradient(180deg, rgba(3,3,4,0.6) 0%, rgba(3,3,4,0.9) 100%); z-index: 0; pointer-events: none; }
+/* METEOR CANVAS */
+#meteor-canvas {
+  position: fixed; inset: 0; width: 100vw; height: 100vh;
+  z-index: -1; pointer-events: none;
+}
+
+/* BLURLU VE KARARTILMIŞ PREMIUM ARKAPLAN */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url('https://i.ibb.co/6cC3yYZM/arkaplan.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px) brightness(0.4);
+  z-index: -3;
+  pointer-events: none;
+}
+
+.glow-bg-1 { position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(120, 0, 255, 0.25) 0%, rgba(0,0,0,0) 70%); filter: blur(90px); pointer-events: none; z-index: -2; }
+.glow-bg-2 { position: fixed; bottom: 10%; right: -5%; width: 45vw; height: 45vw; background: radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(0,0,0,0) 70%); filter: blur(110px); pointer-events: none; z-index: -2; }
+.bg-overlay { position: fixed; inset: 0; background: linear-gradient(180deg, rgba(3,3,4,0.7) 0%, rgba(3,3,4,0.95) 100%); z-index: -2; pointer-events: none; }
 
 /* AÇILIŞ EKRANI */
 #instagram-loader {
@@ -52,86 +71,128 @@ body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var
 
 #app-view { opacity: 0; transform: scale(0.99); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 5; position: relative; }
 
-/* NAVBAR */
-nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 0; transition: all 0.3s ease; }
-nav.scrolled { background: rgba(3,3,4,0.85); border-bottom: 1px solid var(--border); padding: 12px 0; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-.nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+/* BÜYÜTÜLMÜŞ VE YENİDEN HİZALANMIŞ NAVBAR */
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 28px 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); background: rgba(3, 3, 4, 0.4); backdrop-filter: blur(8px); }
+nav.scrolled { background: rgba(3,3,4,0.92); border-bottom: 1px solid var(--border); padding: 16px 0; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: center; }
 
-/* LOGO - tüylü yazı + yanında yuvarlak ikon */
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo-fluffy-img { height: 36px; width: auto; object-fit: contain; }
-.logo-round-wrap { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); overflow: hidden; flex-shrink: 0; }
+/* LOGO SOLDA - YAZI ORTADA DUZENI */
+.logo { display: flex; align-items: center; gap: 20px; text-decoration: none; position: relative; width: 100%; }
+.logo-round-wrap { width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.25); overflow: hidden; flex-shrink: 0; box-shadow: 0 0 15px rgba(255,255,255,0.1); transition: transform 0.3s ease; }
 .logo-round-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.logo:hover .logo-round-wrap { transform: rotate(15deg) scale(1.05); border-color: var(--green-neon); }
 
-.nav-links { display: flex; list-style: none; gap: 32px; align-items: center; }
-.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: #fff; }
-.badge-neon { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; background: rgba(0,255,102,0.05); color: var(--green-neon); border: 1px solid rgba(0,255,102,0.15); text-transform: uppercase; }
-.badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
+.logo-fluffy-img { height: 44px; width: auto; object-fit: contain; position: absolute; left: 50%; transform: translateX(-50%); filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+
+.nav-links { display: flex; list-style: none; gap: 36px; align-items: center; flex-shrink: 0; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s, text-shadow 0.2s; }
+.nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+/* NEON VE ANİMASYONLU BUTTON / BADGE SİSTEMLERİ */
+.badge-neon { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; background: rgba(0,255,102,0.04); color: var(--green-neon); border: 1px solid rgba(0,255,102,0.2); text-transform: uppercase; box-shadow: 0 0 15px rgba(0,255,102,0.05); }
+.badge-neon span { width: 8px; height: 8px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 10px var(--green-neon); animation: pulse 2s infinite; }
+@keyframes pulse { 0% { transform: scale(0.9); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 14px var(--green-neon); } 100% { transform: scale(0.9); opacity: 0.6; } }
 
 /* HERO BANNER */
-.top-showcase-banner { width: 100%; max-width: 1100px; margin: 120px auto 30px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); height: 440px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); display: flex; position: relative; background: #000; }
+.top-showcase-banner { width: 100%; max-width: 1100px; margin: 160px auto 30px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); height: 440px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); display: flex; position: relative; background: #000; }
 .chrome-half { flex: 1; height: 100%; display: flex; align-items: center; overflow: hidden; position: relative; }
 .chrome-half.left-grid { background-color: #ededed; background-image: linear-gradient(45deg,#e0e0e0 25%,transparent 25%),linear-gradient(-45deg,#e0e0e0 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e0e0e0 75%),linear-gradient(-45deg,transparent 75%,#e0e0e0 75%); background-size: 20px 20px; background-position: 0 0,0 10px,10px -10px,-10px 0; justify-content: flex-end; }
 .chrome-half.right-plain { background: #070708; justify-content: flex-start; }
 .chrome-huge-text { font-family: 'Syne', sans-serif; font-size: clamp(30px,5.5vw,68px); font-weight: 800; line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; position: absolute; width: 200%; text-align: center; }
 .left-grid .chrome-huge-text { color: #000; left: 0; }
 .right-plain .chrome-huge-text { left: -100%; background: linear-gradient(135deg,#ff0055,#00ffaa,#00bcff,#ff0055); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: chromeGradientFlow 4s ease infinite; }
-@keyframes chromeGradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-.bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; position: relative; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
-.bento-card:hover { border-color: rgba(255,255,255,0.18); transform: translateY(-2px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+.bento-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; position: relative; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.bento-card:hover { border-color: rgba(0, 255, 102, 0.4); transform: translateY(-4px) scale(1.01); box-shadow: 0 20px 40px rgba(0, 255, 102, 0.1); }
 
-.hero-mini { max-width: 650px; margin: 35px auto 45px; text-align: center; padding: 0 24px; }
-.hero-bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
-.btn-group { display: flex; gap: 12px; justify-content: center; }
-.btn { display: inline-flex; align-items: center; padding: 12px 28px; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; font-family: 'Space Grotesk', sans-serif; }
-.btn.primary { background: #fff; color: #000; }
-.btn.primary:hover { background: #e4e4e7; transform: translateY(-1px); }
-.btn.secondary { background: transparent; color: #fff; border: 1px solid var(--border); }
-.btn.secondary:hover { background: rgba(255,255,255,0.04); border-color: #fff; }
+.hero-mini { max-width: 650px; margin: 35px auto 45px; text-align: center; padding: 0 24px; position: relative; z-index: 10; }
+.hero-bio { font-size: 16px; color: #e4e4e7; line-height: 1.6; margin-bottom: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
 
-section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relative; z-index: 2; }
-.section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
-.portfolio-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
-.project-card { padding: 14px; cursor: pointer; display: flex; flex-direction: column; }
-.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 8px; background: #0b0b0d; }
-.project-img-wrapper img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.project-card:hover .project-img-wrapper img { transform: scale(1.02); }
-.project-meta { padding: 12px 4px 2px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
-.project-name { font-size: 14px; font-weight: 600; color: #fff; }
-.project-action { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
-.project-action::after { content: ' ↗'; font-size: 14px; }
+/* NEON BUTTONS */
+.btn { display: inline-flex; align-items: center; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: 'Space Grotesk', sans-serif; position: relative; overflow: hidden; }
+.btn.primary { background: #fff; color: #000; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
+.btn.primary:hover { background: var(--green-neon); color: #000; transform: translateY(-2px); box-shadow: 0 0 25px var(--green-neon); }
+.btn.secondary { background: rgba(255,255,255,0.03); color: #fff; border: 1px solid var(--border); }
+.btn.secondary:hover { background: rgba(255,255,255,0.08); border-color: var(--purple-neon); color: #fff; transform: translateY(-2px); box-shadow: 0 0 25px rgba(157, 78, 221, 0.4); }
 
-.rates-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
-.rate-card { padding: 36px; }
-.rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
-.rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
-.rate-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 2; }
+.section-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; border-left: 3px solid var(--green-neon); padding-left: 12px; }
 
-#spin-modal { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2,2,3,0.96); backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px; }
+/* PORTFOLYO KARTLARI VE SOSYAL ETKİLEŞİM */
+.portfolio-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 32px; }
+.project-card { padding: 18px; cursor: default; display: flex; flex-direction: column; }
+.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 10px; background: #0b0b0d; cursor: pointer; }
+.project-img-wrapper img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.project-img-wrapper:hover img { transform: scale(1.04); }
+
+.project-meta { padding: 16px 4px 10px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.project-name { font-size: 15px; font-weight: 700; color: #fff; }
+.project-action { font-size: 12px; color: var(--green-neon); text-transform: uppercase; font-weight: 700; cursor: pointer; }
+
+/* LIKE & COMMENT ALANI */
+.project-social { display: flex; flex-direction: column; gap: 12px; padding-top: 14px; }
+.social-triggers { display: flex; gap: 16px; align-items: center; }
+.social-btn { background: none; border: none; color: var(--text-muted); font-size: 13px; font-family: 'Space Grotesk', sans-serif; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.social-btn:hover { color: #fff; }
+.social-btn.liked { color: #ff3366; }
+.social-btn.liked i { animation: heartBeat 0.3s ease; }
+@keyframes heartBeat { 0%{transform:scale(1)} 50%{transform:scale(1.3)} 100%{transform:scale(1)} }
+
+.comments-box { display: none; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px; margin-top: 4px; border: 1px solid rgba(255,255,255,0.04); }
+.comments-box.active { display: block; }
+.comments-list { max-height: 90px; overflow-y: auto; list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; font-size: 12px; padding-right: 4px; }
+.comments-list li { background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 4px; color: #e4e4e7; border-left: 2px solid var(--purple-neon); }
+.comment-input-row { display: flex; gap: 8px; }
+.comment-input-row input { flex: 1; background: #121217; border: 1px solid var(--border); border-radius: 4px; padding: 6px 12px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; }
+.comment-input-row input:focus { outline: none; border-color: var(--green-neon); }
+.comment-input-row button { background: #fff; color: #000; border: none; padding: 0 12px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Space Grotesk', sans-serif; }
+.comment-input-row button:hover { background: var(--green-neon); }
+
+/* FİYATLANDIRMA DİNAMİK PROTOKOL */
+.rates-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 32px; }
+.rate-card { padding: 40px; border-left: 4px solid var(--border); }
+.rate-card:hover { border-left-color: var(--green-neon); }
+.rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 12px; text-transform: uppercase; color: var(--green-neon); letter-spacing: 1.5px; font-weight: 700; }
+.rate-value { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: #fff; margin: 14px 0 6px; display: flex; flex-direction: column; gap: 2px; }
+.rate-value span.alt-val { font-size: 16px; color: var(--text-muted); font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
+.rate-info { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-top: 10px; }
+
+/* 360 PREVIEW MODAL GÜNCELLEMESİ */
+#spin-modal { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2,2,3,0.97); backdrop-filter: blur(20px); align-items: center; justify-content: center; flex-direction: column; padding: 24px; }
 #spin-modal.open { display: flex; }
-#modal-canvas { width: 100%; max-width: 800px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+#modal-canvas { width: 100%; max-width: 850px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0, 255, 102, 0.3); background: #000; position: relative; box-shadow: 0 0 50px rgba(0,255,102,0.15); }
 #modal-img { width: 100%; height: 100%; object-fit: cover; }
-.modal-close { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; cursor: pointer; }
-.modal-close:hover { background: #fff; color: #000; }
+.preview-360-overlay { position: absolute; inset: 0; pointer-events: none; border: 1px solid rgba(255,255,255,0.05); background: linear-gradient(rgba(0,255,102,0.03) 50%, rgba(0,0,0,0) 50%); background-size: 100% 4px; }
+.preview-scanline { position: absolute; width: 100%; height: 100%; top: -100%; left: 0; background: linear-gradient(to bottom, transparent, rgba(0,255,102,0.15), transparent); animation: scan360 3s linear infinite; }
+@keyframes scan360 { 0% { top: -100%; } 100% { top: 100%; } }
+.badge-360 { position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.75); border: 1px solid var(--green-neon); color: var(--green-neon); padding: 4px 10px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+.modal-close { margin-top: 24px; background: none; border: 1px solid var(--border); color: #fff; padding: 12px 26px; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+.modal-close:hover { background: #fff; color: #000; box-shadow: 0 0 20px #fff; }
 .brand-signature { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; margin-top: 40px; text-transform: uppercase; color: #fff; letter-spacing: 1px; opacity: 0.9; }
+
+@media(max-width:912px) {
+  .logo-fluffy-img { display: none; }
+  .logo { width: auto; }
+  .nav-container { justify-content: space-between; }
+}
 
 @media(max-width:768px) {
   .nav-links { display: none; }
-  .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
-  .top-showcase-banner { height: 260px; }
+  .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 20px; }
+  .top-showcase-banner { height: 260px; margin-top: 110px; }
   .loader-big-text { font-size: 42px; }
 }
 </style>
 </head>
 <body>
 
+<canvas id="meteor-canvas"></canvas>
+
 <div class="glow-bg-1"></div>
 <div class="glow-bg-2"></div>
 <div class="bg-overlay"></div>
 
-<!-- AÇILIŞ EKRANI -->
 <div id="instagram-loader">
   <div class="loader-text-wrap">
     <div class="loader-corner tl"></div>
@@ -145,25 +206,29 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 </div>
 
 <div id="spin-modal">
-  <div id="modal-canvas"><img id="modal-img" src="" alt="preview"></div>
-  <button class="modal-close" onclick="closeModal()">Close System Preview</button>
+  <div id="modal-canvas">
+    <div class="preview-360-overlay"></div>
+    <div class="preview-scanline"></div>
+    <div class="badge-360"><i class="fa-solid fa-rotate"></i> 360° System View</div>
+    <img id="modal-img" src="" alt="preview">
+  </div>
+  <button class="modal-close" onclick="closeModal()">Sistem Önizlemesini Kapat</button>
 </div>
 
 <div id="app-view">
+  
   <nav id="navbar">
     <div class="nav-container">
       <a href="#home" class="logo">
-        <!-- Tüylü Fluffy yazısı -->
-        <img class="logo-fluffy-img" src="https://i.ibb.co/N6Z5s0w1/copilot-image-1779862648816.png" alt="Fluffy">
-        <!-- Yuvarlak karanlık göz logosu -->
         <div class="logo-round-wrap">
           <img src="https://i.ibb.co/rKrCQktj/copilot-image-1779864288025.png" alt="Logo">
         </div>
+        <img class="logo-fluffy-img" src="https://i.ibb.co/N6Z5s0w1/copilot-image-1779862648816.png" alt="Fluffy">
       </a>
       <ul class="nav-links">
-        <li><a href="#home">Ana Sayfa</a></li>
+        <li><a href="#home">Merkez</a></li>
         <li><a href="#projects">Portfolyo</a></li>
-        <li><a href="#rates">Fiyatlandırma</a></li>
+        <li><a href="#rates">Tarifeler</a></li>
         <li><a href="#contact">İletişim</a></li>
         <li><div class="badge-neon"><span></span>Commissions Open</div></li>
       </ul>
@@ -184,31 +249,76 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
   </div>
 
   <section id="projects">
-    <div class="section-title">Seçilmiş Çalışmalar</div>
+    <div class="section-title">Mühendislik Harikası Arayüzler</div>
     <div class="portfolio-grid">
-      <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
-        <div class="project-img-wrapper"><img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Work 1"></div>
-        <div class="project-meta"><span class="project-name">Custom Simulator HUD Framework</span><span class="project-action">İncele</span></div>
+      
+      <div class="bento-card project-card" id="p1">
+        <div class="project-img-wrapper" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Work 1">
+        </div>
+        <div class="project-meta">
+          <span class="project-name class-random-title">Loading Framework...</span>
+          <span class="project-action" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">360° İncele</span>
+        </div>
+        <div class="project-social">
+          <div class="social-triggers">
+            <button class="social-btn" onclick="toggleLike('p1')"><i class="fa-solid fa-heart"></i> <span class="like-count">142</span></button>
+            <button class="social-btn" onclick="toggleComments('p1')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
+          </div>
+          <div class="comments-box" id="comments-p1">
+            <ul class="comments-list" id="list-p1"></ul>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Fikrini belirt..." id="input-p1">
+              <button onclick="addComment('p1')">Gönder</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
-        <div class="project-img-wrapper"><img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Work 2"></div>
-        <div class="project-meta"><span class="project-name">Symmetrical Bento Market View</span><span class="project-action">İncele</span></div>
+
+      <div class="bento-card project-card" id="p2">
+        <div class="project-img-wrapper" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Work 2">
+        </div>
+        <div class="project-meta">
+          <span class="project-name class-random-title">Loading Framework...</span>
+          <span class="project-action" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">360° İncele</span>
+        </div>
+        <div class="project-social">
+          <div class="social-triggers">
+            <button class="social-btn" onclick="toggleLike('p2')"><i class="fa-solid fa-heart"></i> <span class="like-count">98</span></button>
+            <button class="social-btn" onclick="toggleComments('p2')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
+          </div>
+          <div class="comments-box" id="comments-p2">
+            <ul class="comments-list" id="list-p2"></ul>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Fikrini belirt..." id="input-p2">
+              <button onclick="addComment('p2')">Gönder</button>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </section>
 
   <section id="rates">
-    <div class="section-title">Fiyatlandırma & Paketler</div>
+    <div class="section-title">Esnek Fiyatlandırma Protokolü</div>
     <div class="rates-grid">
       <div class="bento-card rate-card">
-        <div class="rate-label">Komple Oyun Arayüz Tasarımı</div>
-        <div class="rate-value">R$ 5,000+</div>
-        <p class="rate-info">Complete core HUD framework styling, full custom scale integration rules, and high-fidelity multi-frame views.</p>
+        <div class="rate-label">Temel Düzey / Basit Düzenlemeler</div>
+        <div class="rate-value">
+          <span>R$ 500 - 1,000</span>
+          <span class="alt-val">veya Frame Başı 5$ - 10$</span>
+        </div>
+        <p class="rate-info">Hafif HUD optimizasyonları, hazır şablon yerleşimleri, tekli menü/ekran tasarımları ve hizalama düzeltmeleri.</p>
       </div>
       <div class="bento-card rate-card">
-        <div class="rate-label">Frame / Panel Başı İşler</div>
-        <div class="rate-value">R$ 500 - 1,000</div>
-        <p class="rate-info">Targeted responsive UI fix, custom responsive frame creation, or dedicated alignment protocols.</p>
+        <div class="rate-label">Üst Düzey / Gelişmiş Kompakt Sistemler</div>
+        <div class="rate-value">
+          <span>R$ 2,000 - 5,000+</span>
+          <span class="alt-val">veya Frame Başı 20$ - 50$+</span>
+        </div>
+        <p class="rate-info">Zorluk ve işin düzeyine göre ölçeklenen tam teşekküllü Simulator/Tycoon oyun sistemleri, simetrik Bento Grid mağaza arayüzleri.</p>
       </div>
     </div>
   </section>
@@ -224,26 +334,142 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 </div>
 
 <script>
+// AÇILIŞ VE RANDOM ISIMLER
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('instagram-loader');
   const app = document.getElementById('app-view');
+  
+  // Random Proje İsim Havuzu
+  const prefixes = ["Brainrot", "Cyberpunk", "Symmetrical", "Hyper", "Elite", "Stellar"];
+  const cores = ["Slime Simulator HUD", "Ninja Tycoon Framework", "Bento Market View", "Inventory Core", "Dashboard Blueprint"];
+  
+  document.querySelectorAll('.class-random-title').forEach(el => {
+    const randPre = prefixes[Math.floor(Math.random() * prefixes.length)];
+    const randCore = cores[Math.floor(Math.random() * cores.length)];
+    el.innerText = `${randPre} ${randCore}`;
+  });
+
+  initSocials();
+
   setTimeout(() => {
     loader.style.transform = 'translateY(-100%)';
     app.style.opacity = '1';
     app.style.transform = 'scale(1)';
     setTimeout(() => { loader.style.display = 'none'; }, 800);
-  }, 2000);
+  }, 1600);
 });
 
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
+// LAGSIZ METEOR CANVAS YAĞMURU
+const canvas = document.getElementById('meteor-canvas');
+const ctx = canvas.getContext('2d');
+let meteors = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class Meteor {
+  constructor() { this.reset(); this.y = Math.random() * canvas.height; }
+  reset() {
+    this.x = Math.random() * canvas.width + 200;
+    this.y = -20;
+    this.length = Math.random() * 80 + 50;
+    this.speed = Math.random() * 4 + 3;
+    this.alpha = Math.random() * 0.4 + 0.1;
+  }
+  update() {
+    this.x -= this.speed;
+    this.y += this.speed * 0.7;
+    if (this.x < -this.length || this.y > canvas.height + this.length) { this.reset(); }
+  }
+  draw() {
+    ctx.strokeStyle = `rgba(0, 255, 102, ${this.alpha})`;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x - this.length, this.y + this.length * 0.7);
+    ctx.stroke();
+  }
+}
+
+for(let i=0; i<6; i++) { meteors.push(new Meteor()); }
+function animateMeteors() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  meteors.forEach(m => { m.update(); m.draw(); });
+  requestAnimationFrame(animateMeteors);
+}
+animateMeteors();
+
+// 360 MODAL
 const modal = document.getElementById('spin-modal');
 const modalImg = document.getElementById('modal-img');
 function openModal(src) { modalImg.src = src; modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
 modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+
+// LOCALSTORAGE DESTEKLİ SOSYAL ETKİLEŞİM SİSTEMİ
+function initSocials() {
+  ['p1', 'p2'].forEach(id => {
+    const isLiked = localStorage.getItem(`liked_${id}`) === 'true';
+    if(isLiked) {
+      const btn = document.querySelector(`#${id} .social-triggers .social-btn`);
+      btn.classList.add('liked');
+      const countEl = btn.querySelector('.like-count');
+      countEl.innerText = parseInt(countEl.innerText) + 1;
+    }
+    const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
+    const listEl = document.getElementById(`list-${id}`);
+    savedComments.forEach(text => {
+      const li = document.createElement('li');
+      li.innerText = text;
+      listEl.appendChild(li);
+    });
+  });
+}
+
+function toggleLike(id) {
+  const btn = document.querySelector(`#${id} .social-triggers .social-btn`);
+  const countEl = btn.querySelector('.like-count');
+  let currentCount = parseInt(countEl.innerText);
+  
+  if(btn.classList.contains('liked')) {
+    btn.classList.remove('liked');
+    countEl.innerText = currentCount - 1;
+    localStorage.setItem(`liked_${id}`, 'false');
+  } else {
+    btn.classList.add('liked');
+    countEl.innerText = currentCount + 1;
+    localStorage.setItem(`liked_${id}`, 'true');
+  }
+}
+
+function toggleComments(id) {
+  document.getElementById(`comments-${id}`).classList.toggle('active');
+}
+
+function addComment(id) {
+  const input = document.getElementById(`input-${id}`);
+  if(!input.value.trim()) return;
+  
+  const listEl = document.getElementById(`list-${id}`);
+  const li = document.createElement('li');
+  li.innerText = input.value;
+  listEl.appendChild(li);
+  
+  const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
+  savedComments.push(input.value);
+  localStorage.setItem(`comments_${id}`, JSON.stringify(savedComments));
+  
+  input.value = '';
+  listEl.scrollTop = listEl.scrollHeight;
+}
 </script>
 </body>
 </html>
