@@ -30,27 +30,115 @@ body {
   position: relative;
 }
 
-/* 🚀 AÇILIŞ LOADER - YENİ LOGO + FLUFFY YAZISI + FADE BG */
+/* 🚀 AÇILIŞ LOADER - LIGHTNING EFEKTLİ LOGO */
 #instagram-loader {
   position: fixed; inset: 0; z-index: 99999; display: flex;
   background: #000; align-items: center; justify-content: center;
   flex-direction: column; gap: 24px;
   transition: opacity 1s ease, background 1s ease;
+  overflow: hidden;
 }
 #instagram-loader.fade-out {
   background: rgba(0,0,0,0);
   opacity: 0;
   pointer-events: none;
 }
+
+/* RANDOM FLASH BACKGROUND */
+#instagram-loader::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0);
+  animation: lightningFlash 3.5s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes lightningFlash {
+  0%, 100% { background: rgba(255,255,255,0); }
+  48% { background: rgba(255,255,255,0); }
+  49% { background: rgba(180,210,255,0.15); }
+  50% { background: rgba(255,255,255,0); }
+  51% { background: rgba(180,210,255,0.25); }
+  52% { background: rgba(255,255,255,0); }
+  75% { background: rgba(255,255,255,0); }
+  76% { background: rgba(150,200,255,0.18); }
+  77% { background: rgba(255,255,255,0); }
+}
+
 .loader-logo-wrap { 
-  width: 180px; 
-  height: 180px; 
-  animation: logoFx 2.5s infinite ease-in-out;
-  display: flex; align-items: center; justify-content: center;
+  width: 200px; 
+  height: 200px;
+  position: relative;
+  z-index: 2;
+  animation: logoFloat 2.5s infinite ease-in-out;
 }
+
+/* LIGHTNING SHINE OVERLAY */
+.loader-logo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle, rgba(150,200,255,0.4) 0%, rgba(150,200,255,0) 70%);
+  filter: blur(20px);
+  animation: glowPulse 2s infinite ease-in-out;
+  z-index: -1;
+}
+
+/* SHINE BAR (parlayan ışık çubuğu) */
+.loader-logo-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255,255,255,0.0) 40%,
+    rgba(180,220,255,0.6) 50%,
+    rgba(255,255,255,0.0) 60%,
+    transparent 70%
+  );
+  animation: shineSweep 2.8s infinite;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
 .loader-logo-wrap img { 
-  width: 100%; height: 100%; object-fit: contain; 
+  width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(120,180,255,0.5)) drop-shadow(0 0 40px rgba(120,180,255,0.3));
+  animation: logoZap 3.5s infinite;
+  position: relative;
+  z-index: 2;
 }
+
+@keyframes logoFloat {
+  0%, 100% { transform: scale(0.96) translateY(0); }
+  50% { transform: scale(1.04) translateY(-4px); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+}
+@keyframes shineSweep {
+  0% { left: -100%; }
+  40% { left: 150%; }
+  100% { left: 150%; }
+}
+@keyframes logoZap {
+  0%, 47%, 53%, 74%, 78%, 100% {
+    filter: drop-shadow(0 0 20px rgba(120,180,255,0.5)) drop-shadow(0 0 40px rgba(120,180,255,0.3));
+  }
+  48%, 51% {
+    filter: drop-shadow(0 0 30px rgba(255,255,255,1)) drop-shadow(0 0 60px rgba(180,220,255,0.9)) brightness(1.5);
+  }
+  76% {
+    filter: drop-shadow(0 0 25px rgba(255,255,255,0.8)) drop-shadow(0 0 50px rgba(180,220,255,0.7)) brightness(1.3);
+  }
+}
+
 .loader-brand-text {
   font-family: 'Syne', sans-serif;
   font-size: 38px;
@@ -60,10 +148,13 @@ body {
   text-transform: uppercase;
   opacity: 0;
   animation: brandFadeIn 1.2s 0.4s ease forwards;
-  background: linear-gradient(135deg, #ffffff 0%, #888 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #b4d4ff 50%, #888 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 0 30px rgba(180,220,255,0.3);
+  position: relative;
+  z-index: 2;
 }
 .loader-sub {
   font-family: 'Space Grotesk', sans-serif;
@@ -73,12 +164,8 @@ body {
   text-transform: uppercase;
   opacity: 0;
   animation: brandFadeIn 1.2s 0.8s ease forwards;
-}
-
-@keyframes logoFx {
-  0% { transform: scale(0.92); }
-  50% { transform: scale(1.06); }
-  100% { transform: scale(0.92); }
+  position: relative;
+  z-index: 2;
 }
 @keyframes brandFadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -88,16 +175,18 @@ body {
 #app-view { opacity: 0; transform: scale(0.99); transition: opacity 1s ease, transform 1s ease; z-index: 5; position: relative; }
 #app-view.show { opacity: 1; transform: scale(1); }
 
-/* NAVBAR */
+/* NAVBAR - YUKARDA, BANNER ALTTA */
 nav { 
-  position: fixed; top: 0; width: 100%; z-index: 1000; 
-  padding: 20px 0; transition: all 0.3s ease; 
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; 
+  padding: 14px 0; transition: all 0.3s ease; 
   border-bottom: 1px solid transparent;
+  background: rgba(3, 3, 4, 0.6);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
 nav.scrolled { 
-  background: rgba(3, 3, 4, 0.85); 
+  background: rgba(3, 3, 4, 0.9); 
   border-bottom: 1px solid var(--border); 
-  padding: 14px 0; 
+  padding: 12px 0; 
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
 }
 .nav-container { 
@@ -132,13 +221,12 @@ nav.scrolled {
 }
 .hamburger:hover { background: rgba(255,255,255,0.05); }
 
-/* MOBİL MENÜ PANEL */
 .mobile-menu {
   position: fixed; top: 0; right: 0; width: 280px; height: 100vh;
   background: rgba(8,8,10,0.98); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   border-left: 1px solid var(--border);
   transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.85,0,0.15,1);
-  z-index: 1001; padding: 80px 28px 28px; display: flex; flex-direction: column; gap: 24px;
+  z-index: 1002; padding: 80px 28px 28px; display: flex; flex-direction: column; gap: 24px;
 }
 .mobile-menu.open { transform: translateX(0); }
 .mobile-menu a {
@@ -153,14 +241,14 @@ nav.scrolled {
 }
 .menu-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-  z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s;
 }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 
-/* HERO BANNER */
+/* HERO BANNER - TOPBAR'IN ALTINDA RAHAT */
 .top-showcase-banner {
   width: calc(100% - 48px); max-width: 1100px; 
-  margin: 110px auto 30px;
+  margin: 130px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
   height: 440px; display: flex; position: relative; background: #000;
 }
@@ -188,11 +276,9 @@ nav.scrolled {
   100% { background-position: 0% 50%; filter: brightness(1.2); }
 }
 
-/* SECTIONS */
 section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 2; }
 .section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
 
-/* BENTO */
 .bento-card {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -255,9 +341,9 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
   .nav-right-side { display: none; }
   .hamburger { display: flex; }
   .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
-  .top-showcase-banner { height: 260px; margin-top: 90px; }
+  .top-showcase-banner { height: 260px; margin-top: 100px; }
   .contact-wrapper { flex-direction: column; gap: 12px; }
-  .loader-logo-wrap { width: 140px; height: 140px; }
+  .loader-logo-wrap { width: 150px; height: 150px; }
   .loader-brand-text { font-size: 30px; letter-spacing: 4px; }
 }
 </style>
@@ -277,7 +363,6 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
   <button class="modal-close" onclick="closeModal()">Close System Preview</button>
 </div>
 
-<!-- MOBİL MENÜ -->
 <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <button class="menu-close" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
@@ -395,25 +480,22 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 </div>
 
 <script>
-// AÇILIŞ - arka plan şeffaflaşarak fade out
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('instagram-loader');
   const app = document.getElementById('app-view');
   
-  // App'i hemen göster (loader üstünde duracak)
   app.classList.add('show');
   
   setTimeout(() => {
     loader.classList.add('fade-out');
     setTimeout(() => { loader.style.display = 'none'; }, 1000);
-  }, 2400);
+  }, 2800);
 });
 
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-// MOBİL MENÜ TOGGLE
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
   document.getElementById('menuOverlay').classList.toggle('open');
