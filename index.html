@@ -30,7 +30,7 @@ body {
   position: relative;
 }
 
-/* 🛠️ AÇILIŞ LOADERI - SENİN BOMBOS RESMİN */
+/* 🚀 EFEKTLİ AÇILIŞ LOADERI */
 #instagram-loader {
   position: fixed; inset: 0; z-index: 99999; display: flex;
   background: #000; align-items: center; justify-content: center;
@@ -39,14 +39,32 @@ body {
 .loader-logo-wrap { 
   width: 240px; 
   height: 240px; 
+  /* Hem büyüyüp küçülme hem de hue (renk) değiştirme animasyonu */
+  animation: logoFx 2.5s infinite ease-in-out;
 }
 .loader-logo-wrap img { 
   width: 100%; height: 100%; object-fit: contain; 
 }
 
+/* Logo Animasyon Tanımı */
+@keyframes logoFx {
+  0% {
+    transform: scale(0.92);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08);
+    filter: hue-rotate(180deg); /* Renk spektrumunun tam tersine kayar */
+  }
+  100% {
+    transform: scale(0.92);
+    filter: hue-rotate(360deg); /* Tam tur dönüp orijinal renge geri gelir */
+  }
+}
+
 #app-view { opacity: 0; transform: scale(0.99); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 5; position: relative; }
 
-/* NAVBAR */
+/* NAVBAR - EN ÜSTTE SABİT */
 nav { 
   position: fixed; top: 0; width: 100%; z-index: 1000; 
   padding: 24px 0; transition: all 0.3s ease; 
@@ -80,9 +98,10 @@ nav.scrolled {
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* CHROMATIC HERO BANNER */
+/* CHROMATIC HERO BANNER - TOPBAR HATASINI ÇÖZEN AYAR */
 .top-showcase-banner {
-  width: 100%; max-width: 1100px; margin: 140px auto 30px;
+  width: 100%; max-width: 1100px; 
+  margin: 100px auto 30px; /* Üst boşluk 140px'den 100px'e çekildi, topbarın altında kalmıyor */
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
   height: 440px; display: flex; position: relative; background: #000;
 }
@@ -182,7 +201,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 @media(max-width: 768px) {
   .nav-right-side { display: none; }
   .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
-  .top-showcase-banner { height: 260px; }
+  .top-showcase-banner { height: 260px; margin-top: 80px; }
   .contact-wrapper { flex-direction: column; gap: 12px; }
 }
 </style>
@@ -315,7 +334,7 @@ window.addEventListener('DOMContentLoaded', () => {
     app.style.opacity = '1';
     app.style.transform = 'scale(1)';
     setTimeout(() => { loader.style.display = 'none'; }, 800);
-  }, 1400);
+  }, 1800); /* Efekt rahat izlensin diye loader süresini çok hafif uzattım kanka */
 });
 
 window.addEventListener('scroll', () => {
