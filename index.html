@@ -17,11 +17,6 @@
   --border: rgba(255, 255, 255, 0.08);
   --card-bg: rgba(5, 5, 6, 0.6);
   --green-neon: #00ff66;
-  
-  /* LİNKLERİ DOĞRUDAN REPO İÇİNDEN ALACAK ŞEKİLDE AYARLADIM */
-  --site-logo-url: url('site-logosu.jpg');
-  --acilis-logo-url: 'acilis-logosu.jpg';
-  --arkaplan-url: url('arkaplan.jpg');
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,15 +34,15 @@ body {
 body::before {
   content: '';
   position: fixed; inset: 0;
-  background-image: var(--arkaplan-url);
+  background-image: url('arkaplan.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.25; /* Arayüz net gözüksün diye hafif kıstım */
+  opacity: 0.25; 
   z-index: -2;
   pointer-events: none;
 }
 
-/* MOR VE TURKUAZ PARLAYAN SPOTLAR */
+/* ARKA PLAN SPOT IŞIKLARI */
 .glow-bg-1 {
   position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
   background: radial-gradient(circle, rgba(120, 0, 255, 0.18) 0%, rgba(0,0,0,0) 70%);
@@ -72,7 +67,7 @@ body::before {
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease;
 }
 .loader-logo-wrap { width: 140px; height: 140px; margin-bottom: 20px; animation: pulseLogo 2s infinite ease-in-out; }
-.loader-logo-wrap img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
+.loader-logo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
 .loader-text {
   font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800;
   letter-spacing: 4px; color: #fff; text-transform: uppercase; opacity: 0.8;
@@ -90,7 +85,8 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
 
 .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; text-transform: uppercase; }
-.logo .logo-img-wrapper { width: 36px; height: 36px; background-image: var(--site-logo-url); background-size: cover; background-position: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background-color: #111; }
+.logo .logo-img-wrapper { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background-color: #111; overflow: hidden; }
+.logo .logo-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 .logo span { color: #fff; letter-spacing: -0.5px; }
 
 .nav-links { display: flex; list-style: none; gap: 32px; align-items: center; }
@@ -104,7 +100,7 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* CHROMATIC HERO SPLIT (HUE SHIFT FLUFFY TEXT) */
+/* CHROMATIC HERO SPLIT */
 .top-showcase-banner {
   width: 100%; max-width: 1100px; margin: 120px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
@@ -166,14 +162,14 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 .project-action::after { content: ' ↗'; font-family: 'Inter', sans-serif; font-size: 14px; display: inline-block; transition: transform 0.2s; }
 .project-card:hover .project-action::after { transform: translate(2px, -2px); color: #fff; }
 
-/* FİYATLANDIRMA DÜZENİ */
+/* FİYATLANDIRMA */
 .rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .rate-card { padding: 36px; }
 .rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
 .rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
 .rate-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-/* SYSTEM MODAL PREVIEW */
+/* PREVIEW MODAL */
 #spin-modal {
   display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2, 2, 3, 0.96);
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px;
@@ -204,10 +200,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 
 <div id="instagram-loader">
   <div class="loader-logo-wrap">
-    <script>
-      const loaderSrc = getComputedStyle(document.documentElement).getPropertyValue('--acilis-logo-url').replace(/'/g, "").trim();
-      document.write('<img src="' + loaderSrc + '" alt="FLUFFY DESIGNS" onerror="this.style.display=\'none\'">');
-    </script>
+    <img src="acilis-logosu.jpg" alt="FLUFFY DESIGNS">
   </div>
   <div class="loader-text">Loading System</div>
 </div>
@@ -222,7 +215,9 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
   <nav id="navbar">
     <div class="nav-container">
       <a href="#home" class="logo">
-        <div class="logo-img-wrapper"></div>
+        <div class="logo-img-wrapper">
+          <img src="site-logosu.jpg" alt="Fluffy Logo">
+        </div>
         <span>Fluffy</span>
       </a>
       <ul class="nav-links">
