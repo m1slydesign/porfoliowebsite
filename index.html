@@ -30,34 +30,23 @@ body {
   position: relative;
 }
 
-/* 🚀 YUKARI KAYAN AÇILIŞ LOADER SİSTEMİ */
+/* 🛠️ AÇILIŞ LOADERI - SENİN BOMBOS RESMİN */
 #instagram-loader {
-  position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column;
+  position: fixed; inset: 0; z-index: 99999; display: flex;
   background: #000; align-items: center; justify-content: center;
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease;
 }
 .loader-logo-wrap { 
-  width: 240px; height: 240px; 
-  margin-bottom: 24px; 
-  animation: pulseLogo 1.8s infinite ease-in-out; 
+  width: 240px; 
+  height: 240px; 
 }
 .loader-logo-wrap img { 
-  width: 100%; height: 100%; object-fit: cover; 
-  border-radius: 50%; 
-  border: 2px solid rgba(255, 255, 255, 0.1);
-}
-.loader-text {
-  font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700;
-  letter-spacing: 5px; color: #fff; text-transform: uppercase; opacity: 0.8;
-}
-@keyframes pulseLogo {
-  0%, 100% { transform: scale(0.95); filter: drop-shadow(0 0 15px rgba(255,255,255,0.05)); }
-  50% { transform: scale(1.03); filter: drop-shadow(0 0 35px rgba(255,255,255,0.2)); }
+  width: 100%; height: 100%; object-fit: contain; 
 }
 
 #app-view { opacity: 0; transform: scale(0.99); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 5; position: relative; }
 
-/* NAVBAR - DÜMDÜZ TEXT LOGO VE HİZALAMA */
+/* NAVBAR */
 nav { 
   position: fixed; top: 0; width: 100%; z-index: 1000; 
   padding: 24px 0; transition: all 0.3s ease; 
@@ -74,7 +63,6 @@ nav.scrolled {
   display: flex; justify-content: space-between; align-items: center; 
 }
 
-/* Dümdüz yazı logo, hiçbir kutunun içine sokulmadı */
 .logo-text { 
   font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; 
   letter-spacing: -1px; color: #fff; text-decoration: none; text-transform: uppercase; 
@@ -150,7 +138,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 .inter-btn:hover { color: #fff; }
 .like-btn.liked { color: #ff0055; }
 
-/* CANLI YORUM PANELİ */
+/* YORUM PANELİ */
 .comment-section { display: none; border-top: 1px solid var(--border); margin-top: 4px; padding-top: 14px; }
 .comment-section.active { display: block; }
 .comment-list { max-height: 120px; overflow-y: auto; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
@@ -167,9 +155,8 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 .rate-card { padding: 36px; }
 .rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
 .rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
-.rate-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-/* 🛠️ CONTACT PANELİ (Uydurma yazısız, temiz buton grupları) */
+/* CONTACT PANELİ */
 .contact-wrapper { display: flex; justify-content: center; gap: 16px; margin-top: 10px; }
 .btn-contact { 
   display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; 
@@ -204,9 +191,8 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 
 <div id="instagram-loader">
   <div class="loader-logo-wrap">
-    <img src="https://i.ibb.co/7J2PX37g/site-logosu.jpg" alt="FLUFFY DESIGNS">
+    <img src="https://i.ibb.co/5gdxz3xy/copilot-image-1779863075427.png" alt="Loader">
   </div>
-  <div class="loader-text">Loading System</div>
 </div>
 
 <div id="spin-modal">
@@ -320,7 +306,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 </div>
 
 <script>
-// Akıcı loader animasyonu açılışı
+// Akıcı yukarı kayma geçişi
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('instagram-loader');
   const app = document.getElementById('app-view');
@@ -343,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector(`#${id} .like-btn`);
     const countEl = btn.querySelector('.like-count');
     
-    // Sistem kesinlikle 0 ile başlar kanka, random sayı atılması engellendi.
     let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || 0;
     
     localStorage.setItem(`likes_count_${id}`, likes);
