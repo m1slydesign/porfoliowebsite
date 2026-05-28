@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLUFFY | Professional UI Studio</title>
+<title>FLUFFY — Design Studio</title>
 <meta name="referrer" content="no-referrer">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #030304;
-  --text: #ffffff;
+  --bg: #050505;
+  --bg-2: #0a0a0b;
+  --text: #f4f4f5;
   --text-muted: #71717a;
+  --text-dim: #52525b;
   --border: rgba(255, 255, 255, 0.08);
-  --card-bg: rgba(5, 5, 6, 0.6);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.02);
   --green-neon: #00ff66;
-  --nav-h: 78px;
+  --nav-h: 72px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,11 +31,11 @@ body {
   color: var(--text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  position: relative;
-  padding-top: var(--nav-h); /* TOPBAR'IN ALTINA SABIT BOSLUK */
+  padding-top: var(--nav-h);
+  line-height: 1.5;
 }
 
-/* 🚀 AÇILIŞ LOADER */
+/* ========== AÇILIŞ LOADER ========== */
 #instagram-loader {
   position: fixed; inset: 0; z-index: 99999; display: flex;
   background: #000; align-items: center; justify-content: center;
@@ -40,46 +43,14 @@ body {
   transition: opacity 1s ease, background 1s ease;
   overflow: hidden;
 }
-#instagram-loader.fade-out {
-  background: rgba(0,0,0,0);
-  opacity: 0;
-  pointer-events: none;
-}
+#instagram-loader.fade-out { background: rgba(0,0,0,0); opacity: 0; pointer-events: none; }
 
-.loader-leopard-wrap {
-  width: 280px;
-  height: 280px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.leopard-half {
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  top: 0;
-}
-.leopard-half img {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  object-fit: contain;
-  top: 0;
-  animation: lightnessPulse 2.5s 1.4s infinite ease-in-out;
-}
-.leopard-half.left {
-  left: 0;
-  transform: translateX(-150%) scaleX(0.3);
-  animation: slideInLeft 1.3s cubic-bezier(0.22, 1.4, 0.36, 1) forwards;
-}
+.loader-leopard-wrap { width: 280px; height: 280px; position: relative; display: flex; align-items: center; justify-content: center; }
+.leopard-half { position: absolute; width: 50%; height: 100%; overflow: hidden; top: 0; }
+.leopard-half img { position: absolute; width: 200%; height: 100%; object-fit: contain; top: 0; animation: lightnessPulse 2.5s 1.4s infinite ease-in-out; }
+.leopard-half.left { left: 0; transform: translateX(-150%) scaleX(0.3); animation: slideInLeft 1.3s cubic-bezier(0.22, 1.4, 0.36, 1) forwards; }
 .leopard-half.left img { left: 0; }
-.leopard-half.right {
-  right: 0;
-  transform: translateX(150%) scaleX(0.3);
-  animation: slideInRight 1.3s cubic-bezier(0.22, 1.4, 0.36, 1) forwards;
-}
+.leopard-half.right { right: 0; transform: translateX(150%) scaleX(0.3); animation: slideInRight 1.3s cubic-bezier(0.22, 1.4, 0.36, 1) forwards; }
 .leopard-half.right img { right: 0; }
 
 @keyframes slideInLeft {
@@ -100,65 +71,44 @@ body {
 }
 
 .loader-brand-text {
-  font-family: 'Syne', sans-serif;
-  font-size: 38px;
-  font-weight: 800;
-  letter-spacing: 6px;
-  color: #fff;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: brandFadeIn 1s 1.5s ease forwards;
+  font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800;
+  letter-spacing: 6px; color: #fff; text-transform: uppercase;
+  opacity: 0; animation: brandFadeIn 1s 1.5s ease forwards;
   background: linear-gradient(135deg, #ffffff 0%, #888 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .loader-sub {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: #555;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: brandFadeIn 1s 1.8s ease forwards;
+  font-family: 'Space Grotesk', sans-serif; font-size: 10px;
+  letter-spacing: 4px; color: #555; text-transform: uppercase;
+  opacity: 0; animation: brandFadeIn 1s 1.8s ease forwards;
 }
-@keyframes brandFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes brandFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-#app-view { opacity: 0; transform: scale(0.99); transition: opacity 1s ease, transform 1s ease; z-index: 5; position: relative; }
+#app-view { opacity: 0; transform: scale(0.99); transition: opacity 1s ease, transform 1s ease; }
 #app-view.show { opacity: 1; transform: scale(1); }
 
-/* NAVBAR - SABİT YÜKSEKLİK, ÜSTTE */
+/* ========== NAVBAR (9zh tarzı minimal) ========== */
 nav { 
-  position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1000; 
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; 
   height: var(--nav-h);
-  transition: all 0.3s ease; 
-  background: rgba(3, 3, 4, 0.78);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
   display: flex; align-items: center;
+  background: rgba(5, 5, 5, 0.6);
+  backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
 }
 nav.scrolled { 
-  background: rgba(3, 3, 4, 0.95); 
+  background: rgba(5, 5, 5, 0.88); 
+  border-bottom: 1px solid var(--border);
 }
 .nav-container { 
-  width: 100%;
-  max-width: 1100px; margin: 0 auto; padding: 0 24px; 
+  width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 28px; 
   display: flex; justify-content: space-between; align-items: center; 
 }
 
-/* NAVBAR LEOPAR LOGO - BÜYÜK & NET */
-.logo-leopard {
-  display: flex; align-items: center; text-decoration: none;
-  height: 100%;
-}
-.logo-leopard img {
-  height: 58px;
-  width: auto;
-  object-fit: contain;
-  display: block;
+.logo-text { 
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; 
+  letter-spacing: 1px; color: #fff; text-decoration: none; text-transform: uppercase; 
 }
 
 .nav-right-side { display: flex; align-items: center; gap: 28px; }
@@ -167,18 +117,18 @@ nav.scrolled {
 .nav-links a:hover { color: #fff; }
 
 .badge-neon {
-  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px;
-  font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700;
-  background: rgba(0, 255, 102, 0.05); color: var(--green-neon); border: 1px solid rgba(0, 255, 102, 0.15); text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 600;
+  background: rgba(0, 255, 102, 0.05); color: var(--green-neon); border: 1px solid rgba(0, 255, 102, 0.18); 
+  text-transform: uppercase; letter-spacing: 1px;
 }
-.badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
+.badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 .hamburger {
-  display: none;
-  background: none; border: 1px solid var(--border); border-radius: 8px;
-  width: 42px; height: 42px; cursor: pointer; color: #fff;
-  align-items: center; justify-content: center; font-size: 16px;
-  transition: all 0.2s;
+  display: none; background: none; border: 1px solid var(--border); border-radius: 8px;
+  width: 40px; height: 40px; cursor: pointer; color: #fff;
+  align-items: center; justify-content: center; font-size: 15px; transition: all 0.2s;
 }
 .hamburger:hover { background: rgba(255,255,255,0.05); }
 
@@ -187,7 +137,7 @@ nav.scrolled {
   background: rgba(8,8,10,0.98); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   border-left: 1px solid var(--border);
   transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.85,0,0.15,1);
-  z-index: 1002; padding: 80px 28px 28px; display: flex; flex-direction: column; gap: 24px;
+  z-index: 1002; padding: 80px 28px 28px; display: flex; flex-direction: column; gap: 20px;
 }
 .mobile-menu.open { transform: translateX(0); }
 .mobile-menu a {
@@ -195,119 +145,236 @@ nav.scrolled {
   font-size: 18px; font-weight: 700; padding: 10px 0;
   border-bottom: 1px solid var(--border);
 }
-.mobile-menu .badge-neon { align-self: flex-start; }
-.menu-close {
-  position: absolute; top: 22px; right: 22px;
-  background: none; border: none; color: #fff; font-size: 22px; cursor: pointer;
-}
-.menu-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-  z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-}
+.mobile-menu .badge-neon { align-self: flex-start; margin-top: 12px; }
+.menu-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; }
+.menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .menu-overlay.open { opacity: 1; pointer-events: all; }
 
-/* HERO BANNER - body padding-top sayesinde topbar'a değmiyor */
-.top-showcase-banner {
-  width: calc(100% - 48px); max-width: 1100px; 
-  margin: 30px auto 30px;
-  border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
-  height: 440px; display: flex; position: relative; background: #000;
+/* ========== HERO ========== */
+.hero {
+  max-width: 1200px; margin: 0 auto; padding: 80px 28px 60px;
+  position: relative;
 }
-.chrome-half { flex: 1; height: 100%; display: flex; align-items: center; overflow: hidden; position: relative; }
-.chrome-half.left-grid {
-  background-color: #ededed;
-  background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%), linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e0e0e0 75%), linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
-  background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-  justify-content: flex-end;
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 500;
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 28px;
 }
-.chrome-half.right-plain { background: #070708; justify-content: flex-start; }
-.chrome-huge-text {
-  font-family: 'Syne', sans-serif; font-size: clamp(30px, 5.5vw, 68px); font-weight: 800;
-  line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; position: absolute; width: 200%; text-align: center;
+.hero-tag::before {
+  content: ''; width: 24px; height: 1px; background: var(--text-muted);
 }
-.left-grid .chrome-huge-text { color: #000; left: 0; }
-.right-plain .chrome-huge-text {
-  left: -100%; background: linear-gradient(135deg, #ff0055, #00ffaa, #00bcff, #ff0055);
-  background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; animation: chromeGradientFlow 4s ease infinite;
+.hero-title {
+  font-family: 'Syne', sans-serif; font-size: clamp(48px, 9vw, 112px);
+  font-weight: 800; line-height: 0.95; letter-spacing: -3px;
+  text-transform: uppercase; margin-bottom: 32px;
 }
-@keyframes chromeGradientFlow {
-  0% { background-position: 0% 50%; filter: brightness(1.2); }
-  50% { background-position: 100% 50%; filter: brightness(1.5); }
-  100% { background-position: 0% 50%; filter: brightness(1.2); }
+.hero-title .italic {
+  font-family: 'Syne', serif; font-style: italic; font-weight: 600;
+  background: linear-gradient(135deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-desc {
+  max-width: 580px; font-size: 16px; color: var(--text-muted);
+  margin-bottom: 40px; line-height: 1.6;
+}
+.hero-meta {
+  display: flex; gap: 40px; flex-wrap: wrap;
+  padding-top: 28px; border-top: 1px solid var(--border);
+}
+.meta-item { font-family: 'Space Grotesk', sans-serif; }
+.meta-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+.meta-value { font-size: 14px; color: #fff; font-weight: 500; }
+
+/* ========== SECTION GENERIC ========== */
+section { max-width: 1200px; margin: 0 auto; padding: 80px 28px; position: relative; }
+.section-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+}
+.section-label {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500;
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--text-muted); }
+.section-title {
+  font-family: 'Syne', sans-serif; font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700; letter-spacing: -1.5px; line-height: 1;
+  margin-top: 12px;
 }
 
-section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 2; }
-.section-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
-
-.bento-card {
-  background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* ========== ABOUT ========== */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
 }
-.bento-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateY(-2px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+.about-text p {
+  color: var(--text-muted); font-size: 16px; line-height: 1.7;
+  margin-bottom: 20px;
+}
+.about-text p strong { color: #fff; font-weight: 500; }
+.about-stats { display: flex; flex-direction: column; gap: 24px; }
+.stat-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 20px 0; border-bottom: 1px solid var(--border);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-num {
+  font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800;
+  letter-spacing: -2px; line-height: 1;
+}
+.stat-label {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;
+  text-align: right; max-width: 140px;
+}
 
-.portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.project-card { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+/* ========== WORKS (9zh tarzı) ========== */
+.works-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+}
+.work-item {
+  position: relative; cursor: pointer; overflow: hidden;
+  border-radius: 8px; background: var(--bg-2);
+  border: 1px solid var(--border);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.work-item:hover { border-color: var(--border-strong); transform: translateY(-4px); }
 
-.project-img-wrapper { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 8px; background: #0b0b0d; border: 1px solid rgba(255,255,255,0.03); cursor: pointer; }
-.project-img-wrapper img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.project-card:hover .project-img-wrapper img { transform: scale(1.02); }
+.work-img {
+  position: relative; width: 100%; padding-top: 62%; overflow: hidden;
+  background: #0b0b0d;
+}
+.work-img img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.work-item:hover .work-img img { transform: scale(1.04); }
 
-.project-meta { display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
-.project-name { font-size: 14px; font-weight: 600; color: #fff; }
+.work-info {
+  padding: 24px;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+}
+.work-meta { flex: 1; }
+.work-title {
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700;
+  margin-bottom: 6px; color: #fff;
+}
+.work-cat {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;
+}
 
-.interactive-bar { display: flex; gap: 16px; align-items: center; }
-.inter-btn { background: none; border: none; color: var(--text-muted); font-family: 'Space Grotesk', sans-serif; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
-.inter-btn:hover { color: #fff; }
-.like-btn.liked { color: #ff0055; }
+.work-actions { display: flex; gap: 14px; align-items: center; }
+.act-btn {
+  background: none; border: none; color: var(--text-muted); cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif; font-size: 12px;
+  display: flex; align-items: center; gap: 5px; transition: color 0.2s;
+}
+.act-btn:hover { color: #fff; }
+.like-btn.liked { color: #ff3355; }
 
-.comment-section { display: none; border-top: 1px solid var(--border); margin-top: 4px; padding-top: 14px; }
-.comment-section.active { display: block; }
-.comment-list { max-height: 120px; overflow-y: auto; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-.comment-list li { background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #d4d4d8; line-height: 1.4; }
-.comment-list li strong { color: #888; margin-right: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; }
+.comments-panel {
+  display: none; padding: 0 24px 24px;
+  border-top: 1px solid var(--border);
+}
+.comments-panel.active { display: block; }
+.comment-list {
+  max-height: 140px; overflow-y: auto; list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+  margin: 16px 0 12px;
+}
+.comment-list::-webkit-scrollbar { width: 4px; }
+.comment-list::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+.comment-list li {
+  background: rgba(255,255,255,0.02); padding: 10px 12px;
+  border-radius: 6px; font-size: 12px; color: #d4d4d8; line-height: 1.5;
+  border: 1px solid var(--border);
+}
+.comment-list li strong { color: #888; margin-right: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
 .comment-inputs { display: flex; gap: 8px; }
-.comment-inputs input { flex: 1; background: #09090b; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; }
-.comment-inputs input:focus { outline: none; border-color: #71717a; }
-.comment-inputs button { background: #fff; color: #000; border: none; padding: 0 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Space Grotesk', sans-serif; }
-
-.rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.rate-card { padding: 36px; }
-.rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
-.rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
-
-.contact-wrapper { display: flex; justify-content: center; gap: 16px; margin-top: 10px; }
-.btn-contact { 
-  display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; 
-  border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; 
-  font-family: 'Space Grotesk', sans-serif; transition: all 0.2s;
-  background: transparent; color: #fff; border: 1px solid var(--border);
+.comment-inputs input {
+  flex: 1; background: #0a0a0b; border: 1px solid var(--border);
+  border-radius: 6px; padding: 11px 14px; color: #fff;
+  font-size: 12px; font-family: 'Inter', sans-serif;
 }
-.btn-contact:hover { background: rgba(255,255,255,0.04); border-color: #fff; transform: translateY(-1px); }
+.comment-inputs input:focus { outline: none; border-color: var(--border-strong); }
+.comment-inputs button {
+  background: #fff; color: #000; border: none; padding: 0 18px;
+  border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 1px;
+}
 
+/* ========== RATES ========== */
+.rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.rate-card {
+  padding: 36px; border-radius: 8px;
+  background: var(--card-bg); border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.rate-card:hover { border-color: var(--border-strong); }
+.rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; font-weight: 500; }
+.rate-value { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: #fff; margin: 14px 0 8px; letter-spacing: -1px; }
+.rate-desc { font-size: 13px; color: var(--text-dim); }
+
+/* ========== CONTACT ========== */
+.contact-block { text-align: center; padding: 60px 0; }
+.contact-big {
+  font-family: 'Syne', sans-serif; font-size: clamp(40px, 7vw, 80px);
+  font-weight: 700; letter-spacing: -2px; line-height: 1;
+  margin: 20px 0 40px;
+}
+.contact-big .italic {
+  font-style: italic; font-weight: 600;
+  background: linear-gradient(135deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.contact-wrapper { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.btn-contact { 
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; 
+  border-radius: 999px; font-size: 13px; font-weight: 500; text-decoration: none; 
+  font-family: 'Space Grotesk', sans-serif; transition: all 0.2s;
+  background: transparent; color: #fff; border: 1px solid var(--border-strong);
+}
+.btn-contact:hover { background: #fff; color: #000; }
+
+/* ========== MODAL ========== */
 #spin-modal {
   display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2, 2, 3, 0.96);
-  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px;
+  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+  align-items: center; justify-content: center; flex-direction: column; padding: 24px;
 }
 #spin-modal.open { display: flex; }
-#modal-canvas { width: 100%; max-width: 800px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; }
-#modal-img { width: 100%; height: 100%; object-fit: cover; }
-.modal-close { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; cursor: pointer; }
+#modal-canvas { width: 100%; max-width: 900px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+#modal-img { width: 100%; height: 100%; object-fit: contain; }
+.modal-close { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 24px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
 
-.brand-signature { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; margin-top: 50px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; text-align: center; }
+/* ========== FOOTER ========== */
+footer {
+  border-top: 1px solid var(--border); margin-top: 60px;
+  padding: 40px 28px;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+}
+.footer-brand { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+.footer-copy { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
-@media(max-width: 768px) {
-  :root { --nav-h: 68px; }
+/* ========== RESPONSIVE ========== */
+@media(max-width: 880px) {
+  :root { --nav-h: 64px; }
   .nav-right-side { display: none; }
   .hamburger { display: flex; }
-  .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
-  .top-showcase-banner { height: 260px; margin-top: 20px; }
-  .contact-wrapper { flex-direction: column; gap: 12px; }
+  .hero { padding: 50px 24px 40px; }
+  section { padding: 60px 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .works-grid, .rates-grid { grid-template-columns: 1fr; gap: 20px; }
+  .hero-meta { gap: 24px; }
   .loader-leopard-wrap { width: 220px; height: 220px; }
   .loader-brand-text { font-size: 30px; letter-spacing: 4px; }
-  .logo-leopard img { height: 50px; }
+  .stat-num { font-size: 36px; }
 }
 </style>
 </head>
@@ -315,12 +382,8 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 
 <div id="instagram-loader">
   <div class="loader-leopard-wrap">
-    <div class="leopard-half left">
-      <img src="https://i.ibb.co/gLm879kD/BCO-ee3714a9-9d53-4c00-b82e-e176fcede61a.png" alt="Fluffy">
-    </div>
-    <div class="leopard-half right">
-      <img src="https://i.ibb.co/gLm879kD/BCO-ee3714a9-9d53-4c00-b82e-e176fcede61a.png" alt="Fluffy">
-    </div>
+    <div class="leopard-half left"><img src="https://i.ibb.co/gLm879kD/BCO-ee3714a9-9d53-4c00-b82e-e176fcede61a.png" alt="Fluffy"></div>
+    <div class="leopard-half right"><img src="https://i.ibb.co/gLm879kD/BCO-ee3714a9-9d53-4c00-b82e-e176fcede61a.png" alt="Fluffy"></div>
   </div>
   <div class="loader-brand-text">FLUFFY</div>
   <div class="loader-sub">DESIGN STUDIO</div>
@@ -328,14 +391,15 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 
 <div id="spin-modal">
   <div id="modal-canvas"><img id="modal-img" src="" alt="preview"></div>
-  <button class="modal-close" onclick="closeModal()">Close System Preview</button>
+  <button class="modal-close" onclick="closeModal()">Close Preview</button>
 </div>
 
 <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <button class="menu-close" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
   <a href="#home" onclick="toggleMenu()">Home</a>
-  <a href="#projects" onclick="toggleMenu()">Portfolio</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#works" onclick="toggleMenu()">Works</a>
   <a href="#rates" onclick="toggleMenu()">Rates</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
   <div class="badge-neon"><span></span>Commissions Open</div>
@@ -345,13 +409,12 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 
   <nav id="navbar">
     <div class="nav-container">
-      <a href="#home" class="logo-leopard">
-        <img src="https://i.ibb.co/gLm879kD/BCO-ee3714a9-9d53-4c00-b82e-e176fcede61a.png" alt="Fluffy Logo">
-      </a>
+      <a href="#home" class="logo-text">FLUFFY</a>
       <div class="nav-right-side">
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
-          <li><a href="#projects">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#works">Works</a></li>
           <li><a href="#rates">Rates</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -361,32 +424,93 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
     </div>
   </nav>
 
-  <div class="top-showcase-banner" id="home">
-    <div class="chrome-half left-grid">
-      <div class="chrome-huge-text">FLUFFY<br>DESIGNS</div>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-tag">Fluffy Design Studio</div>
+    <h1 class="hero-title">
+      Crafting<br>
+      <span class="italic">interfaces</span> that<br>
+      feel premium.
+    </h1>
+    <p class="hero-desc">
+      Roblox oyunları için modern, sezgisel ve göz alıcı kullanıcı arayüzleri tasarlıyorum. Her piksel bir amaç taşır, her etkileşim akıcı hissettirir.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-label">Based in</div>
+        <div class="meta-value">Türkiye 🇹🇷</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Available</div>
+        <div class="meta-value">For commissions</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Focus</div>
+        <div class="meta-value">UI / UX Design</div>
+      </div>
     </div>
-    <div class="chrome-half right-plain">
-      <div class="chrome-huge-text">FLUFFY<br>DESIGNS</div>
-    </div>
-  </div>
+  </section>
 
-  <section id="projects">
-    <div class="section-title">Seçilmiş Vitrin</div>
-    <div class="portfolio-grid">
-      
-      <div class="bento-card project-card" id="p1">
-        <div class="project-img-wrapper" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
-          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Project 1">
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-head">
+      <div>
+        <div class="section-label">About</div>
+        <h2 class="section-title">Tanışalım.</h2>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Ben <strong>Fluffy</strong>, Roblox ekosistemine özel kullanıcı arayüzleri tasarlayan bir UI/UX designer'ım. Modern web tasarım standartlarını oyun arayüzleriyle birleştirmek en sevdiğim şey.</p>
+        <p>Her proje farklı bir hikaye; ben de o hikayeye en uygun arayüzü, en akıcı animasyonları ve en temiz tipografiyi getiriyorum. <strong>Minimalist</strong>, <strong>fonksiyonel</strong> ve <strong>akılda kalıcı</strong> arayüzler benim imzam.</p>
+        <p>Şu anda yeni projeler için müsaitim — bir fikrin varsa konuşalım.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-row">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Tamamlanmış<br>proje</div>
         </div>
-        <div class="project-meta">
-          <span class="project-name">Project 1</span>
-          <div class="interactive-bar">
-            <button class="inter-btn like-btn" onclick="toggleLike('p1')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
-            <button class="inter-btn" onclick="toggleComments('p1')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
+        <div class="stat-row">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Yıllık<br>deneyim</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Kahve<br>tüketimi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works">
+    <div class="section-head">
+      <div>
+        <div class="section-label">Selected Works</div>
+        <h2 class="section-title">Son projeler.</h2>
+      </div>
+      <a href="https://x.com/stor4m" target="_blank" class="btn-contact" style="padding: 10px 20px; font-size: 12px;">
+        <i class="fa-brands fa-x-twitter"></i> Tümünü gör
+      </a>
+    </div>
+
+    <div class="works-grid">
+      
+      <div class="work-item" id="p1">
+        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Project">
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <div class="work-title">Combat HUD</div>
+            <div class="work-cat">UI / Game Interface</div>
+          </div>
+          <div class="work-actions">
+            <button class="act-btn like-btn" onclick="toggleLike('p1')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
+            <button class="act-btn" onclick="toggleComments('p1')"><i class="fa-solid fa-comment"></i></button>
           </div>
         </div>
-        
-        <div class="comment-section" id="comments-box-p1">
+        <div class="comments-panel" id="comments-p1">
           <ul class="comment-list" id="comment-list-p1"></ul>
           <div class="comment-inputs">
             <input type="text" placeholder="Yorum bırak..." id="comment-text-p1" onkeydown="if(event.key==='Enter') addComment('p1')">
@@ -395,19 +519,21 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
         </div>
       </div>
 
-      <div class="bento-card project-card" id="p2">
-        <div class="project-img-wrapper" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
-          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Project 2">
+      <div class="work-item" id="p2">
+        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Project">
         </div>
-        <div class="project-meta">
-          <span class="project-name">Project 2</span>
-          <div class="interactive-bar">
-            <button class="inter-btn like-btn" onclick="toggleLike('p2')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
-            <button class="inter-btn" onclick="toggleComments('p2')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
+        <div class="work-info">
+          <div class="work-meta">
+            <div class="work-title">Shop System</div>
+            <div class="work-cat">UI / E-commerce</div>
+          </div>
+          <div class="work-actions">
+            <button class="act-btn like-btn" onclick="toggleLike('p2')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
+            <button class="act-btn" onclick="toggleComments('p2')"><i class="fa-solid fa-comment"></i></button>
           </div>
         </div>
-        
-        <div class="comment-section" id="comments-box-p2">
+        <div class="comments-panel" id="comments-p2">
           <ul class="comment-list" id="comment-list-p2"></ul>
           <div class="comment-inputs">
             <input type="text" placeholder="Yorum bırak..." id="comment-text-p2" onkeydown="if(event.key==='Enter') addComment('p2')">
@@ -416,34 +542,97 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
         </div>
       </div>
 
+      <div class="work-item" id="p3">
+        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Project">
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <div class="work-title">Loading Screen</div>
+            <div class="work-cat">UI / Motion</div>
+          </div>
+          <div class="work-actions">
+            <button class="act-btn like-btn" onclick="toggleLike('p3')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
+            <button class="act-btn" onclick="toggleComments('p3')"><i class="fa-solid fa-comment"></i></button>
+          </div>
+        </div>
+        <div class="comments-panel" id="comments-p3">
+          <ul class="comment-list" id="comment-list-p3"></ul>
+          <div class="comment-inputs">
+            <input type="text" placeholder="Yorum bırak..." id="comment-text-p3" onkeydown="if(event.key==='Enter') addComment('p3')">
+            <button onclick="addComment('p3')">Gönder</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item" id="p4">
+        <div class="work-img" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
+          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Project">
+        </div>
+        <div class="work-info">
+          <div class="work-meta">
+            <div class="work-title">Inventory UI</div>
+            <div class="work-cat">UI / System Design</div>
+          </div>
+          <div class="work-actions">
+            <button class="act-btn like-btn" onclick="toggleLike('p4')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
+            <button class="act-btn" onclick="toggleComments('p4')"><i class="fa-solid fa-comment"></i></button>
+          </div>
+        </div>
+        <div class="comments-panel" id="comments-p4">
+          <ul class="comment-list" id="comment-list-p4"></ul>
+          <div class="comment-inputs">
+            <input type="text" placeholder="Yorum bırak..." id="comment-text-p4" onkeydown="if(event.key==='Enter') addComment('p4')">
+            <button onclick="addComment('p4')">Gönder</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
+  <!-- RATES -->
   <section id="rates">
-    <div class="section-title">Fiyatlandırma & Paketler</div>
+    <div class="section-head">
+      <div>
+        <div class="section-label">Pricing</div>
+        <h2 class="section-title">Paketler.</h2>
+      </div>
+    </div>
     <div class="rates-grid">
-      <div class="bento-card rate-card">
-        <div class="rate-label">Komple Oyun Arayüz Tasarımı</div>
+      <div class="rate-card">
+        <div class="rate-label">Full Game UI</div>
         <div class="rate-value">R$ 5,000+</div>
+        <div class="rate-desc">Komple oyun arayüz tasarımı, tüm sistemler dahil.</div>
       </div>
-      <div class="bento-card rate-card">
-        <div class="rate-label">Frame / Panel Başı İşler</div>
-        <div class="rate-value">R$ 500 - 1,000</div>
+      <div class="rate-card">
+        <div class="rate-label">Per Frame / Panel</div>
+        <div class="rate-value">R$ 500–1,000</div>
+        <div class="rate-desc">Tek panel veya frame tasarımı işleri.</div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
-    <div class="section-title" style="text-align: center;">İletişim</div>
-    <div class="contact-wrapper">
-      <a href="https://x.com/stor4m" target="_blank" class="btn-contact"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
-      <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn-contact"><i class="fa-brands fa-discord"></i> Discord</a>
+    <div class="contact-block">
+      <div class="section-label" style="justify-content: center;">Get in touch</div>
+      <h2 class="contact-big">
+        Let's build something <span class="italic">together.</span>
+      </h2>
+      <div class="contact-wrapper">
+        <a href="https://x.com/stor4m" target="_blank" class="btn-contact"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
+        <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn-contact"><i class="fa-brands fa-discord"></i> Discord</a>
+      </div>
     </div>
   </section>
 
-  <div style="padding-bottom: 60px;">
-    <div class="brand-signature">® FLUFFY DESIGN</div>
-  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">® FLUFFY</div>
+      <div class="footer-copy">Design Studio — 2025</div>
+    </div>
+  </footer>
 
 </div>
 
@@ -451,9 +640,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relat
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('instagram-loader');
   const app = document.getElementById('app-view');
-  
   app.classList.add('show');
-  
   setTimeout(() => {
     loader.classList.add('fade-out');
     setTimeout(() => { loader.style.display = 'none'; }, 1000);
@@ -469,15 +656,15 @@ function toggleMenu() {
   document.getElementById('menuOverlay').classList.toggle('open');
 }
 
-// LIKE & YORUM SISTEMI - ISIM SORMADAN
+const PROJECTS = ['p1','p2','p3','p4'];
+
 document.addEventListener('DOMContentLoaded', () => {
-  ['p1', 'p2'].forEach(id => {
+  PROJECTS.forEach(id => {
     const isLiked = localStorage.getItem(`liked_${id}`) === 'true';
     const btn = document.querySelector(`#${id} .like-btn`);
     const countEl = btn.querySelector('.like-count');
     
     let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || 0;
-    localStorage.setItem(`likes_count_${id}`, likes);
     countEl.innerText = likes;
     if(isLiked) btn.classList.add('liked');
     
@@ -485,7 +672,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const listEl = document.getElementById(`comment-list-${id}`);
     savedComments.forEach(c => {
       const li = document.createElement('li');
-      li.innerHTML = `<strong>guest:</strong> ${c.text}`;
+      li.innerHTML = `<strong>guest</strong> ${c.text}`;
       listEl.appendChild(li);
     });
   });
@@ -510,7 +697,7 @@ function toggleLike(id) {
 }
 
 function toggleComments(id) {
-  document.getElementById(`comments-box-${id}`).classList.toggle('active');
+  document.getElementById(`comments-${id}`).classList.toggle('active');
 }
 
 function addComment(id) {
@@ -520,7 +707,7 @@ function addComment(id) {
   
   const listEl = document.getElementById(`comment-list-${id}`);
   const li = document.createElement('li');
-  li.innerHTML = `<strong>guest:</strong> ${text}`;
+  li.innerHTML = `<strong>guest</strong> ${text}`;
   listEl.appendChild(li);
   
   const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
