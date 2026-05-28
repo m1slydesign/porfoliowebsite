@@ -17,6 +17,7 @@
   --border: rgba(255, 255, 255, 0.06);
   --card-bg: rgba(7, 7, 9, 0.6);
   --green-neon: #00ff66;
+  --accent: #7c3aed;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,7 +31,30 @@ body {
   position: relative;
 }
 
-/* MODERN NEON BLUR CIRCLES (ARKA PLAN PARLAMALARI) */
+/* 🚀 AÇILIŞ LOGOSU (SPLASH SCREEN) & ANIMASYONU */
+#splash-screen {
+  position: fixed; inset: 0;
+  background: #030304;
+  z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+.splash-logo {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background-image: url('acilis-logosu.jpg');
+  background-size: cover; background-position: center;
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
+  animation: logoPulse 2s infinite ease-in-out;
+}
+@keyframes logoPulse {
+  0% { transform: scale(0.95); filter: brightness(0.8) drop-shadow(0 0 20px rgba(124, 58, 237, 0.2)); }
+  50% { transform: scale(1.05); filter: brightness(1.2) drop-shadow(0 0 50px rgba(124, 58, 237, 0.6)); }
+  100% { transform: scale(0.95); filter: brightness(0.8) drop-shadow(0 0 20px rgba(124, 58, 237, 0.2)); }
+}
+
+/* MODERN NEON BLUR DEKORLARI */
 .blur-circle-1 {
   position: fixed; top: -15%; left: -10%; width: 60vw; height: 60vw;
   background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(0,0,0,0) 70%);
@@ -44,7 +68,7 @@ body {
 
 #app-view { z-index: 5; position: relative; }
 
-/* NAVBAR - LOGOSUZ VE TAŞMASIZ TEMİZ DÜZEN */
+/* NAVBAR */
 nav { 
   position: fixed; top: 0; width: 100%; z-index: 1000; 
   height: 85px; display: flex; align-items: center;
@@ -56,7 +80,6 @@ nav.scrolled {
 }
 .nav-container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
 
-/* Sadece Temiz Text Logo */
 .logo-text { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -1px; color: #fff; text-decoration: none; text-transform: uppercase; }
 
 .nav-links { display: flex; list-style: none; gap: 32px; align-items: center; }
@@ -70,7 +93,7 @@ nav.scrolled {
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* CHROMATIC HERO SPLIT (ORTADAKİ EFSANE ÇİFT RENK ALAN) */
+/* CHROMATIC HERO SPLIT */
 .top-showcase-banner {
   width: 100%; max-width: 1100px; margin: 140px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
@@ -108,29 +131,51 @@ nav.scrolled {
 
 /* SECTIONS */
 section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-.section-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; opacity: 0.9; }
+.section-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
 
-/* BENTO CARDS */
+/* BENTO PORTFOLIO KARTLARI */
 .bento-card {
-  background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bento-card:hover { border-color: rgba(255, 255, 255, 0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
-/* PORTFOLYO GRID - RESİMSİZ, SADECE PREMIUM ISTATISTIK VE LIKEALANI */
-.portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.project-stats-card { padding: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
-.stats-left { display: flex; align-items: center; gap: 16px; color: var(--text-muted); font-size: 14px; }
-.stats-left span i { margin-right: 6px; color: rgba(255,255,255,0.4); }
+.portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.project-card { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
 
-.like-btn { background: none; border: none; color: var(--text-muted); font-family: 'Space Grotesk', sans-serif; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
-.like-btn i { transition: transform 0.2s; }
-.like-btn:hover { color: #fff; }
-.like-btn:hover i { transform: scale(1.1); }
+/* Resim Alanı */
+.project-img-display {
+  position: relative; width: 100%; padding-top: 56.25%;
+  border-radius: 8px; overflow: hidden; background: #0b0b0d;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+.project-img-display img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.project-card:hover .project-img-display img { transform: scale(1.02); }
+
+/* Alt Detaylar */
+.project-info-row { display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
+.p-title { font-size: 14px; font-weight: 600; color: #fff; }
+
+.interactive-bar { display: flex; gap: 16px; align-items: center; }
+.inter-btn { background: none; border: none; color: var(--text-muted); font-family: 'Space Grotesk', sans-serif; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.inter-btn:hover { color: #fff; }
 .like-btn.liked { color: #ff0055; }
 
-/* RATES GRID (FİYATLANDIRMA) */
+/* Yorum Kutusu Bölümü */
+.comment-section { display: none; border-top: 1px solid var(--border); margin-top: 12px; padding-top: 14px; }
+.comment-section.active { display: block; }
+.comment-list { max-height: 120px; overflow-y: auto; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.comment-list li { background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: #d4d4d8; }
+.comment-list li strong { color: #fff; margin-right: 4px; font-family: 'Space Grotesk', sans-serif; }
+
+.comment-inputs { display: flex; gap: 8px; }
+.comment-inputs input { flex: 1; background: #09090b; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; }
+.comment-inputs input:focus { outline: none; border-color: #71717a; }
+.comment-inputs button { background: #fff; color: #000; border: none; padding: 0 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: background 0.2s; }
+.comment-inputs button:hover { background: #e4e4e7; }
+
+/* RATES GRID */
 .rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .rate-card { padding: 30px; }
 .rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
@@ -138,18 +183,21 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
 .rate-value span.alt-val { font-size: 13px; color: var(--text-muted); font-family: 'Space Grotesk', sans-serif; font-weight: 400; margin-top: 2px; }
 .rate-info { font-size: 13px; color: #a1a1aa; line-height: 1.5; }
 
-/* FOOTER / BRAND SIGNATURE */
 .brand-signature { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; margin-top: 60px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; text-align: center; }
 
 @media(max-width: 768px) {
   nav { height: 70px; }
   .nav-links { display: none; }
-  .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 14px; }
+  .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
   .top-showcase-banner { height: 240px; margin-top: 100px; }
 }
 </style>
 </head>
 <body>
+
+<div id="splash-screen">
+  <div class="splash-logo"></div>
+</div>
 
 <div class="blur-circle-1"></div>
 <div class="blur-circle-2"></div>
@@ -182,25 +230,51 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
   </div>
 
   <section id="projects">
-    <div class="section-title">Sistem Analizi</div>
+    <div class="section-title">Seçilmiş Vitrin</div>
     <div class="portfolio-grid">
       
-      <div class="bento-card project-stats-card" id="p1">
-        <div class="stats-left">
-          <span><i class="fa-regular rel fa-eye"></i> 360 Görüntüleme</span>
+      <div class="bento-card project-card" id="p1">
+        <div class="project-img-display">
+          <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Custom Simulator HUD">
         </div>
-        <button class="like-btn" onclick="toggleLike('p1')">
-          <i class="fa-solid fa-heart"></i> <span class="like-count">0</span>
-        </button>
+        <div class="project-info-row">
+          <span class="p-title">Simulator HUD Framework</span>
+          <div class="interactive-bar">
+            <button class="inter-btn like-btn" onclick="toggleLike('p1')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
+            <button class="inter-btn" onclick="toggleComments('p1')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
+          </div>
+        </div>
+        
+        <div class="comment-section" id="comments-box-p1">
+          <ul class="comment-list" id="comment-list-p1"></ul>
+          <div class="comment-inputs">
+            <input type="text" placeholder="Adın" id="comment-name-p1" style="max-width: 80px;">
+            <input type="text" placeholder="Yorumun..." id="comment-text-p1">
+            <button onclick="addComment('p1')">Gönder</button>
+          </div>
+        </div>
       </div>
 
-      <div class="bento-card project-stats-card" id="p2">
-        <div class="stats-left">
-          <span><i class="fa-regular fa-eye"></i> 360 Görüntüleme</span>
+      <div class="bento-card project-card" id="p2">
+        <div class="project-img-display">
+          <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Bento Market View">
         </div>
-        <button class="like-btn" onclick="toggleLike('p2')">
-          <i class="fa-solid fa-heart"></i> <span class="like-count">0</span>
-        </button>
+        <div class="project-info-row">
+          <span class="p-title">Symmetrical Bento Market</span>
+          <div class="interactive-bar">
+            <button class="inter-btn like-btn" onclick="toggleLike('p2')"><i class="fa-solid fa-heart"></i> <span class="like-count">0</span></button>
+            <button class="inter-btn" onclick="toggleComments('p2')"><i class="fa-solid fa-comment"></i> Yorumlar</button>
+          </div>
+        </div>
+        
+        <div class="comment-section" id="comments-box-p2">
+          <ul class="comment-list" id="comment-list-p2"></ul>
+          <div class="comment-inputs">
+            <input type="text" placeholder="Adın" id="comment-name-p2" style="max-width: 80px;">
+            <input type="text" placeholder="Yorumun..." id="comment-text-p2">
+            <button onclick="addComment('p2')">Gönder</button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -238,25 +312,43 @@ section { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
 </div>
 
 <script>
+// 🕒 Açılış Ekranı Kontrolü (Görseller yüklenince kapanır)
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash-screen');
+  setTimeout(() => {
+    splash.style.opacity = '0';
+    splash.style.visibility = 'hidden';
+  }, 1200); // 1.2 saniye o tatlı logoyu gösterip kapatıyoruz
+});
+
 // Navbar Scroll Efekti
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
 }, { passive: true });
 
-// Dinamik Beğeni Sistemi (Local Storage Kayıtlı)
+// Like ve Yorum Veri Tabanı Taklidi (Local Storage)
 document.addEventListener('DOMContentLoaded', () => {
   ['p1', 'p2'].forEach(id => {
+    // Like Kurulumu
     const isLiked = localStorage.getItem(`liked_${id}`) === 'true';
     const btn = document.querySelector(`#${id} .like-btn`);
     const countEl = btn.querySelector('.like-count');
-    let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || Math.floor(Math.random() * 15) + 5; // İlk açılışta boş durmasın diye gerçekçi sayı
+    let likes = parseInt(localStorage.getItem(`likes_count_${id}`)) || Math.floor(Math.random() * 40) + 10;
     
     if(!localStorage.getItem(`likes_count_${id}`)) {
       localStorage.setItem(`likes_count_${id}`, likes);
     }
-    
     countEl.innerText = likes;
     if(isLiked) btn.classList.add('liked');
+    
+    // Yorum Kurulumu
+    const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
+    const listEl = document.getElementById(`comment-list-${id}`);
+    savedComments.forEach(c => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${c.name}:</strong> ${c.text}`;
+      listEl.appendChild(li);
+    });
   });
 });
 
@@ -276,6 +368,31 @@ function toggleLike(id) {
   }
   countEl.innerText = currentCount;
   localStorage.setItem(`likes_count_${id}`, currentCount);
+}
+
+function toggleComments(id) {
+  document.getElementById(`comments-box-${id}`).classList.toggle('active');
+}
+
+function addComment(id) {
+  const nameInput = document.getElementById(`comment-name-${id}`);
+  const textInput = document.getElementById(`comment-text-${id}`);
+  
+  const name = nameInput.value.trim() || 'Anonim';
+  const text = textInput.value.trim();
+  
+  if(!text) return;
+  
+  const listEl = document.getElementById(`comment-list-${id}`);
+  const li = document.createElement('li');
+  li.innerHTML = `<strong>${name}:</strong> ${text}`;
+  listEl.appendChild(li);
+  
+  const savedComments = JSON.parse(localStorage.getItem(`comments_${id}`)) || [];
+  savedComments.push({ name, text });
+  localStorage.setItem(`comments_${id}`, JSON.stringify(savedComments));
+  
+  textInput.value = '';
 }
 </script>
 </body>
