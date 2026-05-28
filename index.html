@@ -6,7 +6,7 @@
 <title>FLUFFY | Professional UI Studio</title>
 <meta name="referrer" content="no-referrer">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -30,63 +30,48 @@ body {
   position: relative;
 }
 
+/* ARKAPLAN RESMİ - IMGBB */
 body::before {
   content: '';
   position: fixed; inset: 0;
   background-image: url('https://i.ibb.co/6cC3yYZM/arkaplan.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.35;
+  opacity: 0.18; 
   z-index: -2;
   pointer-events: none;
 }
 
+/* SPOT IŞIKLARI */
 .glow-bg-1 {
   position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
-  background: radial-gradient(circle, rgba(120, 0, 255, 0.2) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(120, 0, 255, 0.18) 0%, rgba(0,0,0,0) 70%);
   filter: blur(90px); pointer-events: none; z-index: -1;
 }
 .glow-bg-2 {
   position: fixed; bottom: 10%; right: -5%; width: 45vw; height: 45vw;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(0,0,0,0) 70%);
   filter: blur(110px); pointer-events: none; z-index: -1;
 }
 
 .bg-overlay {
   position: fixed; inset: 0;
-  background: linear-gradient(180deg, rgba(3, 3, 4, 0.6) 0%, rgba(3, 3, 4, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(3, 3, 4, 0.5) 0%, rgba(3, 3, 4, 0.95) 100%);
   z-index: 0; pointer-events: none;
 }
 
-/* AÇILIŞ LOADER */
-#instagram-loader {
-  position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column;
-  background: #000; align-items: center; justify-content: center;
-  transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease;
-}
-.loader-logo-wrap { width: 140px; height: 140px; margin-bottom: 20px; animation: pulseLogo 2s infinite ease-in-out; }
-.loader-logo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-.loader-text {
-  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800;
-  letter-spacing: 4px; color: #fff; text-transform: uppercase; opacity: 0.8;
-}
-@keyframes pulseLogo {
-  0%, 100% { transform: scale(0.96); filter: drop-shadow(0 0 10px rgba(255,255,255,0)); }
-  50% { transform: scale(1.03); filter: drop-shadow(0 0 30px rgba(255,255,255,0.25)); }
-}
-
-#app-view { opacity: 0; transform: scale(0.99); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 5; position: relative; }
+#app-view { z-index: 5; position: relative; }
 
 /* NAVBAR */
 nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 24px 0; transition: all 0.3s ease; }
-nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--border); padding: 14px 0; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--border); padding: 14px 0; backdrop-filter: blur(20px); }
 .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
 
 .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; text-transform: uppercase; }
 
-/* NAVBAR SOL ÜST LOGO - IMGBB İLE GARANTİLENDİ */
+/* NAVBAR SOL ÜST LOGO - IMGBB */
 .logo .logo-img-wrapper {
-  width: 36px; height: 36px;
+  width: 38px; height: 38px;
   background-image: url('https://i.ibb.co/7J2PX37g/site-logosu.jpg');
   background-size: cover; background-position: center;
   border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background-color: #111;
@@ -104,29 +89,19 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
 }
 .badge-neon span { width: 6px; height: 6px; background: var(--green-neon); border-radius: 50%; box-shadow: 0 0 8px var(--green-neon); }
 
-/* HERO BANNER */
+/* CHROMATIC HERO BANNER (KROM VE RENK DEĞİŞTİREN BAŞLIK) */
 .top-showcase-banner {
   width: 100%; max-width: 1100px; margin: 120px auto 30px;
   border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
   height: 440px; box-shadow: 0 40px 80px rgba(0,0,0,0.7);
   display: flex; position: relative; background: #000;
 }
-.chrome-half { flex: 1; height: 100%; display: flex; align-items: center; overflow: hidden; position: relative; }
-.chrome-half.left-grid {
-  background-color: #ededed;
-  background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%), linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e0e0e0 75%), linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
-  background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-  justify-content: flex-end;
-}
-.chrome-half.right-plain { background: #070708; justify-content: flex-start; }
 .chrome-huge-text {
   font-family: 'Syne', sans-serif; font-size: clamp(30px, 5.5vw, 68px); font-weight: 800;
-  line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; position: absolute; width: 200%; text-align: center;
-}
-.left-grid .chrome-huge-text { color: #000; left: 0; }
-.right-plain .chrome-huge-text {
-  left: -100%; background: linear-gradient(135deg, #ff0055, #00ffaa, #00bcff, #ff0055);
-  background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; position: absolute; width: 100%; text-align: center;
+  /* KROM VE RENK DEĞİŞTİRME EFEKTİ */
+  background: linear-gradient(135deg, #ff0055 10%, #00ffaa 40%, #00bcff 70%, #ff0055 90%);
+  background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text; animation: chromeGradientFlow 4s ease infinite;
 }
 @keyframes chromeGradientFlow {
@@ -135,10 +110,10 @@ nav.scrolled { background: rgba(3, 3, 4, 0.85); border-bottom: 1px solid var(--b
   100% { background-position: 0% 50%; filter: brightness(1.2); }
 }
 
-/* KARTLAR */
+/* BENTO KARTLAR VE PORTFOLYO */
 .bento-card {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
-  position: relative; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  position: relative; backdrop-filter: blur(16px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bento-card:hover { border-color: rgba(255, 255, 255, 0.18); transform: translateY(-2px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
@@ -161,19 +136,15 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 .project-card:hover .project-img-wrapper img { transform: scale(1.02); }
 .project-meta { padding: 12px 4px 2px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', sans-serif; }
 .project-name { font-size: 14px; font-weight: 600; color: #fff; }
+
 .project-action { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
 .project-action::after { content: ' ↗'; font-family: 'Inter', sans-serif; font-size: 14px; display: inline-block; transition: transform 0.2s; }
 .project-card:hover .project-action::after { transform: translate(2px, -2px); color: #fff; }
 
-.rates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.rate-card { padding: 36px; }
-.rate-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: 700; }
-.rate-value { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin: 10px 0; }
-.rate-info { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
-
+/* MODAL PREVIEW */
 #spin-modal {
   display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(2, 2, 3, 0.96);
-  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px;
+  backdrop-filter: blur(15px); align-items: center; justify-content: center; flex-direction: column; padding: 24px;
 }
 #spin-modal.open { display: flex; }
 #modal-canvas { width: 100%; max-width: 800px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; }
@@ -181,14 +152,9 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 .modal-close { margin-top: 20px; background: none; border: 1px solid var(--border); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; cursor: pointer; }
 .modal-close:hover { background: #fff; color: #000; }
 
-.brand-signature {
-  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; margin-top: 40px; text-transform: uppercase;
-  color: #fff; letter-spacing: 1px; opacity: 0.9;
-}
-
 @media(max-width: 768px) {
   .nav-links { display: none; }
-  .portfolio-grid, .rates-grid { grid-template-columns: 1fr; gap: 16px; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 16px; }
   .top-showcase-banner { height: 260px; }
 }
 </style>
@@ -198,13 +164,6 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
 <div class="glow-bg-1"></div>
 <div class="glow-bg-2"></div>
 <div class="bg-overlay"></div>
-
-<div id="instagram-loader">
-  <div class="loader-logo-wrap">
-    <img src="https://i.ibb.co/7J2PX37g/site-logosu.jpg" alt="FLUFFY DESIGNS">
-  </div>
-  <div class="loader-text">Loading System</div>
-</div>
 
 <div id="spin-modal">
   <div id="modal-canvas"><img id="modal-img" src="" alt="preview"></div>
@@ -230,12 +189,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
   </nav>
 
   <div class="top-showcase-banner" id="home">
-    <div class="chrome-half left-grid">
-      <div class="chrome-huge-text">FLUFFY<br>DESIGNS</div>
-    </div>
-    <div class="chrome-half right-plain">
-      <div class="chrome-huge-text">FLUFFY<br>DESIGNS</div>
-    </div>
+    <div class="chrome-huge-text">FLUFFY DESIGNS</div>
   </div>
 
   <div class="hero-mini">
@@ -249,6 +203,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
   <section id="projects">
     <div class="section-title">Seçilmiş Çalışmalar</div>
     <div class="portfolio-grid">
+      
       <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large')">
         <div class="project-img-wrapper">
           <img src="https://pbs.twimg.com/media/GGL_KODXoAAXmXn?format=png&name=large" alt="Work 1">
@@ -258,6 +213,7 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
           <span class="project-action">İncele</span>
         </div>
       </div>
+
       <div class="bento-card project-card" onclick="openModal('https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large')">
         <div class="project-img-wrapper">
           <img src="https://pbs.twimg.com/media/GGMCeaBX0AAbeF_?format=png&name=large" alt="Work 2">
@@ -267,48 +223,13 @@ section { max-width: 1100px; margin: 0 auto; padding: 50px 24px; position: relat
           <span class="project-action">İncele</span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="rates">
-    <div class="section-title">Fiyatlandırma & Paketler</div>
-    <div class="rates-grid">
-      <div class="bento-card rate-card">
-        <div class="rate-label">Komple Oyun Arayüz Tasarımı</div>
-        <div class="rate-value">R$ 5,000+</div>
-        <p class="rate-info">Complete core HUD framework styling, full custom scale integration rules, and high-fidelity multi-frame views.</p>
-      </div>
-      <div class="bento-card rate-card">
-        <div class="rate-label">Frame / Panel Başı İşler</div>
-        <div class="rate-value">R$ 500 - 1,000</div>
-        <p class="rate-info">Targeted responsive UI fix, custom responsive frame creation, or dedicated alignment protocols.</p>
-      </div>
     </div>
-  </section>
-
-  <section id="contact" style="text-align: center; padding-bottom: 90px;">
-    <div class="section-title" style="text-align: center;">Doğrudan İletişim</div>
-    <div class="btn-group" style="justify-content: center;">
-      <a href="https://x.com/stor4m" target="_blank" class="btn secondary"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
-      <a href="https://discord.com/users/715124564855210045" target="_blank" class="btn secondary"><i class="fa-brands fa-discord"></i> Discord</a>
-    </div>
-    <div class="brand-signature">® Fluffy Designs</div>
   </section>
 
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  const loader = document.getElementById('instagram-loader');
-  const app = document.getElementById('app-view');
-  setTimeout(() => {
-    loader.style.transform = 'translateY(-100%)';
-    app.style.opacity = '1';
-    app.style.transform = 'scale(1)';
-    setTimeout(() => { loader.style.display = 'none'; }, 800);
-  }, 1400);
-});
-
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
